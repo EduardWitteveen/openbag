@@ -69,6 +69,7 @@ public class CsvTransformator implements Transformator {
         if(_cache.containsKey(lcode)) {
             return (Gemeente)_cache.get(lcode);
         }
+        // next code will not be reached, when started with a clean database
         String query = "from Gemeente gemeente where gemeente.code=?";
         Query q = session.createQuery(query).setLong(0, lcode);
         List<Gemeente> gemeenten = q.list();
@@ -230,17 +231,11 @@ public class CsvTransformator implements Transformator {
         if(files.length < 1) {
         	throw new RuntimeException("data-files were missing in directory:" + fileprefix);
         }
-        String filepostfix = files[0];
-        String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
-        String woonplaatsfilename = fileprefix+ "woonplaats" + filepostfix.substring(FILE_STARTS_WITH.length());
-        String openbareruimtefilename = fileprefix+ "openbareruimte" + filepostfix.substring(FILE_STARTS_WITH.length());
-        String nummeraanduidingfilename = fileprefix+ "nummeraanduiding" + filepostfix.substring(FILE_STARTS_WITH.length());
-        String verblijfsobjectfilename = fileprefix+ "verblijfsobject" + filepostfix.substring(FILE_STARTS_WITH.length());
-        String pandfilename = fileprefix+ "pand" + filepostfix.substring(FILE_STARTS_WITH.length());
-
+        String filepostfix = files[0];        
         try
         {
         // gemeente
+        	String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
             System.out.println("Processing: " + gemeentefilename);
             InputStream istream = new FileInputStream(gemeentefilename);
             CSVParser shredder = new CSVParser(istream);
@@ -257,10 +252,11 @@ public class CsvTransformator implements Transformator {
                 gemeente.setGrens(toPolygon(shredder.nextValue()));
                 session.save(gemeente);
                 _cache.put(gemeente.getCode(), gemeente);
-//                System.out.println("\t" + gemeente);
+                System.out.println("\t" + gemeente);
             }
             istream.close();
         // woonplaats
+            String woonplaatsfilename = fileprefix+ "woonplaats" + filepostfix.substring(FILE_STARTS_WITH.length());
             System.out.println("Processing: " + woonplaatsfilename);
             istream = new FileInputStream(woonplaatsfilename);
             shredder = new CSVParser(istream);
@@ -278,10 +274,11 @@ public class CsvTransformator implements Transformator {
                 woonplaats.setGrens(toPolygon(shredder.nextValue()));
                 session.save(woonplaats);
                 _cache.put(woonplaats.getCode(), woonplaats);
-//                System.out.println("\t" + woonplaats);
+                System.out.println("\t" + woonplaats);
             }
             istream.close();
         // openbareruimte
+            String openbareruimtefilename = fileprefix+ "openbareruimte" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + openbareruimtefilename);
             istream = new FileInputStream(openbareruimtefilename);
             shredder = new CSVParser(istream);
@@ -300,10 +297,11 @@ public class CsvTransformator implements Transformator {
                 openbareruimte.setGrens(toPolygon(shredder.nextValue()));
                 session.save(openbareruimte);
                 _cache.put(openbareruimte.getCode(), openbareruimte);
-//                System.out.println("\t" + openbareruimte);
+                System.out.println("\t" + openbareruimte);
             }
             istream.close();
         // nummeraanduiding
+            String nummeraanduidingfilename = fileprefix+ "nummeraanduiding" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + nummeraanduidingfilename);
             istream = new FileInputStream(nummeraanduidingfilename);
             shredder = new CSVParser(istream);
@@ -325,10 +323,11 @@ public class CsvTransformator implements Transformator {
                 nummeraanduiding.setPunt(toPoint(shredder.nextValue()));
                 session.save(nummeraanduiding);
                 _cache.put(nummeraanduiding.getCode(), nummeraanduiding);
-//                System.out.println("\t" + nummeraanduiding);                
+                System.out.println("\t" + nummeraanduiding);                
             }
             istream.close();
         // verblijfsobject
+            String verblijfsobjectfilename = fileprefix+ "verblijfsobject" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + verblijfsobjectfilename);
             istream = new FileInputStream(verblijfsobjectfilename);
             shredder = new CSVParser(istream);
@@ -350,6 +349,7 @@ public class CsvTransformator implements Transformator {
             }
             istream.close();
         // pand
+            String pandfilename = fileprefix+ "pand" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + pandfilename);
             istream = new FileInputStream(pandfilename);
             shredder = new CSVParser(istream);
@@ -366,7 +366,7 @@ public class CsvTransformator implements Transformator {
                 pand.setStatus(toString(shredder.nextValue()));
                 pand.setGrens(toMultiPolygon(shredder.nextValue()));
                 session.save(pand);
-//                System.out.println("\t" + pand);                
+                System.out.println("\t" + pand);                
             }
             istream.close();            
             return true;
