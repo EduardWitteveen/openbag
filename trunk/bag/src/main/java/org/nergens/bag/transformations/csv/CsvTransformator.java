@@ -37,7 +37,7 @@ import org.nergens.bag.transformations.Transformator;
 
 /**
  *
- * @author Administrator
+ * @author Eduard Witteveen
  */
 public class CsvTransformator implements Transformator {
     @SuppressWarnings("unchecked")
@@ -225,7 +225,10 @@ public class CsvTransformator implements Transformator {
             }
         };        
         String[] files = dir.list(filter);
-        String fileprefix = dir.getAbsolutePath() + "\\";
+        String fileprefix = dir.getAbsolutePath() + "\\data\\";
+        if(files.length < 1) {
+        	throw new RuntimeException("data-files were missing in directory:" + fileprefix);
+        }
         String filepostfix = files[0];
         String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
         String woonplaatsfilename = fileprefix+ "woonplaats" + filepostfix.substring(FILE_STARTS_WITH.length());
