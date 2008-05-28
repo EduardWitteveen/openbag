@@ -1,3 +1,5 @@
 - Install Eclise Version: 3.3.1.1
+- Install Standaloen Maven: 2.x
+- Run all the bat files in: local-jars\*.bat
 - Install maven plugin: 		http://m2eclipse.codehaus.org/
 - Install postgresql like documented in the file: postgis.pdf
