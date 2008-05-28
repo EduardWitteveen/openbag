@@ -18,7 +18,6 @@ import javax.persistence.*;
 @Table(name="DATA_OBJECT")
 public abstract class BagObject {    
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="CODE")
     protected long code;
     public long getCode() {
