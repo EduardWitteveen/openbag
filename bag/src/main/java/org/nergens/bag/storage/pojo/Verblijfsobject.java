@@ -30,7 +30,7 @@ import org.nergens.bag.storage.pojo.util.Gebruiksdoel;
 @DiscriminatorValue("VERBLIJFSOBJECT")
 @PrimaryKeyJoinColumn(name="CODE")
 @Table(name="DATA_VERBLIJFSOBJECT")
-public class Verblijfsobject extends BagObject implements Serializable{
+public class Verblijfsobject extends BagAuthentiekObject implements Serializable{
 	/**
 	 * 
 	 */

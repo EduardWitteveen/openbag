@@ -25,7 +25,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("WOONPLAATS")
 @Table(name="DATA_WOONPLAATS")
-public class Woonplaats extends BagObject implements Serializable{
+public class Woonplaats extends BagAuthentiekObject implements Serializable{
 /**
 	 * 
 	 */

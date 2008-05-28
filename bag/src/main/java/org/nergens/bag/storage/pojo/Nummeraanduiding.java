@@ -30,7 +30,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("NUMMERAANDUIDING")
 @Table(name="DATA_NUMMERAANDUIDING")
-public class Nummeraanduiding extends BagObject implements Serializable{
+public class Nummeraanduiding extends BagAuthentiekObject implements Serializable{
 	/**
 	 * 
 	 */

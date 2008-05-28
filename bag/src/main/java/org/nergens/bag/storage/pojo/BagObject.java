@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 /**
- *
+ * generate id: javascript:var m=Math;r=m.random;(r()<0.5?'-':'')+m.round(m.pow(10,17)*r())+'L'
  * @author Eduard Witteveen
  */
 @Entity
@@ -26,45 +26,4 @@ public abstract class BagObject {
     public void setCode(long code) { 
         this.code = code; 
     }
-    //public abstract Geometry getGeometry();
-    Date begingeldigheid;
-    @Column(name="BEGINGELDIGHEID")
-    public Date getBeginGeldigheid() {
-        return begingeldigheid; 
-    }
-    public void setBeginGeldigheid(Date begingeldigheid) { 
-        this.begingeldigheid = begingeldigheid; 
-    }
-    Date eindegeldigheid;
-    @Column(name="EINDEGELDIGHEID")
-    public Date getEindeGeldigheid() {
-        return eindegeldigheid; 
-    }
-    public void setEindeGeldigheid(Date eindegeldigheid) { 
-        this.eindegeldigheid = eindegeldigheid; 
-    }
-    Boolean inonderzoek = false;
-    @Column(name="INONDERZOEK")
-    public Boolean getInOnderzoek() {
-        return inonderzoek; 
-    }
-    public void setInOnderzoek(Boolean inonderzoek) { 
-        this.inonderzoek = inonderzoek; 
-    }        
-    Date documentdatum;
-    @Column(name="DOCUMENTDATUM")
-    public Date getDocumentDatum() {
-        return documentdatum; 
-    }
-    public void setDocumentDatum(Date documentdatum) { 
-        this.documentdatum = documentdatum; 
-    }    
-    String documentnummer;
-    @Column(name="DOCUMENTNUMMER")
-    public String getDocumentNummer() {
-        return documentnummer; 
-    }
-    public void setDocumentNummer(String documentnummer) { 
-        this.documentnummer = documentnummer; 
-    }    
 }

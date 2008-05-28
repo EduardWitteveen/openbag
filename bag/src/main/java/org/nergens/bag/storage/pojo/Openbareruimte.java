@@ -33,7 +33,7 @@ import com.vividsolutions.jts.geom.Polygon;
 @Entity
 @DiscriminatorValue("OPENBARERUIMTE")
 @Table(name="DATA_OPENBARERUIMTE")
-public class Openbareruimte extends BagObject implements Serializable {
+public class Openbareruimte extends BagAuthentiekObject implements Serializable {
 	/**
 	 * 
 	 */
