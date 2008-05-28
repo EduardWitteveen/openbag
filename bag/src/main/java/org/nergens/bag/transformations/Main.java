@@ -28,7 +28,7 @@ public class Main {
         session.beginTransaction();
         
         // our transformers
-        HashMap<String,Transformator> transformers = new HashMap();
+        HashMap<String,Transformator> transformers = new HashMap<String,Transformator>();
         transformers.put("csv", new CsvTransformator());
         
         // look if the transformer exists
@@ -36,7 +36,7 @@ public class Main {
         if(transformers.containsKey(format)) {
             trans = transformers.get(format);
             // de we really have to wrap around?
-            List<String> aargs = new ArrayList();
+            List<String> aargs = new ArrayList<String>();
             for(String arg : args) {            
                 aargs.add(arg);
             }
