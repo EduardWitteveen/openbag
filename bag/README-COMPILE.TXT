@@ -1,0 +1,3 @@
+- Install Eclise Version: 3.3.1.1
+- Install maven plugin: 		http://m2eclipse.codehaus.org/
+- Install postgresql like documented in the file: postgis.pdf
