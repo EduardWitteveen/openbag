@@ -2,6 +2,7 @@ package org.nergens.bag.storage.pojo;
 
 import com.vividsolutions.jts.geom.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -30,7 +31,7 @@ import org.nergens.bag.storage.pojo.util.Gebruiksdoel;
 @DiscriminatorValue("VERBLIJFSOBJECT")
 @PrimaryKeyJoinColumn(name="CODE")
 @Table(name="DATA_VERBLIJFSOBJECT")
-public class Verblijfsobject extends BagObject {
+public class Verblijfsobject extends BagObject implements Serializable{
 // referencing to other tables
     Gemeente gemeente;
     @ManyToOne
@@ -49,37 +50,37 @@ public class Verblijfsobject extends BagObject {
     public void setHoofdadres(Nummeraanduiding hoofdadres) { 
         this.hoofdadres = hoofdadres; 
     }        
-    List<Nummeraanduiding> nevenadressen;
+    ArrayList<Nummeraanduiding> nevenadressen;
     @ManyToMany
     @JoinTable(
         name = "DATA_VO_NEVENADRES", 
         joinColumns=@JoinColumn(name="VERBLIJFSOBJECT_CODE"),
         inverseJoinColumns=@JoinColumn(name="NUMMERAANDUIDING_CODE")
     )
-    public List<Nummeraanduiding> getNevenadressen() {
+    public ArrayList<Nummeraanduiding> getNevenadressen() {
         return nevenadressen;
     }
-    public void setNevenadressen(List<Nummeraanduiding> nevenadressen) { 
+    public void setNevenadressen(ArrayList<Nummeraanduiding> nevenadressen) { 
         this.nevenadressen = nevenadressen; 
     }        
-    List<Gebruiksdoel> gebruiksdoeleinden = new ArrayList<Gebruiksdoel>();
+    ArrayList<Gebruiksdoel> gebruiksdoeleinden = new ArrayList<Gebruiksdoel>();
     @ManyToMany
     @JoinTable(name = "DATA_VO_GEBRUIKSDOELEIND")
     //http://opensource.atlassian.com/projects/hibernate/browse/ANN-6?rc=1
-    public List<Gebruiksdoel> getGebruiksdoeleinden() {
+    public ArrayList<Gebruiksdoel> getGebruiksdoeleinden() {
         return gebruiksdoeleinden;
     }
-    public void setGebruiksdoeleinden(List<Gebruiksdoel> gebruiksdoeleinden) { 
+    public void setGebruiksdoeleinden(ArrayList<Gebruiksdoel> gebruiksdoeleinden) { 
         this.gebruiksdoeleinden = gebruiksdoeleinden; 
     }        
-    List<Pand> panden = new ArrayList<Pand>();
+    ArrayList<Pand> panden = new ArrayList<Pand>();
     @ManyToMany(mappedBy="verblijfsobjecten")
 //    @ManyToMany
     @OrderBy("code")
-    public List<Pand> getPanden() {
+    public ArrayList<Pand> getPanden() {
         return panden;
     }
-    public void setPanden(List<Pand> panden) {
+    public void setPanden(ArrayList<Pand> panden) {
         this.panden = panden;
     }    
     // attributes
