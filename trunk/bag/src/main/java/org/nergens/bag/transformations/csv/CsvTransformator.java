@@ -41,7 +41,7 @@ import org.nergens.bag.transformations.Transformator;
  */
 public class CsvTransformator implements Transformator {
     @SuppressWarnings("unchecked")
-	private static HashMap _cache= new HashMap();
+	//private static HashMap _cache= new HashMap();
     String path= null;
     public String help() {
         return "[path]";
@@ -66,9 +66,9 @@ public class CsvTransformator implements Transformator {
     @SuppressWarnings("unchecked")
 	private Gemeente toGemeente(Session session, String code) {
         long lcode = Long.parseLong(code);
-        if(_cache.containsKey(lcode)) {
-            return (Gemeente)_cache.get(lcode);
-        }
+        //if(_cache.containsKey(lcode)) {
+        //    return (Gemeente)_cache.get(lcode);
+        //}
         // next code will not be reached, when started with a clean database
         String query = "from Gemeente gemeente where gemeente.code=?";
         Query q = session.createQuery(query).setLong(0, lcode);
@@ -80,7 +80,7 @@ public class CsvTransformator implements Transformator {
         else if(gemeenten.size() == 1)
         {
             Gemeente result = gemeenten.get(0);
-            _cache.put(result.getCode(), result);
+            //_cache.put(result.getCode(), result);
             return result;
         }
         else {
@@ -91,9 +91,9 @@ public class CsvTransformator implements Transformator {
     @SuppressWarnings("unchecked")
 	private Woonplaats toWoonplaats(Session session, String code) {        
         long lcode = Long.parseLong(code);        
-        if(_cache.containsKey(lcode)) {
-            return (Woonplaats)_cache.get(lcode);
-        }
+        //if(_cache.containsKey(lcode)) {
+        //    return (Woonplaats)_cache.get(lcode);
+        //}
         // next code will not be reached, when started with a clean database
         String query = "from Woonplaats woonplaats where woonplaats.code=?";
         Query q = session.createQuery(query).setLong(0, lcode);
@@ -105,7 +105,7 @@ public class CsvTransformator implements Transformator {
         else if(woonplaatsen.size() == 1)
         {
             Woonplaats result = woonplaatsen.get(0);
-            _cache.put(result.getCode(), result);
+            //_cache.put(result.getCode(), result);
             return result;            
         }
         else {
@@ -116,9 +116,9 @@ public class CsvTransformator implements Transformator {
     @SuppressWarnings("unchecked")
 	private Openbareruimte toOpenbareruimte(Session session, String code) {
         long lcode = Long.parseLong(code);
-        if(_cache.containsKey(lcode)) {
-            return (Openbareruimte)_cache.get(lcode);
-        }    
+        //if(_cache.containsKey(lcode)) {
+        //    return (Openbareruimte)_cache.get(lcode);
+        //}    
         // next code will not be reached, when started with a clean database
         String query = "from Openbareruimte openbareruimte where openbareruimte.code=?";
         Query q = session.createQuery(query).setLong(0, lcode);
@@ -130,7 +130,7 @@ public class CsvTransformator implements Transformator {
         else if(openbareruimten.size() == 1)
         {
             Openbareruimte result = openbareruimten.get(0);
-            _cache.put(result.getCode(), result);
+            //_cache.put(result.getCode(), result);
             return result;            
         }
         else {
@@ -141,9 +141,9 @@ public class CsvTransformator implements Transformator {
     @SuppressWarnings("unchecked")
 	private Nummeraanduiding toAdres(Session session, String code) {
         long lcode = Long.parseLong(code);
-        if(_cache.containsKey(lcode)) {
-            return (Nummeraanduiding)_cache.get(lcode);
-        }
+        //if(_cache.containsKey(lcode)) {
+        //    return (Nummeraanduiding)_cache.get(lcode);
+        //}
         // next code will not be reached, when started with a clean database
         String query = "from Nummeraanduiding nummeraanduiding where nummeraanduiding.code=?";
         Query q = session.createQuery(query).setLong(0, lcode);
@@ -155,7 +155,7 @@ public class CsvTransformator implements Transformator {
         else if(nummeraanduidingen.size() == 1)
         {
             Nummeraanduiding result = nummeraanduidingen.get(0);
-            _cache.put(result.getCode(), result);
+            //_cache.put(result.getCode(), result);
             return result;            
         }
         else {
@@ -251,7 +251,7 @@ public class CsvTransformator implements Transformator {
                 gemeente.setNaam(toString(shredder.nextValue()));
                 gemeente.setGrens(toPolygon(shredder.nextValue()));
                 session.save(gemeente);
-                _cache.put(gemeente.getCode(), gemeente);
+                //_cache.put(gemeente.getCode(), gemeente);
                 System.out.println("\t" + gemeente);
             }
             istream.close();
@@ -273,7 +273,7 @@ public class CsvTransformator implements Transformator {
                 woonplaats.setStatus(toString(shredder.nextValue()));
                 woonplaats.setGrens(toPolygon(shredder.nextValue()));
                 session.save(woonplaats);
-                _cache.put(woonplaats.getCode(), woonplaats);
+                //_cache.put(woonplaats.getCode(), woonplaats);
                 System.out.println("\t" + woonplaats);
             }
             istream.close();
@@ -296,7 +296,7 @@ public class CsvTransformator implements Transformator {
                 openbareruimte.setType(toString(shredder.nextValue()));
                 openbareruimte.setGrens(toPolygon(shredder.nextValue()));
                 session.save(openbareruimte);
-                _cache.put(openbareruimte.getCode(), openbareruimte);
+                //_cache.put(openbareruimte.getCode(), openbareruimte);
                 System.out.println("\t" + openbareruimte);
             }
             istream.close();
@@ -322,7 +322,7 @@ public class CsvTransformator implements Transformator {
                 nummeraanduiding.setType(toString(shredder.nextValue()));
                 nummeraanduiding.setPunt(toPoint(shredder.nextValue()));
                 session.save(nummeraanduiding);
-                _cache.put(nummeraanduiding.getCode(), nummeraanduiding);
+                //_cache.put(nummeraanduiding.getCode(), nummeraanduiding);
                 System.out.println("\t" + nummeraanduiding);                
             }
             istream.close();

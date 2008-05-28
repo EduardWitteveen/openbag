@@ -24,7 +24,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("PAND")
 @Table(name="DATA_PAND")
-public class Pand extends BagObject implements Serializable{
+public class Pand extends BagAuthentiekObject implements Serializable{
 	/**
 	 * 
 	 */
