@@ -226,6 +226,7 @@ public class CsvTransformator implements Transformator {
         };        
         String[] files = dir.list(filter);
         String fileprefix = dir.getAbsolutePath();
+        fileprefix = fileprefix + File.separator;
         if(files.length < 1) {
         	throw new RuntimeException("data-files were missing in directory:" + fileprefix);
         }
