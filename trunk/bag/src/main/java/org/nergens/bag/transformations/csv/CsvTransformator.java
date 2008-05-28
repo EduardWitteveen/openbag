@@ -40,7 +40,8 @@ import org.nergens.bag.transformations.Transformator;
  * @author Administrator
  */
 public class CsvTransformator implements Transformator {
-    private static HashMap _cache= new HashMap();
+    @SuppressWarnings("unchecked")
+	private static HashMap _cache= new HashMap();
     String path= null;
     public String help() {
         return "[path]";
@@ -62,7 +63,8 @@ public class CsvTransformator implements Transformator {
         }
         return str;
     }
-    private Gemeente toGemeente(Session session, String code) {
+    @SuppressWarnings("unchecked")
+	private Gemeente toGemeente(Session session, String code) {
         long lcode = Long.parseLong(code);
         if(_cache.containsKey(lcode)) {
             return (Gemeente)_cache.get(lcode);
@@ -85,7 +87,8 @@ public class CsvTransformator implements Transformator {
             return null;
         }
     }
-    private Woonplaats toWoonplaats(Session session, String code) {        
+    @SuppressWarnings("unchecked")
+	private Woonplaats toWoonplaats(Session session, String code) {        
         long lcode = Long.parseLong(code);        
         if(_cache.containsKey(lcode)) {
             return (Woonplaats)_cache.get(lcode);
@@ -109,7 +112,8 @@ public class CsvTransformator implements Transformator {
             return null;
         }
     }
-    private Openbareruimte toOpenbareruimte(Session session, String code) {
+    @SuppressWarnings("unchecked")
+	private Openbareruimte toOpenbareruimte(Session session, String code) {
         long lcode = Long.parseLong(code);
         if(_cache.containsKey(lcode)) {
             return (Openbareruimte)_cache.get(lcode);
@@ -133,7 +137,8 @@ public class CsvTransformator implements Transformator {
             return null;
         }
     }    
-    private Nummeraanduiding toAdres(Session session, String code) {
+    @SuppressWarnings("unchecked")
+	private Nummeraanduiding toAdres(Session session, String code) {
         long lcode = Long.parseLong(code);
         if(_cache.containsKey(lcode)) {
             return (Nummeraanduiding)_cache.get(lcode);
@@ -209,7 +214,8 @@ public class CsvTransformator implements Transformator {
         Long l = new Long(str);
         return l;
     }
-    public boolean retrieveFromFormat(Session session) {
+    @SuppressWarnings("unchecked")
+	public boolean retrieveFromFormat(Session session) {
         final String FILE_STARTS_WITH = "gemeente";
         File dir = getPath();
         // first find our file
@@ -397,7 +403,8 @@ public class CsvTransformator implements Transformator {
     private void writeNewLine(FileWriter writer) throws IOException {
         writer.write("\n\r");        
     }
-    public boolean exportToFormat(Session session) {
+    @SuppressWarnings("unchecked")
+	public boolean exportToFormat(Session session) {
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String timestamp = formatter.format(now);

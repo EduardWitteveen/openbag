@@ -6,13 +6,13 @@
 package org.nergens.bag.storage.util;
 
 import java.sql.Types;
-import org.hibernate.dialect.Oracle9Dialect;
+import org.hibernate.dialect.Oracle9iDialect;
 
 /**
  *
  * @author Administrator
  */
-public class OracleSpatialDialect extends Oracle9Dialect {
+public class OracleSpatialDialect extends Oracle9iDialect {
     /**
      * FIX THE: org.hibernate.tool.hbm2ddl.SchemaUpdate - could not complete schema update
      * org.hibernate.MappingException: No Dialect mapping for JDBC type: 2002

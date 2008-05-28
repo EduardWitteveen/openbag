@@ -18,7 +18,8 @@ import org.nergens.bag.transformations.csv.CsvTransformator;
  * @author Eduard Witteveen
  */
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    @SuppressWarnings("unchecked")
+	public static void main(String[] args) throws FileNotFoundException, IOException {
         Session session = HibernateFactory.getSessionFactory().getCurrentSession();
         // start our transaction
         session.beginTransaction();        
