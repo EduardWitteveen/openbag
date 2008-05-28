@@ -1,6 +1,5 @@
 package org.nergens.bag.storage.pojo;
 
-import java.util.Date;
 import javax.persistence.*;
 
 
