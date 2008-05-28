@@ -1,11 +1,19 @@
 package org.nergens.bag.storage.pojo;
 
-import com.vividsolutions.jts.geom.*;
-
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Type;
+
+import com.vividsolutions.jts.geom.Polygon;
 /**
  * http://bag.vrom.nl/bag_com/f8bf8e4cdf87d10b37ca25a20e027c4f.php	
  * Code	Gegevensnaam
@@ -25,7 +33,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("OPENBARERUIMTE")
 @Table(name="DATA_OPENBARERUIMTE")
-public class Openbareruimte extends BagObject  {
+public class Openbareruimte extends BagObject implements Serializable {
 // referencing to other tables
     Woonplaats woonplaats;
     @ManyToOne
@@ -118,13 +126,13 @@ public class Openbareruimte extends BagObject  {
 //        return grens;
 //    }    
 // used in other tables
-    List<Nummeraanduiding> nummeraanduidingen = new ArrayList<Nummeraanduiding>();;
+    ArrayList<Nummeraanduiding> nummeraanduidingen = new ArrayList<Nummeraanduiding>();;
     @OneToMany(mappedBy="openbareruimte")
     @OrderBy("huisnummer")
-    public List<Nummeraanduiding> getNummeraanduidingen() {
+    public ArrayList<Nummeraanduiding> getNummeraanduidingen() {
         return nummeraanduidingen;
     }
-    public void setNummeraanduidingen(List<Nummeraanduiding> nummeraanduidingen) {
+    public void setNummeraanduidingen(ArrayList<Nummeraanduiding> nummeraanduidingen) {
         this.nummeraanduidingen = nummeraanduidingen;
     }       
 // tostring    

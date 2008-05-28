@@ -3,6 +3,7 @@ package org.nergens.bag.storage.pojo;
 import com.vividsolutions.jts.geom.*;
 
 //import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -25,7 +26,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("WOONPLAATS")
 @Table(name="DATA_WOONPLAATS")
-public class Woonplaats extends BagObject {
+public class Woonplaats extends BagObject implements Serializable{
 // referencing to other tables
     Gemeente gemeente;
     @ManyToOne
@@ -78,13 +79,13 @@ public class Woonplaats extends BagObject {
 //    public Geometry getGeometry() {
 //        return grens;
 //    }    
-    List<Openbareruimte> openbareruimten = new ArrayList<Openbareruimte>();;
+    ArrayList<Openbareruimte> openbareruimten = new ArrayList<Openbareruimte>();;
     @OneToMany(mappedBy="woonplaats")
     @OrderBy("naam")
-    public List<Openbareruimte> getOpenbareruimten() {
+    public ArrayList<Openbareruimte> getOpenbareruimten() {
         return openbareruimten;
     }
-    public void setOpenbareruimten(List<Openbareruimte> openbareruimten) {
+    public void setOpenbareruimten(ArrayList<Openbareruimte> openbareruimten) {
         this.openbareruimten = openbareruimten;
     }    
 // tostring    

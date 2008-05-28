@@ -2,6 +2,7 @@ package org.nergens.bag.storage.pojo;
 
 import com.vividsolutions.jts.geom.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("GEMEENTE")
 @Table(name="DATA_GEMEENTE")
-public class Gemeente extends BagObject {
+public class Gemeente extends BagObject implements Serializable{
 // referencing to other tables
 // attributes
 //    long code;
@@ -47,31 +48,31 @@ public class Gemeente extends BagObject {
 //        return grens;
 //    }
 // used in other tables
-    List<Woonplaats> woonplaatsen = new ArrayList<Woonplaats>();
+    ArrayList<Woonplaats> woonplaatsen = new ArrayList<Woonplaats>();
     @OneToMany(mappedBy="gemeente")
     @OrderBy("naam")
-    public List<Woonplaats> getWoonplaatsen() {
+    public ArrayList<Woonplaats> getWoonplaatsen() {
         return woonplaatsen;
     }
-    public void setWoonplaatsen(List<Woonplaats> woonplaatsen) {
+    public void setWoonplaatsen(ArrayList<Woonplaats> woonplaatsen) {
         this.woonplaatsen = woonplaatsen;
     }    
-    List<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
+    ArrayList<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
     @OneToMany(mappedBy="gemeente")
     @OrderBy("code")
-    public List<Verblijfsobject> getVerblijfsobjecten() {
+    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
         return verblijfsobjecten;
     }
-    public void setVerblijfsobjecten(List<Verblijfsobject> verblijfsobjecten) {
+    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
         this.verblijfsobjecten = verblijfsobjecten;
     }    
-    List<Pand> panden = new ArrayList<Pand>();
+    ArrayList<Pand> panden = new ArrayList<Pand>();
     @OneToMany(mappedBy="gemeente")
     @OrderBy("code")
-    public List<Pand> getPanden() {
+    public ArrayList<Pand> getPanden() {
         return panden;
     }
-    public void setPanden(List<Pand> panden) {
+    public void setPanden(ArrayList<Pand> panden) {
         this.panden = panden;
     }        
 // tostring    

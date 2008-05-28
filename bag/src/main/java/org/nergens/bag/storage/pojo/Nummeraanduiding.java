@@ -3,6 +3,7 @@ package org.nergens.bag.storage.pojo;
 import com.vividsolutions.jts.geom.*;
 
 //import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -30,10 +31,10 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("NUMMERAANDUIDING")
 @Table(name="DATA_NUMMERAANDUIDING")
-public class Nummeraanduiding extends BagObject {
+public class Nummeraanduiding extends BagObject implements Serializable{
 // referencing to other tables
     Openbareruimte openbareruimte;
-    @ManyToOne
+    @ManyToOne(targetEntity=Openbareruimte.class)
     public Openbareruimte getOpenbareruimte() {
         return openbareruimte;
     }
@@ -151,14 +152,14 @@ public class Nummeraanduiding extends BagObject {
 //        return punt;
 //    }    
 // used in other tables    
-    List<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
+    ArrayList<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
 //    @OneToMany(mappedBy="hoofdadres,nevenadressen")
     @OneToMany(mappedBy="hoofdadres")
     @OrderBy("code")
-    public List<Verblijfsobject> getVerblijfsobjecten() {
+    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
         return verblijfsobjecten;
     }
-    public void setVerblijfsobjecten(List<Verblijfsobject> verblijfsobjecten) {
+    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
         this.verblijfsobjecten = verblijfsobjecten;
     }    
 // tostring    

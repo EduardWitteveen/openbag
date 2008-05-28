@@ -2,6 +2,7 @@ package org.nergens.bag.storage.pojo;
 
 import com.vividsolutions.jts.geom.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -24,7 +25,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @DiscriminatorValue("PAND")
 @Table(name="DATA_PAND")
-public class Pand extends BagObject {
+public class Pand extends BagObject implements Serializable{
 // referencing to other tables
     Gemeente gemeente;
     @ManyToOne
@@ -34,15 +35,15 @@ public class Pand extends BagObject {
     public void setGemeente(Gemeente gemeente) { 
         this.gemeente = gemeente; 
     }    
-    List<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
+    ArrayList<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
 //    @ManyToMany(mappedBy="panden")
     @ManyToMany()
     @OrderBy("code")
     @JoinTable(name = "DATA_VO_PAND")    
-    public List<Verblijfsobject> getVerblijfsobjecten() {
+    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
         return verblijfsobjecten;
     }
-    public void setVerblijfsobjecten(List<Verblijfsobject> verblijfsobjecten) {
+    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
         this.verblijfsobjecten = verblijfsobjecten;
     }        
 // attributes
