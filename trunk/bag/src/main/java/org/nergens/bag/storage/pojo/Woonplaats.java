@@ -5,7 +5,6 @@ import com.vividsolutions.jts.geom.*;
 //import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 import org.hibernate.annotations.Type;
 /**
@@ -27,7 +26,11 @@ import org.hibernate.annotations.Type;
 @DiscriminatorValue("WOONPLAATS")
 @Table(name="DATA_WOONPLAATS")
 public class Woonplaats extends BagObject implements Serializable{
-// referencing to other tables
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6718944186372946432L;
+	// referencing to other tables
     Gemeente gemeente;
     @ManyToOne
     public Gemeente getGemeente() {

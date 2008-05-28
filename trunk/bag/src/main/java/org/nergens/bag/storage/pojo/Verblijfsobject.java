@@ -4,7 +4,6 @@ import com.vividsolutions.jts.geom.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 import org.hibernate.annotations.Type;
 import org.nergens.bag.storage.pojo.util.Gebruiksdoel;
@@ -32,7 +31,11 @@ import org.nergens.bag.storage.pojo.util.Gebruiksdoel;
 @PrimaryKeyJoinColumn(name="CODE")
 @Table(name="DATA_VERBLIJFSOBJECT")
 public class Verblijfsobject extends BagObject implements Serializable{
-// referencing to other tables
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6171936434187699536L;
+	// referencing to other tables
     Gemeente gemeente;
     @ManyToOne
     public Gemeente getGemeente() {

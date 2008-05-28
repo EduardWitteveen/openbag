@@ -1,13 +1,5 @@
 package org.nergens.bag.storage.util;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-import java.io.BufferedReader;
 import java.io.File;
-//import org.hibernate.*;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 //import org.hibernate.cfg.*;

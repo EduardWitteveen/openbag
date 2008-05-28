@@ -34,7 +34,11 @@ import com.vividsolutions.jts.geom.Polygon;
 @DiscriminatorValue("OPENBARERUIMTE")
 @Table(name="DATA_OPENBARERUIMTE")
 public class Openbareruimte extends BagObject implements Serializable {
-// referencing to other tables
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8915684457507855214L;
+	// referencing to other tables
     Woonplaats woonplaats;
     @ManyToOne
     public Woonplaats getWoonplaats() {
