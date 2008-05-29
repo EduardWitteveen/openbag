@@ -68,11 +68,13 @@
 			<artifactId>oracle-instantclient</artifactId>
 			<version>11.1.0.6.0</version>
 		</dependency>
+<!--		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-spatial-oracle</artifactId>
 			<version>1.0M1</version>
 		</dependency>
+-->		
 <!-- STOP ORACLE SPATIAL SUPPORT -->
 	</dependencies>
 	<build>
