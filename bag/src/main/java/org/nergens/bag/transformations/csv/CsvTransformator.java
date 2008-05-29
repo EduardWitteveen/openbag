@@ -234,6 +234,10 @@ public class CsvTransformator implements Transformator {
         String filepostfix = files[0];        
         try
         {
+        	// counter, to prevent java.lang.OutOfMemoryError: Java heap space
+        	int insertCount = 0;
+        	int maxInsertCount= 50;        	
+        	
         // gemeente
         	String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
             System.out.println("Processing: " + gemeentefilename);
@@ -252,10 +256,20 @@ public class CsvTransformator implements Transformator {
                 gemeente.setGrens(toPolygon(shredder.nextValue()));
                 session.save(gemeente);
                 _cache.put(gemeente.getCode(), gemeente);
-                System.out.println("\t" + gemeente);
+                System.out.println("\t(" + shredder.lastLineNumber() + ")" + gemeente);
+                
+            	insertCount++;
+            	if(insertCount >= maxInsertCount) {
+            		insertCount = 0;
+                    //flush a batch of inserts and release memory:
+                    System.out.println("hibernate flush");
+                    session.flush();
+                    session.clear();            		
+            	}                
             }
             istream.close();
-        // woonplaats
+
+            // woonplaats
             String woonplaatsfilename = fileprefix+ "woonplaats" + filepostfix.substring(FILE_STARTS_WITH.length());
             System.out.println("Processing: " + woonplaatsfilename);
             istream = new FileInputStream(woonplaatsfilename);
@@ -274,9 +288,19 @@ public class CsvTransformator implements Transformator {
                 woonplaats.setGrens(toPolygon(shredder.nextValue()));
                 session.save(woonplaats);
                 _cache.put(woonplaats.getCode(), woonplaats);
-                System.out.println("\t" + woonplaats);
+                System.out.println("\t(" + shredder.lastLineNumber() + ")" + woonplaats);
+                
+            	insertCount++;
+            	if(insertCount >= maxInsertCount) {
+            		insertCount = 0;
+                    //flush a batch of inserts and release memory:
+                    System.out.println("hibernate flush");
+                    session.flush();
+                    session.clear();            		
+            	}                
             }
             istream.close();
+            
         // openbareruimte
             String openbareruimtefilename = fileprefix+ "openbareruimte" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + openbareruimtefilename);
@@ -297,9 +321,19 @@ public class CsvTransformator implements Transformator {
                 openbareruimte.setGrens(toPolygon(shredder.nextValue()));
                 session.save(openbareruimte);
                 _cache.put(openbareruimte.getCode(), openbareruimte);
-                System.out.println("\t" + openbareruimte);
+                System.out.println("\t(" + shredder.lastLineNumber() + ")" + openbareruimte);
+                
+            	insertCount++;
+            	if(insertCount >= maxInsertCount) {
+            		insertCount = 0;
+                    //flush a batch of inserts and release memory:
+                    System.out.println("hibernate flush");
+                    session.flush();
+                    session.clear();            		
+            	}                                
             }
             istream.close();
+            
         // nummeraanduiding
             String nummeraanduidingfilename = fileprefix+ "nummeraanduiding" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + nummeraanduidingfilename);
@@ -323,9 +357,19 @@ public class CsvTransformator implements Transformator {
                 nummeraanduiding.setPunt(toPoint(shredder.nextValue()));
                 session.save(nummeraanduiding);
                 _cache.put(nummeraanduiding.getCode(), nummeraanduiding);
-                System.out.println("\t" + nummeraanduiding);                
+                System.out.println("\t(" + shredder.lastLineNumber() + ")" + nummeraanduiding);
+
+            	insertCount++;
+            	if(insertCount >= maxInsertCount) {
+            		insertCount = 0;
+                    //flush a batch of inserts and release memory:
+                    System.out.println("hibernate flush");
+                    session.flush();
+                    session.clear();            		
+            	}                
             }
             istream.close();
+            
         // verblijfsobject
             String verblijfsobjectfilename = fileprefix+ "verblijfsobject" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + verblijfsobjectfilename);
@@ -345,9 +389,19 @@ public class CsvTransformator implements Transformator {
                 verblijfsobject.setStatus(toString(shredder.nextValue()));
                 verblijfsobject.setPunt(toPoint(shredder.nextValue()));
                 session.save(verblijfsobject);
-//                System.out.println("\t" + verblijfsobject);                
+                System.out.println("\t(" + shredder.lastLineNumber() + ")" + verblijfsobject);
+                
+            	insertCount++;
+            	if(insertCount >= maxInsertCount) {
+            		insertCount = 0;
+                    //flush a batch of inserts and release memory:
+                    System.out.println("hibernate flush");
+                    session.flush();
+                    session.clear();            		
+            	}                
             }
             istream.close();
+            
         // pand
             String pandfilename = fileprefix+ "pand" + filepostfix.substring(FILE_STARTS_WITH.length());            
             System.out.println("Processing: " + pandfilename);
@@ -366,9 +420,19 @@ public class CsvTransformator implements Transformator {
                 pand.setStatus(toString(shredder.nextValue()));
                 pand.setGrens(toMultiPolygon(shredder.nextValue()));
                 session.save(pand);
-                System.out.println("\t" + pand);                
+                System.out.println("\t(" + shredder.lastLineNumber() + ")" + pand);
+                
+            	insertCount++;
+            	if(insertCount >= maxInsertCount) {
+            		insertCount = 0;
+                    //flush a batch of inserts and release memory:
+                    System.out.println("hibernate flush");
+                    session.flush();
+                    session.clear();            		
+            	}                
             }
-            istream.close();            
+            istream.close();
+            
             return true;
         }
         catch(IOException ioe) {

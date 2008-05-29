@@ -1,0 +1,1 @@
+mvn install:install-file -DgroupId=oracle -DartifactId=oracle-instantclient -Dversion=11.1.0.6.0 -Dpackaging=jar -Dfile=c:\instantclient\ojdbc6.jar

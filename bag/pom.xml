@@ -36,11 +36,6 @@
 			<version>1.0M1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-spatial-postgis</artifactId>
-			<version>1.0M1</version>
-		</dependency>
-		<dependency>
 			<groupId>com.vividsolutions</groupId>
 			<artifactId>jts</artifactId>
 			<version>1.8</version>
@@ -50,16 +45,35 @@
 			<artifactId>utils</artifactId>
 			<version>1.07.00</version>
 		</dependency>
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgis</artifactId>
-			<version>1.3.2</version>
-		</dependency>
+<!-- START POSTGIS SUPPORT -->		
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>8.3-603.jdbc4</version>
 		</dependency>
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgis</artifactId>
+			<version>1.3.2</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial-postgis</artifactId>
+			<version>1.0M1</version>
+		</dependency>
+<!-- STOP POSTGIS SUPPORT -->
+<!-- START ORACLE SPATIAL SUPPORT -->
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>oracle-instantclient</artifactId>
+			<version>11.1.0.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial-oracle</artifactId>
+			<version>1.0M1</version>
+		</dependency>
+<!-- STOP ORACLE SPATIAL SUPPORT -->
 	</dependencies>
 	<build>
 		<plugins>
