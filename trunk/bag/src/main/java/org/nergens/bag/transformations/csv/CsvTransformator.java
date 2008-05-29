@@ -252,8 +252,8 @@ public class CsvTransformator implements Transformator {
         {
         	// counter, to prevent java.lang.OutOfMemoryError: Java heap space
         	// see also: http://www.hibernate.org/hib_docs/reference/en/html/batch.html
-        	int insertCount = 0;
-        	int maxInsertCount= 250;        	
+//        	int insertCount = 0;
+//        	int maxInsertCount= 250;        	
         	
         // gemeente
         	String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
@@ -275,14 +275,14 @@ public class CsvTransformator implements Transformator {
                 _cache.put(gemeente.getCode(), gemeente);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + gemeente);
                 
-            	insertCount++;
-            	if(insertCount >= maxInsertCount) {
-            		insertCount = 0;
-                    //flush a batch of inserts and release memory:
-                    log.info("hibernate flush");
-                    session.flush();
-                    session.clear();            		
-            	}                
+//            	insertCount++;
+//            	if(insertCount >= maxInsertCount) {
+//            		insertCount = 0;
+//                    //flush a batch of inserts and release memory:
+//                    log.info("hibernate flush");
+//                    session.flush();
+//                    session.clear();            		
+//            	}                
             }
             istream.close();
 
@@ -307,14 +307,14 @@ public class CsvTransformator implements Transformator {
                 _cache.put(woonplaats.getCode(), woonplaats);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + woonplaats);
                 
-            	insertCount++;
-            	if(insertCount >= maxInsertCount) {
-            		insertCount = 0;
-                    //flush a batch of inserts and release memory:
-                    log.info("hibernate flush");
-                    session.flush();
-                    session.clear();            		
-            	}                
+//            	insertCount++;
+//            	if(insertCount >= maxInsertCount) {
+//            		insertCount = 0;
+//                    //flush a batch of inserts and release memory:
+//                    log.info("hibernate flush");
+//                    session.flush();
+//                    session.clear();            		
+//            	}                
             }
             istream.close();
             
@@ -340,14 +340,14 @@ public class CsvTransformator implements Transformator {
                 _cache.put(openbareruimte.getCode(), openbareruimte);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + openbareruimte);
                 
-            	insertCount++;
-            	if(insertCount >= maxInsertCount) {
-            		insertCount = 0;
-                    //flush a batch of inserts and release memory:
-                    log.info("hibernate flush");
-                    session.flush();
-                    session.clear();            		
-            	}                                
+//            	insertCount++;
+//            	if(insertCount >= maxInsertCount) {
+//            		insertCount = 0;
+//                    //flush a batch of inserts and release memory:
+//                    log.info("hibernate flush");
+//                    session.flush();
+//                    session.clear();            		
+//            	}                                
             }
             istream.close();
             
@@ -376,14 +376,14 @@ public class CsvTransformator implements Transformator {
                 _cache.put(nummeraanduiding.getCode(), nummeraanduiding);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + nummeraanduiding);
 
-            	insertCount++;
-            	if(insertCount >= maxInsertCount) {
-            		insertCount = 0;
-                    //flush a batch of inserts and release memory:
-                    log.info("hibernate flush");
-                    session.flush();
-                    session.clear();            		
-            	}                
+//            	insertCount++;
+//            	if(insertCount >= maxInsertCount) {
+//            		insertCount = 0;
+//                    //flush a batch of inserts and release memory:
+//                    log.info("hibernate flush");
+//                    session.flush();
+//                    session.clear();            		
+//            	}                
             }
             istream.close();
             
@@ -408,14 +408,14 @@ public class CsvTransformator implements Transformator {
                 session.save(verblijfsobject);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + verblijfsobject);
                 
-            	insertCount++;
-            	if(insertCount >= maxInsertCount) {
-            		insertCount = 0;
-                    //flush a batch of inserts and release memory:
-                    log.info("hibernate flush");
-                    session.flush();
-                    session.clear();            		
-            	}                
+//            	insertCount++;
+//            	if(insertCount >= maxInsertCount) {
+//            		insertCount = 0;
+//                    //flush a batch of inserts and release memory:
+//                    log.info("hibernate flush");
+//                    session.flush();
+//                    session.clear();            		
+//            	}                
             }
             istream.close();
             
@@ -439,14 +439,14 @@ public class CsvTransformator implements Transformator {
                 session.save(pand);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + pand);
                 
-            	insertCount++;
-            	if(insertCount >= maxInsertCount) {
-            		insertCount = 0;
-                    //flush a batch of inserts and release memory:
-                    log.info("hibernate flush");
-                    session.flush();
-                    session.clear();            		
-            	}                
+//            	insertCount++;
+//            	if(insertCount >= maxInsertCount) {
+//            		insertCount = 0;
+//                    //flush a batch of inserts and release memory:
+//                    log.info("hibernate flush");
+//                    session.flush();
+//                    session.clear();            		
+//            	}                
             }
             istream.close();
             

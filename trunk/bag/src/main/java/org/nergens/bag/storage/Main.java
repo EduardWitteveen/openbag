@@ -8,6 +8,8 @@ package org.nergens.bag.storage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
+
 import org.hibernate.Session;
 import org.nergens.bag.storage.pojo.*;
 import org.nergens.bag.storage.util.HibernateFactory;
@@ -18,6 +20,8 @@ import org.nergens.bag.transformations.csv.CsvTransformator;
  * @author Eduard Witteveen
  */
 public class Main {
+	private static Logger log = Logger.getLogger(Main.class.getName());
+	
     @SuppressWarnings("unchecked")
 	public static void main(String[] args) throws FileNotFoundException, IOException {
         Session session = HibernateFactory.getSessionFactory().getCurrentSession();
@@ -29,31 +33,31 @@ public class Main {
             // use the cvs files to fill our system
             Transformator trans = new CsvTransformator();
             if(trans.retrieveFromFormat(session))  {
-                System.out.println("import succesfull to transaction!");
+                log.info("import succesfull to transaction!");
             }
             else {
-                System.out.println("import failed!");
+                log.info("import failed!");
             }
         }
         else {
             // export the data
             for (Gemeente gemeente : gemeenten) {
-                System.out.println(gemeente);
+                log.info(gemeente.toString());
                 // woonplaats
                 java.util.Iterator<Woonplaats> woonplaatsen = gemeente.getWoonplaatsen().iterator();
                 while(woonplaatsen.hasNext()) {
                 	Woonplaats woonplaats = woonplaatsen.next();     
-                    System.out.println(woonplaats);
+                    log.info(woonplaats.toString());
                     // openbareruimte
                     java.util.Iterator<Openbareruimte> openbareruimten = woonplaats.getOpenbareruimten().iterator();
                     while(openbareruimten.hasNext()) {
                     	Openbareruimte openbareruimte = openbareruimten.next();     
-                        System.out.println(openbareruimte);
+                        log.info(openbareruimte.toString());
                         // nummeraanduiding
                         java.util.Iterator<Nummeraanduiding> nummeraanduidingen = openbareruimte.getNummeraanduidingen().iterator();
                         while(nummeraanduidingen.hasNext()) {
                         	Nummeraanduiding nummeraanduiding = nummeraanduidingen.next();     
-                            System.out.println(nummeraanduiding);
+                            log.info(nummeraanduiding.toString());
                         }                        
                     }
                 }
@@ -61,18 +65,18 @@ public class Main {
                 java.util.Iterator<Verblijfsobject> verblijfsobjecten = gemeente.getVerblijfsobjecten().iterator();
                 while(verblijfsobjecten.hasNext()) {
                 	Verblijfsobject verblijfsobject = verblijfsobjecten.next();                
-                    System.out.println(verblijfsobject);
+                    log.info(verblijfsobject.toString());
                 }
                 // pand
                 java.util.Iterator<Pand> panden = gemeente.getPanden().iterator();
                 while(panden.hasNext()) {
                 	Pand pand = panden.next();        
-                    System.out.println(pand);
+                    log.info(pand.toString());
                 }            
             }
         }
-        System.out.println("start transaction commit");
+        log.info("start transaction commit");
         session.getTransaction().commit();
-        System.out.println("done transaction commit");
+        log.info("done transaction commit");
     }
 }
