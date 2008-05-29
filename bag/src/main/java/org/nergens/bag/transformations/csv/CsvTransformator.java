@@ -69,6 +69,9 @@ public class CsvTransformator implements Transformator {
     }
     @SuppressWarnings("unchecked")
 	private Gemeente toGemeente(Session session, String code) {
+        if(code.length() == 0) {
+            return null;
+        }
         long lcode = Long.parseLong(code);
         if(_cache.containsKey(lcode)) {
             return (Gemeente)_cache.get(lcode);
@@ -93,7 +96,10 @@ public class CsvTransformator implements Transformator {
         }
     }
     @SuppressWarnings("unchecked")
-	private Woonplaats toWoonplaats(Session session, String code) {        
+	private Woonplaats toWoonplaats(Session session, String code) {
+        if(code.length() == 0) {
+            return null;
+        }    	
         long lcode = Long.parseLong(code);        
         if(_cache.containsKey(lcode)) {
             return (Woonplaats)_cache.get(lcode);
@@ -119,6 +125,9 @@ public class CsvTransformator implements Transformator {
     }
     @SuppressWarnings("unchecked")
 	private Openbareruimte toOpenbareruimte(Session session, String code) {
+        if(code.length() == 0) {
+            return null;
+        }    	
         long lcode = Long.parseLong(code);
         if(_cache.containsKey(lcode)) {
             return (Openbareruimte)_cache.get(lcode);
@@ -144,6 +153,9 @@ public class CsvTransformator implements Transformator {
     }    
     @SuppressWarnings("unchecked")
 	private Nummeraanduiding toAdres(Session session, String code) {
+        if(code.length() == 0) {
+            return null;
+        }    	
         long lcode = Long.parseLong(code);
         if(_cache.containsKey(lcode)) {
             return (Nummeraanduiding)_cache.get(lcode);
