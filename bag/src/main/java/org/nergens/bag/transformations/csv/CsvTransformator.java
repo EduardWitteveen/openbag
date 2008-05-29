@@ -24,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.nergens.bag.storage.pojo.Gemeente;
@@ -40,6 +42,8 @@ import org.nergens.bag.transformations.Transformator;
  * @author Eduard Witteveen
  */
 public class CsvTransformator implements Transformator {
+	private static Logger log = Logger.getLogger(CsvTransformator.class.getName());
+	
     @SuppressWarnings("unchecked")
 	private static HashMap _cache= new HashMap();
     String path= null;
@@ -53,7 +57,7 @@ public class CsvTransformator implements Transformator {
     private File getPath() {
         if(path == null) {
             path = System.getProperty("user.dir") + "/";
-            System.out.println("using path:" + path);
+            log.info("using path:" + path);
         }
         return new File(path);    
     }
@@ -74,7 +78,7 @@ public class CsvTransformator implements Transformator {
         Query q = session.createQuery(query).setLong(0, lcode);
         List<Gemeente> gemeenten = q.list();
         if(gemeenten.size() < 1) {
-            System.out.print("found no objects for gemeente with code:" + code);
+            log.info("found no objects for gemeente with code:" + code);
             return null;            
         }
         else if(gemeenten.size() == 1)
@@ -84,7 +88,7 @@ public class CsvTransformator implements Transformator {
             return result;
         }
         else {
-            System.out.print("found multiple objects for gemeente with code:" + code);
+            log.info("found multiple objects for gemeente with code:" + code);
             return null;
         }
     }
@@ -99,7 +103,7 @@ public class CsvTransformator implements Transformator {
         Query q = session.createQuery(query).setLong(0, lcode);
         List<Woonplaats> woonplaatsen = q.list();
         if(woonplaatsen.size() < 1) {
-            System.out.print("found no objects for woonplaats with code:" + code);
+            log.info("found no objects for woonplaats with code:" + code);
             return null;            
         }
         else if(woonplaatsen.size() == 1)
@@ -109,7 +113,7 @@ public class CsvTransformator implements Transformator {
             return result;            
         }
         else {
-            System.out.print("found multiple objects for woonplaats with code:" + code);
+            log.info("found multiple objects for woonplaats with code:" + code);
             return null;
         }
     }
@@ -124,7 +128,7 @@ public class CsvTransformator implements Transformator {
         Query q = session.createQuery(query).setLong(0, lcode);
         List<Openbareruimte> openbareruimten = q.list();
         if(openbareruimten.size() < 1) {
-            System.out.print("found no objects for openbareruimte with code:" + code);
+            log.info("found no objects for openbareruimte with code:" + code);
             return null;            
         }
         else if(openbareruimten.size() == 1)
@@ -134,7 +138,7 @@ public class CsvTransformator implements Transformator {
             return result;            
         }
         else {
-            System.out.print("found multiple objects for openbareruimte with code:" + code);
+            log.info("found multiple objects for openbareruimte with code:" + code);
             return null;
         }
     }    
@@ -149,7 +153,7 @@ public class CsvTransformator implements Transformator {
         Query q = session.createQuery(query).setLong(0, lcode);
         List<Nummeraanduiding> nummeraanduidingen = q.list();
         if(nummeraanduidingen.size() < 1) {
-            System.out.print("found no objects for nummeraanduiding with code:" + code);
+            log.info("found no objects for nummeraanduiding with code:" + code);
             return null;            
         }
         else if(nummeraanduidingen.size() == 1)
@@ -159,7 +163,7 @@ public class CsvTransformator implements Transformator {
             return result;            
         }
         else {
-            System.out.print("found multiple objects for nummeraanduiding with code:" + code);
+            log.info("found multiple objects for nummeraanduiding with code:" + code);
             return null;
         }
     } 
@@ -172,7 +176,7 @@ public class CsvTransformator implements Transformator {
             return wkt.read(str);
         }
         catch(ParseException pe) {
-            System.out.println("error parsing WKT string:" + str);
+            log.info("error parsing WKT string:" + str);
             pe.printStackTrace();
             return null;
         }
@@ -189,7 +193,7 @@ public class CsvTransformator implements Transformator {
             apoly[0] = (Polygon)g;
             return gf.createMultiPolygon(apoly);
         }
-        System.out.println("error converting WKT string to Polygon, found type:" + g.getGeometryType()+ " for string:"  + str);
+        log.info("error converting WKT string to Polygon, found type:" + g.getGeometryType()+ " for string:"  + str);
         return null;
     }
     private Polygon toPolygon(String str) {
@@ -198,7 +202,7 @@ public class CsvTransformator implements Transformator {
         if("Polygon".equals(g.getGeometryType())) {            
             return (Polygon)g;
         }
-        System.out.println("error converting WKT string to Polygon, found type:" + g.getGeometryType()+ " for string:"  + str);
+        log.info("error converting WKT string to Polygon, found type:" + g.getGeometryType()+ " for string:"  + str);
         return null;
     }
     private Point toPoint(String str) {
@@ -207,7 +211,7 @@ public class CsvTransformator implements Transformator {
         if("Point".equals(g.getGeometryType())) {            
             return (Point)g;
         }
-        System.out.println("error converting WKT string to Point, found type:" + g.getGeometryType()+ " for string:"  + str);
+        log.info("error converting WKT string to Point, found type:" + g.getGeometryType()+ " for string:"  + str);
         return null;
     }
     private Long toLong(String str) {
@@ -235,12 +239,13 @@ public class CsvTransformator implements Transformator {
         try
         {
         	// counter, to prevent java.lang.OutOfMemoryError: Java heap space
+        	// see also: http://www.hibernate.org/hib_docs/reference/en/html/batch.html
         	int insertCount = 0;
-        	int maxInsertCount= 50;        	
+        	int maxInsertCount= 250;        	
         	
         // gemeente
         	String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
-            System.out.println("Processing: " + gemeentefilename);
+            log.info("Processing: " + gemeentefilename);
             InputStream istream = new FileInputStream(gemeentefilename);
             CSVParser shredder = new CSVParser(istream);
             shredder.setCommentStart("#;!");
@@ -249,20 +254,20 @@ public class CsvTransformator implements Transformator {
             while ((firstfield = shredder.nextValue()) != null) {
                 //  gemeente
                 //  code, naam, grens
-//                System.out.println("gemeente #" + shredder.lastLineNumber());
+//                log.info("gemeente #" + shredder.lastLineNumber());
                 Gemeente gemeente = new Gemeente();
                 gemeente.setCode(toLong(firstfield));
                 gemeente.setNaam(toString(shredder.nextValue()));
                 gemeente.setGrens(toPolygon(shredder.nextValue()));
                 session.save(gemeente);
                 _cache.put(gemeente.getCode(), gemeente);
-                System.out.println("\t(" + shredder.lastLineNumber() + ")" + gemeente);
+                log.info("\t(" + shredder.lastLineNumber() + ")" + gemeente);
                 
             	insertCount++;
             	if(insertCount >= maxInsertCount) {
             		insertCount = 0;
                     //flush a batch of inserts and release memory:
-                    System.out.println("hibernate flush");
+                    log.info("hibernate flush");
                     session.flush();
                     session.clear();            		
             	}                
@@ -271,7 +276,7 @@ public class CsvTransformator implements Transformator {
 
             // woonplaats
             String woonplaatsfilename = fileprefix+ "woonplaats" + filepostfix.substring(FILE_STARTS_WITH.length());
-            System.out.println("Processing: " + woonplaatsfilename);
+            log.info("Processing: " + woonplaatsfilename);
             istream = new FileInputStream(woonplaatsfilename);
             shredder = new CSVParser(istream);
             shredder.setCommentStart("#;!");
@@ -279,7 +284,7 @@ public class CsvTransformator implements Transformator {
             while ((firstfield = shredder.nextValue()) != null) {
                 //  woonplaats
                 //  gemeente_code, code, naam, status, grens
-//                System.out.println("woonplaats #" + shredder.lastLineNumber());
+//                log.info("woonplaats #" + shredder.lastLineNumber());
                 Woonplaats woonplaats = new Woonplaats();                
                 woonplaats.setGemeente(toGemeente(session, firstfield));               
                 woonplaats.setCode(toLong(shredder.nextValue()));
@@ -288,13 +293,13 @@ public class CsvTransformator implements Transformator {
                 woonplaats.setGrens(toPolygon(shredder.nextValue()));
                 session.save(woonplaats);
                 _cache.put(woonplaats.getCode(), woonplaats);
-                System.out.println("\t(" + shredder.lastLineNumber() + ")" + woonplaats);
+                log.info("\t(" + shredder.lastLineNumber() + ")" + woonplaats);
                 
             	insertCount++;
             	if(insertCount >= maxInsertCount) {
             		insertCount = 0;
                     //flush a batch of inserts and release memory:
-                    System.out.println("hibernate flush");
+                    log.info("hibernate flush");
                     session.flush();
                     session.clear();            		
             	}                
@@ -303,7 +308,7 @@ public class CsvTransformator implements Transformator {
             
         // openbareruimte
             String openbareruimtefilename = fileprefix+ "openbareruimte" + filepostfix.substring(FILE_STARTS_WITH.length());            
-            System.out.println("Processing: " + openbareruimtefilename);
+            log.info("Processing: " + openbareruimtefilename);
             istream = new FileInputStream(openbareruimtefilename);
             shredder = new CSVParser(istream);
             shredder.setCommentStart("#;!");
@@ -311,7 +316,7 @@ public class CsvTransformator implements Transformator {
             while ((firstfield = shredder.nextValue()) != null) {
                 //  openbareruimte
                 //  woonplaats_code, code, naam, status, type, grens
-//                System.out.println("openbareruimte #" + shredder.lastLineNumber());
+//                log.info("openbareruimte #" + shredder.lastLineNumber());
                 Openbareruimte openbareruimte = new Openbareruimte();                
                 openbareruimte.setWoonplaats(toWoonplaats(session, firstfield));               
                 openbareruimte.setCode(toLong(shredder.nextValue()));
@@ -321,13 +326,13 @@ public class CsvTransformator implements Transformator {
                 openbareruimte.setGrens(toPolygon(shredder.nextValue()));
                 session.save(openbareruimte);
                 _cache.put(openbareruimte.getCode(), openbareruimte);
-                System.out.println("\t(" + shredder.lastLineNumber() + ")" + openbareruimte);
+                log.info("\t(" + shredder.lastLineNumber() + ")" + openbareruimte);
                 
             	insertCount++;
             	if(insertCount >= maxInsertCount) {
             		insertCount = 0;
                     //flush a batch of inserts and release memory:
-                    System.out.println("hibernate flush");
+                    log.info("hibernate flush");
                     session.flush();
                     session.clear();            		
             	}                                
@@ -336,7 +341,7 @@ public class CsvTransformator implements Transformator {
             
         // nummeraanduiding
             String nummeraanduidingfilename = fileprefix+ "nummeraanduiding" + filepostfix.substring(FILE_STARTS_WITH.length());            
-            System.out.println("Processing: " + nummeraanduidingfilename);
+            log.info("Processing: " + nummeraanduidingfilename);
             istream = new FileInputStream(nummeraanduidingfilename);
             shredder = new CSVParser(istream);
             shredder.setCommentStart("#;!");
@@ -344,7 +349,7 @@ public class CsvTransformator implements Transformator {
             while ((firstfield = shredder.nextValue()) != null) {
                 //  nummeraanduidingen
                 //  openbareruimte_code, code, huisnummer, huisletter, huisnummertoevoeging, postcode, status, type, punt
-//                System.out.println("nummeraanduiding #" + shredder.lastLineNumber());
+//                log.info("nummeraanduiding #" + shredder.lastLineNumber());
                 Nummeraanduiding nummeraanduiding = new Nummeraanduiding();                
                 nummeraanduiding.setOpenbareruimte(toOpenbareruimte(session, firstfield));               
                 nummeraanduiding.setCode(toLong(shredder.nextValue()));
@@ -357,13 +362,13 @@ public class CsvTransformator implements Transformator {
                 nummeraanduiding.setPunt(toPoint(shredder.nextValue()));
                 session.save(nummeraanduiding);
                 _cache.put(nummeraanduiding.getCode(), nummeraanduiding);
-                System.out.println("\t(" + shredder.lastLineNumber() + ")" + nummeraanduiding);
+                log.info("\t(" + shredder.lastLineNumber() + ")" + nummeraanduiding);
 
             	insertCount++;
             	if(insertCount >= maxInsertCount) {
             		insertCount = 0;
                     //flush a batch of inserts and release memory:
-                    System.out.println("hibernate flush");
+                    log.info("hibernate flush");
                     session.flush();
                     session.clear();            		
             	}                
@@ -372,7 +377,7 @@ public class CsvTransformator implements Transformator {
             
         // verblijfsobject
             String verblijfsobjectfilename = fileprefix+ "verblijfsobject" + filepostfix.substring(FILE_STARTS_WITH.length());            
-            System.out.println("Processing: " + verblijfsobjectfilename);
+            log.info("Processing: " + verblijfsobjectfilename);
             istream = new FileInputStream(verblijfsobjectfilename);
             shredder = new CSVParser(istream);
             shredder.setCommentStart("#;!");
@@ -380,7 +385,7 @@ public class CsvTransformator implements Transformator {
             while ((firstfield = shredder.nextValue()) != null) {
                 //  verblijfsobject
                 //  gemeente_code, adres_code, code, oppervlakte, status, grens                    
-//                System.out.println("verblijfsobject #" + shredder.lastLineNumber());
+//                log.info("verblijfsobject #" + shredder.lastLineNumber());
                 Verblijfsobject verblijfsobject = new Verblijfsobject();                
                 verblijfsobject.setGemeente(toGemeente(session, firstfield));
                 verblijfsobject.setHoofdadres(toAdres(session, shredder.nextValue()));
@@ -389,13 +394,13 @@ public class CsvTransformator implements Transformator {
                 verblijfsobject.setStatus(toString(shredder.nextValue()));
                 verblijfsobject.setPunt(toPoint(shredder.nextValue()));
                 session.save(verblijfsobject);
-                System.out.println("\t(" + shredder.lastLineNumber() + ")" + verblijfsobject);
+                log.info("\t(" + shredder.lastLineNumber() + ")" + verblijfsobject);
                 
             	insertCount++;
             	if(insertCount >= maxInsertCount) {
             		insertCount = 0;
                     //flush a batch of inserts and release memory:
-                    System.out.println("hibernate flush");
+                    log.info("hibernate flush");
                     session.flush();
                     session.clear();            		
             	}                
@@ -404,7 +409,7 @@ public class CsvTransformator implements Transformator {
             
         // pand
             String pandfilename = fileprefix+ "pand" + filepostfix.substring(FILE_STARTS_WITH.length());            
-            System.out.println("Processing: " + pandfilename);
+            log.info("Processing: " + pandfilename);
             istream = new FileInputStream(pandfilename);
             shredder = new CSVParser(istream);
             shredder.setCommentStart("#;!");
@@ -412,7 +417,7 @@ public class CsvTransformator implements Transformator {
             while ((firstfield = shredder.nextValue()) != null) {
                 //  pand
                 //  gemeente_code, code, bouwjaar, status, grens
-//                System.out.println("pand #" + shredder.lastLineNumber());
+//                log.info("pand #" + shredder.lastLineNumber());
                 Pand pand = new Pand();                
                 pand.setGemeente(toGemeente(session, firstfield));
                 pand.setCode(toLong(shredder.nextValue()));
@@ -420,13 +425,13 @@ public class CsvTransformator implements Transformator {
                 pand.setStatus(toString(shredder.nextValue()));
                 pand.setGrens(toMultiPolygon(shredder.nextValue()));
                 session.save(pand);
-                System.out.println("\t(" + shredder.lastLineNumber() + ")" + pand);
+                log.info("\t(" + shredder.lastLineNumber() + ")" + pand);
                 
             	insertCount++;
             	if(insertCount >= maxInsertCount) {
             		insertCount = 0;
                     //flush a batch of inserts and release memory:
-                    System.out.println("hibernate flush");
+                    log.info("hibernate flush");
                     session.flush();
                     session.clear();            		
             	}                
@@ -493,7 +498,7 @@ public class CsvTransformator implements Transformator {
             FileWriter pandwriter = new FileWriter(pandfilename, false);
             
             
-            System.out.println("export to:\n\t" + 
+            log.info("export to:\n\t" + 
                     gemeentefilename.getAbsolutePath() + "\n\t" +
                     woonplaatsfilename.getAbsolutePath() + "\n\t" +              
                     nummeraanduidingfilename.getAbsolutePath() + "\n\t" +
@@ -577,7 +582,7 @@ public class CsvTransformator implements Transformator {
             openbareruimtewriter.close();
             woonplaatswriter.close();
             gemeentewriter.close();
-            System.out.println("export done!");
+            log.info("export done!");
             return true;
         }
         catch(IOException ioe) {
