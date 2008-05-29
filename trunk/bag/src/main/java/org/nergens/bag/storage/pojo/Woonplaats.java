@@ -36,7 +36,7 @@ public class Woonplaats extends BagAuthentiekObject implements Serializable{
     }
     public void setGemeente(Gemeente gemeente) { 
         this.gemeente = gemeente; 
-    }        
+    }   
 // attributes    
     @Column(name="NAAM")
     protected String naam;    

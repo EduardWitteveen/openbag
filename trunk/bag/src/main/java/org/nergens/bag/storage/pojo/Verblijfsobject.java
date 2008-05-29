@@ -63,7 +63,18 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
     }
     public void setOppervlakte(Long oppervlakte) { 
         this.oppervlakte = oppervlakte; 
-    }    
+    }
+    /**
+     * NOT FROM BAG!!!
+    */
+    @Column(name="WOZOBJEKTNR")
+    protected Long wozObjectNumber;   
+    public Long getWozObjectNumber() {
+        return wozObjectNumber; 
+    }
+    public void setWozObjectNumber(Long wozObjectNumber) { 
+        this.wozObjectNumber = wozObjectNumber; 
+    }        
     /**
      * Verblijfsobject gevormd
      * Niet gerealiseerd verblijfsobject
