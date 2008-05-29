@@ -526,8 +526,9 @@ public class CsvTransformator implements Transformator {
                 writeValue(gemeentewriter, gemeente.getNaam(), true);
                 writeValue(gemeentewriter, gemeente.getGrens(), false);
                 writeNewLine(gemeentewriter);
-                List<Woonplaats> woonplaatsen = gemeente.getWoonplaatsen();
-                for (Woonplaats woonplaats : woonplaatsen) {
+                java.util.Iterator<Woonplaats> woonplaatsen = gemeente.getWoonplaatsen().iterator();
+                while(woonplaatsen.hasNext()) {
+                	Woonplaats woonplaats = woonplaatsen.next();
                     //  woonplaats
                     //  gemeente_code, code, naam, status, grens
                     writeValue(woonplaatswriter, woonplaats.getGemeente().getCode(), true);
@@ -536,8 +537,9 @@ public class CsvTransformator implements Transformator {
                     writeValue(woonplaatswriter, woonplaats.getStatus(), true);
                     writeValue(woonplaatswriter, woonplaats.getGrens(), false);
                     writeNewLine(woonplaatswriter);                    
-                    List<Openbareruimte> openbareruimten = woonplaats.getOpenbareruimten();
-                    for (Openbareruimte openbareruimte : openbareruimten) {
+                    java.util.Iterator<Openbareruimte> openbareruimten = woonplaats.getOpenbareruimten().iterator();
+                    while(openbareruimten.hasNext()) {
+                    	Openbareruimte openbareruimte = openbareruimten.next();                
                         //  openbareruimte
                         //  woonplaats_code, code, naam, status, type, grens
                         writeValue(openbareruimtewriter, openbareruimte.getWoonplaats().getCode(), true);
@@ -547,8 +549,9 @@ public class CsvTransformator implements Transformator {
                         writeValue(openbareruimtewriter, openbareruimte.getType(), true);
                         writeValue(openbareruimtewriter, openbareruimte.getGrens(), false);
                         writeNewLine(openbareruimtewriter);
-                        List<Nummeraanduiding> nummeraanduidingen = openbareruimte.getNummeraanduidingen();
-                        for (Nummeraanduiding nummeraanduiding : nummeraanduidingen) {
+                        java.util.Iterator<Nummeraanduiding> nummeraanduidingen = openbareruimte.getNummeraanduidingen().iterator();
+                        while(nummeraanduidingen.hasNext()) {
+                        	Nummeraanduiding nummeraanduiding = nummeraanduidingen.next();     
                             //  nummeraanduidingen
                             //  openbareruimte_code, code, huisnummer, huisletter, huisnummertoevoegign, postcode, status, type, punt
                             writeValue(nummeraanduidingwriter, nummeraanduiding.getOpenbareruimte().getCode(), true);
@@ -564,8 +567,9 @@ public class CsvTransformator implements Transformator {
                         }
                     }                    
                 }
-                List<Verblijfsobject> verblijfsobjecten = gemeente.getVerblijfsobjecten();
-                for (Verblijfsobject verblijfsobject : verblijfsobjecten) {
+                java.util.Iterator<Verblijfsobject> verblijfsobjecten = gemeente.getVerblijfsobjecten().iterator();
+                while(verblijfsobjecten.hasNext()) {
+                	Verblijfsobject verblijfsobject = verblijfsobjecten.next();                
                     //  verblijfsobject
                     //  gemeente_code, adres_code, code, oppervlakte, status, grens                    
                     writeValue(verblijfsobjectwriter, verblijfsobject.getGemeente().getCode(), true);
@@ -576,8 +580,9 @@ public class CsvTransformator implements Transformator {
                     writeValue(verblijfsobjectwriter, verblijfsobject.getPunt(), false);
                     writeNewLine(verblijfsobjectwriter);
                 }
-                List<Pand> panden = gemeente.getPanden();
-                for (Pand pand : panden) {
+                java.util.Iterator<Pand> panden = gemeente.getPanden().iterator();
+                while(panden.hasNext()) {
+                	Pand pand = panden.next();
                     //  pand
                     //  gemeente_code, code, bouwjaar, status, grens
                     writeValue(pandwriter, pand.getGemeente().getCode(), true);

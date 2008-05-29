@@ -130,11 +130,11 @@ public class Nummeraanduiding extends BagAuthentiekObject implements Serializabl
     		mappedBy="hoofdadres"
     )
     @OrderBy("code")
-    protected ArrayList<Verblijfsobject> verblijfsobjecten;
-    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
+    protected java.util.Set<Verblijfsobject> verblijfsobjecten;
+    public java.util.Set<Verblijfsobject> getVerblijfsobjecten() {
         return verblijfsobjecten;
     }
-    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
+    public void setVerblijfsobjecten(java.util.Set<Verblijfsobject> verblijfsobjecten) {
         this.verblijfsobjecten = verblijfsobjecten;
     }
 // tostring    

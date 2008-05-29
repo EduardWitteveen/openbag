@@ -105,11 +105,11 @@ public class Openbareruimte extends BagAuthentiekObject implements Serializable 
     		mappedBy="openbareruimte"
     )
     @OrderBy("huisnummer")
-    ArrayList<Nummeraanduiding> nummeraanduidingen;
-    public ArrayList<Nummeraanduiding> getNummeraanduidingen() {
+    java.util.Set<Nummeraanduiding> nummeraanduidingen;
+    public java.util.Set<Nummeraanduiding> getNummeraanduidingen() {
         return nummeraanduidingen;
     }
-    public void setNummeraanduidingen(ArrayList<Nummeraanduiding> nummeraanduidingen) {
+    public void setNummeraanduidingen(java.util.Set<Nummeraanduiding> nummeraanduidingen) {
         this.nummeraanduidingen = nummeraanduidingen;
     }       
 // tostring    

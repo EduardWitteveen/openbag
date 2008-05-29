@@ -40,28 +40,33 @@ public class Main {
             for (Gemeente gemeente : gemeenten) {
                 System.out.println(gemeente);
                 // woonplaats
-                List<Woonplaats> woonplaatsen = gemeente.getWoonplaatsen();                
-                for (Woonplaats woonplaats : woonplaatsen) {                    
+                java.util.Iterator<Woonplaats> woonplaatsen = gemeente.getWoonplaatsen().iterator();
+                while(woonplaatsen.hasNext()) {
+                	Woonplaats woonplaats = woonplaatsen.next();     
                     System.out.println(woonplaats);
                     // openbareruimte
-                    List<Openbareruimte> openbareruimten = woonplaats.getOpenbareruimten();
-                    for (Openbareruimte openbareruimte : openbareruimten) {
+                    java.util.Iterator<Openbareruimte> openbareruimten = woonplaats.getOpenbareruimten().iterator();
+                    while(openbareruimten.hasNext()) {
+                    	Openbareruimte openbareruimte = openbareruimten.next();     
                         System.out.println(openbareruimte);
                         // nummeraanduiding
-                        List<Nummeraanduiding> nummeraanduindingen = openbareruimte.getNummeraanduidingen();
-                        for (Nummeraanduiding nummeraanduiding : nummeraanduindingen) {
+                        java.util.Iterator<Nummeraanduiding> nummeraanduidingen = openbareruimte.getNummeraanduidingen().iterator();
+                        while(nummeraanduidingen.hasNext()) {
+                        	Nummeraanduiding nummeraanduiding = nummeraanduidingen.next();     
                             System.out.println(nummeraanduiding);
                         }                        
                     }
                 }
                 // verblijfsobject
-                List<Verblijfsobject> verblijfsojecten = gemeente.getVerblijfsobjecten();
-                for (Verblijfsobject verblijfsobject : verblijfsojecten) {
+                java.util.Iterator<Verblijfsobject> verblijfsobjecten = gemeente.getVerblijfsobjecten().iterator();
+                while(verblijfsobjecten.hasNext()) {
+                	Verblijfsobject verblijfsobject = verblijfsobjecten.next();                
                     System.out.println(verblijfsobject);
                 }
                 // pand
-                List<Pand> panden = gemeente.getPanden();
-                for (Pand pand : panden) {
+                java.util.Iterator<Pand> panden = gemeente.getPanden().iterator();
+                while(panden.hasNext()) {
+                	Pand pand = panden.next();        
                     System.out.println(pand);
                 }            
             }
