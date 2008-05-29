@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +15,8 @@ import javax.persistence.Table;
 @Table(name="DATA_AUTHENTIEK")
 public class BagAuthentiekObject extends BagObject implements Serializable {
 	private static final long serialVersionUID = -59139009969185816L;
+// referencing to other tables            
+ // attributes    
     @Column(name="BEGINGELDIGHEID")
     protected Date begingeldigheid;
     public Date getBeginGeldigheid() {
@@ -53,4 +57,5 @@ public class BagAuthentiekObject extends BagObject implements Serializable {
     public void setDocumentNummer(String documentnummer) { 
         this.documentnummer = documentnummer; 
     }
+ // used in other tables    
 }
