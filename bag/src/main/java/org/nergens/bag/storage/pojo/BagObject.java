@@ -7,6 +7,8 @@ import javax.persistence.*;
  * generate id: javascript:var m=Math;r=m.random;(r()<0.5?'-':'')+m.round(m.pow(10,17)*r())+'L'
  * 
  * WHY DOESNT THIS WORK IN HIBERNATE? : http://opensource.atlassian.com/projects/hibernate/browse/ANN-562
+ * 
+ * CACHING: http://www.hibernate.org/hib_docs/reference/en/html/batch.html
  * @author Eduard Witteveen
  */
 @Entity

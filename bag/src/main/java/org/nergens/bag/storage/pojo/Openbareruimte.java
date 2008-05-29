@@ -1,7 +1,6 @@
 package org.nergens.bag.storage.pojo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

@@ -61,19 +61,17 @@ public class Main {
                         }                        
                     }
                 }
-                // verblijfsobject
-                java.util.Iterator<Verblijfsobject> verblijfsobjecten = gemeente.getVerblijfsobjecten().iterator();
-                while(verblijfsobjecten.hasNext()) {
-                	Verblijfsobject verblijfsobject = verblijfsobjecten.next();                
-                    log.info(verblijfsobject.toString());
-                }
-                // pand
-                java.util.Iterator<Pand> panden = gemeente.getPanden().iterator();
-                while(panden.hasNext()) {
-                	Pand pand = panden.next();        
-                    log.info(pand.toString());
-                }            
             }
+            // verblijfsobject
+            List<Verblijfsobject> verblijfsobjecten = session.createQuery("from Verblijfsobject").list();
+            for (Verblijfsobject verblijfsobject : verblijfsobjecten) { 
+                log.info(verblijfsobject.toString());
+            }
+            // pand
+		    List<Pand> panden = session.createQuery("from Pand").list();
+		    for (Pand pand : panden) {
+		        log.info(pand.toString());
+		    }
         }
         log.info("start transaction commit");
         session.getTransaction().commit();

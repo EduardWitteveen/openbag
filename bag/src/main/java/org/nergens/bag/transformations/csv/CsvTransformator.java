@@ -38,7 +38,7 @@ import org.nergens.bag.transformations.Transformator;
 
 
 /**
- *
+ * 
  * @author Eduard Witteveen
  */
 public class CsvTransformator implements Transformator {
@@ -250,8 +250,8 @@ public class CsvTransformator implements Transformator {
         String filepostfix = files[0];        
         try
         {
-        	// counter, to prevent java.lang.OutOfMemoryError: Java heap space
-        	// see also: http://www.hibernate.org/hib_docs/reference/en/html/batch.html
+
+//        	// counter, to prevent java.lang.OutOfMemoryError: Java heap space
 //        	int insertCount = 0;
 //        	int maxInsertCount= 250;        	
         	
@@ -567,32 +567,32 @@ public class CsvTransformator implements Transformator {
                         }
                     }                    
                 }
-                java.util.Iterator<Verblijfsobject> verblijfsobjecten = gemeente.getVerblijfsobjecten().iterator();
-                while(verblijfsobjecten.hasNext()) {
-                	Verblijfsobject verblijfsobject = verblijfsobjecten.next();                
-                    //  verblijfsobject
-                    //  gemeente_code, adres_code, code, oppervlakte, status, grens                    
-                    writeValue(verblijfsobjectwriter, verblijfsobject.getGemeente().getCode(), true);
-                    writeValue(verblijfsobjectwriter, verblijfsobject.getHoofdadres().getCode(), true);
-                    writeValue(verblijfsobjectwriter, verblijfsobject.getCode(), true);
-                    writeValue(verblijfsobjectwriter, verblijfsobject.getOppervlakte(), true);
-                    writeValue(verblijfsobjectwriter, verblijfsobject.getStatus(), true);
-                    writeValue(verblijfsobjectwriter, verblijfsobject.getPunt(), false);
-                    writeNewLine(verblijfsobjectwriter);
-                }
-                java.util.Iterator<Pand> panden = gemeente.getPanden().iterator();
-                while(panden.hasNext()) {
-                	Pand pand = panden.next();
-                    //  pand
-                    //  gemeente_code, code, bouwjaar, status, grens
-                    writeValue(pandwriter, pand.getGemeente().getCode(), true);
-                    writeValue(pandwriter, pand.getCode(), true);
-                    writeValue(pandwriter, pand.getBouwjaar(), true);
-                    writeValue(pandwriter, pand.getStatus(), true);
-                    writeValue(pandwriter, pand.getGrens(), false);
-                    writeNewLine(pandwriter);
-                }
             }
+            // verblijfsobject
+            List<Verblijfsobject> verblijfsobjecten = session.createQuery("from Verblijfsobject").list();
+            for (Verblijfsobject verblijfsobject : verblijfsobjecten) { 
+                //  verblijfsobject
+                //  gemeente_code, adres_code, code, oppervlakte, status, grens                    
+                writeValue(verblijfsobjectwriter, verblijfsobject.getGemeente().getCode(), true);
+                writeValue(verblijfsobjectwriter, verblijfsobject.getHoofdadres().getCode(), true);
+                writeValue(verblijfsobjectwriter, verblijfsobject.getCode(), true);
+                writeValue(verblijfsobjectwriter, verblijfsobject.getOppervlakte(), true);
+                writeValue(verblijfsobjectwriter, verblijfsobject.getStatus(), true);
+                writeValue(verblijfsobjectwriter, verblijfsobject.getPunt(), false);
+                writeNewLine(verblijfsobjectwriter);
+            }
+            // pand
+		    List<Pand> panden = session.createQuery("from Pand").list();
+		    for (Pand pand : panden) {
+                //  pand
+                //  gemeente_code, code, bouwjaar, status, grens
+                writeValue(pandwriter, pand.getGemeente().getCode(), true);
+                writeValue(pandwriter, pand.getCode(), true);
+                writeValue(pandwriter, pand.getBouwjaar(), true);
+                writeValue(pandwriter, pand.getStatus(), true);
+                writeValue(pandwriter, pand.getGrens(), false);
+                writeNewLine(pandwriter);
+		    }            
             pandwriter.close();
             verblijfsobjectwriter.close();
             nummeraanduidingwriter.close();

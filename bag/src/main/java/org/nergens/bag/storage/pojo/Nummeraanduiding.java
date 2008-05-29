@@ -4,7 +4,6 @@ import com.vividsolutions.jts.geom.*;
 
 //import java.util.List;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;

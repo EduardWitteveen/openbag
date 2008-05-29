@@ -4,7 +4,6 @@ import com.vividsolutions.jts.geom.*;
 import java.util.Set;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
@@ -40,7 +39,7 @@ public class Gemeente extends BagObject implements Serializable{
 // used in other tables    
     @OneToMany(
     		targetEntity=org.nergens.bag.storage.pojo.Woonplaats.class,
-    		cascade=CascadeType.ALL, 
+    		cascade=CascadeType.REMOVE, 
     		mappedBy="gemeente"
     )
     @OrderBy("naam")
@@ -53,30 +52,28 @@ public class Gemeente extends BagObject implements Serializable{
     }        
     @OneToMany(
     		targetEntity=org.nergens.bag.storage.pojo.Verblijfsobject.class,
-    		cascade=CascadeType.ALL, 
-    		mappedBy="gemeente"
-    )
-    @OrderBy("code")
-    protected Set<Verblijfsobject> verblijfsobjecten;
-    public Set<Verblijfsobject> getVerblijfsobjecten() {
-        return verblijfsobjecten;
-    }
-    public void setVerblijfsobjecten(Set<Verblijfsobject> verblijfsobjecten) {
-        this.verblijfsobjecten = verblijfsobjecten;
-    }    
-    @OneToMany(
-    		targetEntity=org.nergens.bag.storage.pojo.Pand.class,
     		cascade=CascadeType.REMOVE, 
     		mappedBy="gemeente"
     )
-    @OrderBy("code")
-    protected Set<Pand> panden;
-    public Set<Pand> getPanden() {
-        return panden;
-    }
-    public void setPanden(Set<Pand> panden) {
-        this.panden = panden;
-    }        
+//    protected Set<Verblijfsobject> verblijfsobjecten;
+//    public Set<Verblijfsobject> getVerblijfsobjecten() {
+//        return verblijfsobjecten;
+//    }
+//    public void setVerblijfsobjecten(Set<Verblijfsobject> verblijfsobjecten) {
+//        this.verblijfsobjecten = verblijfsobjecten;
+//    }    
+//    @OneToMany(
+//    		targetEntity=org.nergens.bag.storage.pojo.Pand.class,
+//    		cascade=CascadeType.REMOVE, 
+//    		mappedBy="gemeente"
+//    )
+//    protected Set<Pand> panden;
+//    public Set<Pand> getPanden() {
+//        return panden;
+//    }
+//    public void setPanden(Set<Pand> panden) {
+//        this.panden = panden;
+//    }        
 // tostring    
     @Override
     public String toString() {

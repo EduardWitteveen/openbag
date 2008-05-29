@@ -3,7 +3,6 @@ package org.nergens.bag.storage.pojo;
 import com.vividsolutions.jts.geom.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
