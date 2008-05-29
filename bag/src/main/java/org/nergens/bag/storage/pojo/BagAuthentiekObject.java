@@ -4,49 +4,49 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("AUTHENTIEK")
 @Table(name="DATA_AUTHENTIEK")
 public class BagAuthentiekObject extends BagObject implements Serializable {
 	private static final long serialVersionUID = -59139009969185816L;
-	
-    //public abstract Geometry getGeometry();
-    Date begingeldigheid;
     @Column(name="BEGINGELDIGHEID")
+    protected Date begingeldigheid;
     public Date getBeginGeldigheid() {
         return begingeldigheid; 
     }
     public void setBeginGeldigheid(Date begingeldigheid) { 
         this.begingeldigheid = begingeldigheid; 
-    }
-    Date eindegeldigheid;
+    }    
     @Column(name="EINDEGELDIGHEID")
+    protected Date eindegeldigheid;
     public Date getEindeGeldigheid() {
         return eindegeldigheid; 
     }
     public void setEindeGeldigheid(Date eindegeldigheid) { 
         this.eindegeldigheid = eindegeldigheid; 
-    }
-    Boolean inonderzoek = false;
+    }    
     @Column(name="INONDERZOEK")
+    protected Boolean inonderzoek = false;
     public Boolean getInOnderzoek() {
         return inonderzoek; 
     }
     public void setInOnderzoek(Boolean inonderzoek) { 
         this.inonderzoek = inonderzoek; 
-    }        
-    Date documentdatum;
+    }
     @Column(name="DOCUMENTDATUM")
+    protected Date documentdatum;    
     public Date getDocumentDatum() {
         return documentdatum; 
     }
     public void setDocumentDatum(Date documentdatum) { 
         this.documentdatum = documentdatum; 
-    }    
-    String documentnummer;
+    }
     @Column(name="DOCUMENTNUMMER")
+    protected String documentnummer;    
     public String getDocumentNummer() {
         return documentnummer; 
     }

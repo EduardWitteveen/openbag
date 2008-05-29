@@ -5,6 +5,7 @@ import com.vividsolutions.jts.geom.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
+
 import org.hibernate.annotations.Type;
 import org.nergens.bag.storage.pojo.util.Gebruiksdoel;
 /**
@@ -31,80 +32,39 @@ import org.nergens.bag.storage.pojo.util.Gebruiksdoel;
 @PrimaryKeyJoinColumn(name="CODE")
 @Table(name="DATA_VERBLIJFSOBJECT")
 public class Verblijfsobject extends BagAuthentiekObject implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6171936434187699536L;
-	// referencing to other tables
-    Gemeente gemeente;
+// referencing to other tables
     @ManyToOne
+    @JoinColumn(name="GEMEENTE_CODE")
+    protected Gemeente gemeente;
     public Gemeente getGemeente() {
         return gemeente;
     }
     public void setGemeente(Gemeente gemeente) { 
         this.gemeente = gemeente; 
-    }            
-    Nummeraanduiding hoofdadres;
+    }
     @ManyToOne
+    @JoinColumn(name="NUMMERAANDUIDING_CODE")
+    protected Nummeraanduiding hoofdadres;
     public Nummeraanduiding getHoofdadres() {
         return hoofdadres;
     }
-    @Column(name="NUMMERAANDUIDING_CODE")
     public void setHoofdadres(Nummeraanduiding hoofdadres) { 
         this.hoofdadres = hoofdadres; 
-    }        
-    ArrayList<Nummeraanduiding> nevenadressen;
-    @ManyToMany
-    @JoinTable(
-        name = "DATA_VO_NEVENADRES", 
-        joinColumns=@JoinColumn(name="VERBLIJFSOBJECT_CODE"),
-        inverseJoinColumns=@JoinColumn(name="NUMMERAANDUIDING_CODE")
-    )
-    public ArrayList<Nummeraanduiding> getNevenadressen() {
-        return nevenadressen;
-    }
-    public void setNevenadressen(ArrayList<Nummeraanduiding> nevenadressen) { 
-        this.nevenadressen = nevenadressen; 
-    }        
-    ArrayList<Gebruiksdoel> gebruiksdoeleinden = new ArrayList<Gebruiksdoel>();
-    @ManyToMany
-    @JoinTable(name = "DATA_VO_GEBRUIKSDOELEIND")
-    //http://opensource.atlassian.com/projects/hibernate/browse/ANN-6?rc=1
-    public ArrayList<Gebruiksdoel> getGebruiksdoeleinden() {
-        return gebruiksdoeleinden;
-    }
-    public void setGebruiksdoeleinden(ArrayList<Gebruiksdoel> gebruiksdoeleinden) { 
-        this.gebruiksdoeleinden = gebruiksdoeleinden; 
-    }        
-    ArrayList<Pand> panden = new ArrayList<Pand>();
-    @ManyToMany(mappedBy="verblijfsobjecten")
-//    @ManyToMany
-    @OrderBy("code")
-    public ArrayList<Pand> getPanden() {
-        return panden;
-    }
-    public void setPanden(ArrayList<Pand> panden) {
-        this.panden = panden;
     }    
-    // attributes
-    /**
-     * Combinatie van het (viercijferig) subdomein 'gemeentecode' 
-     * (volgens GBA tabel 33), het (tweecijferig) subdomein 'objecttypecode'
-     * en een voor het betreffende objecttype binnen een gemeente uniek 
-     * (tiencijferig) subdomein 'objectvolgnummer'.
-     * AN16
-     * 
-     * 01 verblijfsobject
-     * 02 ligplaats
-     * 03 standplaats
-     * 10 pand
-     */    
-//    long code;
+// attributes      
     /**
      * Alle natuurlijke getallen van 1 tot en met 999.999
      * N..6
-    */    
-    Long oppervlakte;
+    */
+    @Column(name="OPPERVLAKTE")
+    protected Long oppervlakte;   
+    public Long getOppervlakte() {
+        return oppervlakte; 
+    }
+    public void setOppervlakte(Long oppervlakte) { 
+        this.oppervlakte = oppervlakte; 
+    }    
     /**
      * Verblijfsobject gevormd
      * Niet gerealiseerd verblijfsobject
@@ -114,43 +74,77 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
      * Verblijfsobject buiten gebruik
      * AN..80
      */    
-    String status;       
-    Point punt;
-//    @Id
-//    @Column(name="CODE")
-//    public long getCode() {
-//        return code; 
-//    }
-//    public void setCode(long code) { 
-//        this.code = code; 
-//    }
-    @Column(name="OPPERVLAKTE")
-    public Long getOppervlakte() {
-        return oppervlakte; 
-    }
-    public void setOppervlakte(Long oppervlakte) { 
-        this.oppervlakte = oppervlakte; 
-    }    
-    @Column(name="STATUS")
+    @Column(name="STATUS")    
+    protected String status;    
     public String getStatus() {
         return status; 
     }
     public void setStatus(String status) { 
         this.status = status; 
     }    
-    @Column(name="PUNT")
+    @Column(name="PUNT")    
     @Type(type="org.hibernatespatial.GeometryUserType")
+    protected Point punt;
     public Point getPunt() {
         return punt; 
     }
     public void setPunt(Point punt) { 
         this.punt = punt; 
     }
-//    @Override    
-//    public Geometry getGeometry() {
-//        return punt;
-//    }
-// used in other tables    
+// used in other tables
+    @ManyToMany(
+    		targetEntity=org.nergens.bag.storage.pojo.Nummeraanduiding.class,
+    		cascade=CascadeType.REMOVE    		
+    )
+    @JoinTable(
+        name = "DATA_VO_NEVENADRES", 
+        joinColumns= @JoinColumn(
+        		name="VERBLIJFSOBJECT_CODE"
+        ),
+        inverseJoinColumns=@JoinColumn(
+        		name="NUMMERAANDUIDING_CODE"
+        )
+    )
+    protected ArrayList<Nummeraanduiding> nevenadressen;
+    public ArrayList<Nummeraanduiding> getNevenadressen() {
+        return nevenadressen;
+    }
+    public void setNevenadressen(ArrayList<Nummeraanduiding> nevenadressen) { 
+        this.nevenadressen = nevenadressen; 
+    }
+    //http://opensource.atlassian.com/projects/hibernate/browse/ANN-6?rc=1
+    @ManyToMany(    		
+    		targetEntity=org.nergens.bag.storage.pojo.util.Gebruiksdoel.class,
+    	    cascade=CascadeType.REMOVE
+    )
+    @JoinTable(
+        name = "DATA_VO_GEBRUIKSDOELEIND", 
+        joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
+        inverseJoinColumns=@JoinColumn(name="GEBRUIKSDOEL_NAAM")
+    )
+    protected ArrayList<Gebruiksdoel> gebruiksdoeleinden = new ArrayList<Gebruiksdoel>();
+    public ArrayList<Gebruiksdoel> getGebruiksdoeleinden() {
+        return gebruiksdoeleinden;
+    }
+    public void setGebruiksdoeleinden(ArrayList<Gebruiksdoel> gebruiksdoeleinden) { 
+        this.gebruiksdoeleinden = gebruiksdoeleinden; 
+    }
+    @ManyToMany(    		
+    		targetEntity=org.nergens.bag.storage.pojo.Pand.class,
+    	    cascade=CascadeType.REMOVE
+    )
+    @JoinTable(
+        name = "DATA_VO_PAND", 
+        joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
+        inverseJoinColumns=@JoinColumn(name="PAND_CODE")
+    )
+    protected ArrayList<Pand> panden = new ArrayList<Pand>();    
+    public ArrayList<Pand> getPanden() {
+        return panden;
+    }
+    public void setPanden(ArrayList<Pand> panden) {
+        this.panden = panden;
+    }    
 // tostring    
     @Override
     public String toString() {

@@ -15,24 +15,24 @@ import javax.persistence.*;
 @Table(name="UTIL_GEBRUIKSDOEL")
 public class Gebruiksdoel  {
     // attributes
-/**
- * http://bag.vrom.nl/bag_com/e8a25c6d62e561373145554b7979823b.php
- * woonfunctie
- * bijeenkomstfunctie
- * celfunctie
- * gezondheidszorgfunctie
- * industriefunctie
- * kantoorfunctie
- * logiesfunctie
- * onderwijsfunctie
- * sportfunctie
- * winkelfunctie
- * overige gebruiksfunctie
- * AN..80
- */    
-    String naam;
+	/**
+	 * http://bag.vrom.nl/bag_com/e8a25c6d62e561373145554b7979823b.php
+	 * woonfunctie
+	 * bijeenkomstfunctie
+	 * celfunctie
+	 * gezondheidszorgfunctie
+	 * industriefunctie
+	 * kantoorfunctie
+	 * logiesfunctie
+	 * onderwijsfunctie
+	 * sportfunctie
+	 * winkelfunctie
+	 * overige gebruiksfunctie
+	 * AN..80
+	 */    
     @Id
-    @Column(name="NAAM")
+    @Column(name="NAAM")	
+    protected String naam;
     public String getNaam() {
         return naam; 
     }

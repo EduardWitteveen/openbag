@@ -6,6 +6,7 @@ import com.vividsolutions.jts.geom.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
+
 import org.hibernate.annotations.Type;
 /**
  * http://bag.vrom.nl/bag_com/73a2fa2db0ae59b7b025b577a51f5c1c.php
@@ -31,76 +32,29 @@ import org.hibernate.annotations.Type;
 @DiscriminatorValue("NUMMERAANDUIDING")
 @Table(name="DATA_NUMMERAANDUIDING")
 public class Nummeraanduiding extends BagAuthentiekObject implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5955003661599474524L;
-	// referencing to other tables
-    Openbareruimte openbareruimte;
-    @ManyToOne(targetEntity=Openbareruimte.class)
+// referencing to other tables
+    @ManyToOne
+    @JoinColumn(name="OPENBARERUIMTE_CODE")
+    protected Openbareruimte openbareruimte;
     public Openbareruimte getOpenbareruimte() {
         return openbareruimte;
     }
     public void setOpenbareruimte(Openbareruimte openbareruimte) { 
         this.openbareruimte = openbareruimte; 
-    }
-    Woonplaats alternatieveWoonplaats;
+    } 	    
     @ManyToOne
+    @JoinColumn(name="ALT_WOONPLAATS_CODE")
+    protected Woonplaats alternatieveWoonplaats;
     public Woonplaats getAlternatieveWoonplaats() {
         return alternatieveWoonplaats;
     }
     public void setAlternatieveWoonplaats(Woonplaats alternatieveWoonplaats) { 
         this.alternatieveWoonplaats = alternatieveWoonplaats; 
     }
-// attributes
-/**
- * http://bag.vrom.nl/bag_com/32e4542e948d6a9d51d6c606bb70b88a.php
- * Uit de veld definitie:
- * Elke openbare ruimte waarvan gegevens zijn opgenomen in de adressenregistratie, 
- * wordt uniek aangeduid door middel van een identificatiecode. Deze 
- * identificatiecode bestaat uit de gemeentecode volgens GBA tabel 33 gevolgd 
- * door een codering voor de objecttypering en een voor de registrerende gemeente 
- * uniek volgnummer.
- * Uit de domain definitie:
- * Combinatie van het (viercijferig) subdomein 'gemeentecode' (volgens GBA tabel 33), 
- * het (tweecijferig) subdomein 'objecttypecode' en een voor het betreffende 
- * Waardenverzameling domein
- *  20 nummeraanduiding
- *  30 openbare ruimte
- *  40 woonplaats
- * objecttype binnen een gemeente uniek (tiencijferig) subdomein 'objectvolgnummer'.
- * AN16
- */    
-//    long code;
-    Long huisnummer;
-    String huisletter;
-    String huisnummertoevoeging;
-    String postcode;
-    /**
-     * http://bag.vrom.nl/bag_com/4db79759b61f043aade4c98cc72dab01.php
-     * Verblijfsobject
-     * Standplaats
-     * Ligplaats
-     * AN..20
-     */    
-    String type;    
-    /**
-     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
-     * Naamgeving uitgegeven 
-     * Naamgeving ingetrokken
-     * AN..80
-     */
-    String status;    
-    Point punt;
-//    @Id
-//    @Column(name="CODE")
-//    public long getCode() {
-//        return code; 
-//    }
-//    public void setCode(long code) { 
-//        this.code = code; 
-//    }    
+// attributes    
     @Column(name="HUISNUMMER")
+    protected Long huisnummer;    
     public Long getHuisnummer() {
         return huisnummer; 
     }
@@ -108,6 +62,7 @@ public class Nummeraanduiding extends BagAuthentiekObject implements Serializabl
         this.huisnummer = huisnummer; 
     }
     @Column(name="HUISLETTER")
+    protected String huisletter;
     public String getHuisletter() {
         return huisletter; 
     }
@@ -115,6 +70,7 @@ public class Nummeraanduiding extends BagAuthentiekObject implements Serializabl
         this.huisletter = huisletter; 
     }
     @Column(name="HUISNUMMERTOEVOEGING")
+    protected String huisnummertoevoeging;
     public String getHuisnummertoevoeging() {
         return huisnummertoevoeging; 
     }
@@ -122,20 +78,36 @@ public class Nummeraanduiding extends BagAuthentiekObject implements Serializabl
         this.huisnummertoevoeging = huisnummertoevoeging; 
     }
     @Column(name="POSTCODE")
+    protected String postcode;
     public String getPostcode() {
         return postcode; 
     }
     public void setPostcode(String postcode) { 
         this.postcode = postcode; 
     }
-    @Column(name="TYPE")
+    /**
+     * http://bag.vrom.nl/bag_com/4db79759b61f043aade4c98cc72dab01.php
+     * Verblijfsobject
+     * Standplaats
+     * Ligplaats
+     * AN..20
+     */
+    @Column(name="TYPE")    
+    String type;            
     public String getType() {
         return type; 
     }
     public void setType(String type) { 
         this.type = type; 
     }
-    @Column(name="STATUS")
+    /**
+     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
+     * Naamgeving uitgegeven 
+     * Naamgeving ingetrokken
+     * AN..80
+     */
+    @Column(name="STATUS")    
+    String status;       
     public String getStatus() {
         return status; 
     }
@@ -144,27 +116,27 @@ public class Nummeraanduiding extends BagAuthentiekObject implements Serializabl
     }        
     @Column(name="PUNT")
     @Type(type="org.hibernatespatial.GeometryUserType")
+    protected Point punt;    
     public Point getPunt() {
         return punt; 
     }
     public void setPunt(Point punt) { 
         this.punt = punt; 
     }
-//    @Override
-//    public Geometry getGeometry() {
-//        return punt;
-//    }    
-// used in other tables    
-    ArrayList<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
-//    @OneToMany(mappedBy="hoofdadres,nevenadressen")
-    @OneToMany(mappedBy="hoofdadres")
+// used in other tables
+    @OneToMany(
+    		targetEntity=org.nergens.bag.storage.pojo.Verblijfsobject.class,
+    		cascade=CascadeType.REMOVE, 
+    		mappedBy="hoofdadres"
+    )
     @OrderBy("code")
+    protected ArrayList<Verblijfsobject> verblijfsobjecten;
     public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
         return verblijfsobjecten;
     }
     public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
         this.verblijfsobjecten = verblijfsobjecten;
-    }    
+    }
 // tostring    
     @Override
     public String toString() {

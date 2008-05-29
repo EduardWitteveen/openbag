@@ -3,9 +3,11 @@ package org.nergens.bag.storage.pojo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -34,40 +36,26 @@ import com.vividsolutions.jts.geom.Polygon;
 @DiscriminatorValue("OPENBARERUIMTE")
 @Table(name="DATA_OPENBARERUIMTE")
 public class Openbareruimte extends BagAuthentiekObject implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8915684457507855214L;
-	// referencing to other tables
-    Woonplaats woonplaats;
+// referencing to other tables    
     @ManyToOne
+    @JoinColumn(name="WOONPLAATS_CODE")
+    protected Woonplaats  woonplaats;
     public Woonplaats getWoonplaats() {
         return woonplaats;
     }
     public void setWoonplaats(Woonplaats woonplaats) { 
         this.woonplaats = woonplaats; 
-    }        
-// attributes
-/**
- * http://bag.vrom.nl/bag_com/32e4542e948d6a9d51d6c606bb70b88a.php
- * Uit de veld definitie:
- * Elke openbare ruimte waarvan gegevens zijn opgenomen in de adressenregistratie, 
- * wordt uniek aangeduid door middel van een identificatiecode. Deze 
- * identificatiecode bestaat uit de gemeentecode volgens GBA tabel 33 gevolgd 
- * door een codering voor de objecttypering en een voor de registrerende gemeente 
- * uniek volgnummer.
- * Uit de domain definitie:
- * Combinatie van het (viercijferig) subdomein 'gemeentecode' (volgens GBA tabel 33), 
- * het (tweecijferig) subdomein 'objecttypecode' en een voor het betreffende 
- * Waardenverzameling domein
- *  20 nummeraanduiding
- *  30 openbare ruimte
- *  40 woonplaats
- * objecttype binnen een gemeente uniek (tiencijferig) subdomein 'objectvolgnummer'.
- * AN16
- */        
-//    long code;
-    String naam;
+    } 
+// attributes    
+    @Column(name="NAAM")
+    protected String naam;
+    public String getNaam() {
+        return naam; 
+    }
+    public void setNaam(String naam) { 
+        this.naam = naam; 
+    }
     /**
      * http://bag.vrom.nl/bag_com/d7afb8e8b4923f160eb98923c0a6592b.php
      * Weg
@@ -78,39 +66,23 @@ public class Openbareruimte extends BagAuthentiekObject implements Serializable 
      * Landschappelijk gebied
      * Administratief gebied
      * AN..40
-     **/    
-    String type;  
-    /**
-     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
-     * Naamgeving uitgegeven
-     * Naamgeving ingetrokken
-     * AN..80
-     */
-    String status;
-    Polygon grens;    
-//    @Id
-//    @Column(name="CODE", precision=16, scale=0)
-//    public long getCode() {
-//        return code; 
-//    }
-//    public void setCode(long code) { 
-//        this.code = code; 
-//    }    
-    @Column(name="NAAM")
-    public String getNaam() {
-        return naam; 
-    }
-    public void setNaam(String naam) { 
-        this.naam = naam; 
-    }
+     **/
     @Column(name="TYPE")
+    protected String type;    
     public String getType() {
         return type; 
     }
     public void setType(String type) { 
         this.type = type; 
     }
+    /**
+     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
+     * Naamgeving uitgegeven
+     * Naamgeving ingetrokken
+     * AN..80
+     */
     @Column(name="STATUS")
+	protected String status;
     public String getStatus() {
         return status; 
     }
@@ -119,20 +91,21 @@ public class Openbareruimte extends BagAuthentiekObject implements Serializable 
     }    
     @Column(name="GRENS")
     @Type(type="org.hibernatespatial.GeometryUserType")
+    protected Polygon grens;
     public Polygon getGrens() {
         return grens; 
     }
     public void setGrens(Polygon grens) { 
         this.grens = grens; 
     } 
-//    @Override    
-//    public Geometry getGeometry() {
-//        return grens;
-//    }    
 // used in other tables
-    ArrayList<Nummeraanduiding> nummeraanduidingen = new ArrayList<Nummeraanduiding>();;
-    @OneToMany(mappedBy="openbareruimte")
+    @OneToMany(
+    		targetEntity=org.nergens.bag.storage.pojo.Nummeraanduiding.class,
+    		cascade=CascadeType.REMOVE, 
+    		mappedBy="openbareruimte"
+    )
     @OrderBy("huisnummer")
+    ArrayList<Nummeraanduiding> nummeraanduidingen;
     public ArrayList<Nummeraanduiding> getNummeraanduidingen() {
         return nummeraanduidingen;
     }
