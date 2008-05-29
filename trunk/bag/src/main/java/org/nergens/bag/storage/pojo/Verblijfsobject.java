@@ -105,11 +105,11 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
         		name="NUMMERAANDUIDING_CODE"
         )
     )
-    protected ArrayList<Nummeraanduiding> nevenadressen;
-    public ArrayList<Nummeraanduiding> getNevenadressen() {
+    protected java.util.Set<Nummeraanduiding> nevenadressen;
+    public java.util.Set<Nummeraanduiding> getNevenadressen() {
         return nevenadressen;
     }
-    public void setNevenadressen(ArrayList<Nummeraanduiding> nevenadressen) { 
+    public void setNevenadressen(java.util.Set<Nummeraanduiding> nevenadressen) { 
         this.nevenadressen = nevenadressen; 
     }
     //http://opensource.atlassian.com/projects/hibernate/browse/ANN-6?rc=1
@@ -122,11 +122,11 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
         joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
         inverseJoinColumns=@JoinColumn(name="GEBRUIKSDOEL_NAAM")
     )
-    protected ArrayList<Gebruiksdoel> gebruiksdoeleinden = new ArrayList<Gebruiksdoel>();
-    public ArrayList<Gebruiksdoel> getGebruiksdoeleinden() {
+    protected java.util.Set<Gebruiksdoel> gebruiksdoeleinden;
+    public java.util.Set<Gebruiksdoel> getGebruiksdoeleinden() {
         return gebruiksdoeleinden;
     }
-    public void setGebruiksdoeleinden(ArrayList<Gebruiksdoel> gebruiksdoeleinden) { 
+    public void setGebruiksdoeleinden(java.util.Set<Gebruiksdoel> gebruiksdoeleinden) { 
         this.gebruiksdoeleinden = gebruiksdoeleinden; 
     }
     @ManyToMany(    		
@@ -138,11 +138,11 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
         joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
         inverseJoinColumns=@JoinColumn(name="PAND_CODE")
     )
-    protected ArrayList<Pand> panden = new ArrayList<Pand>();    
-    public ArrayList<Pand> getPanden() {
+    protected java.util.Set<Pand> panden;    
+    public java.util.Set<Pand> getPanden() {
         return panden;
     }
-    public void setPanden(ArrayList<Pand> panden) {
+    public void setPanden(java.util.Set<Pand> panden) {
         this.panden = panden;
     }    
 // tostring    

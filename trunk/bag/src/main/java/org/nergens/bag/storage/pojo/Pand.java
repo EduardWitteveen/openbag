@@ -79,11 +79,11 @@ public class Pand extends BagAuthentiekObject implements Serializable{
             mappedBy = "panden",
             targetEntity = org.nergens.bag.storage.pojo.Verblijfsobject.class
     )    
-	ArrayList<Verblijfsobject> verblijfsobjecten;
-    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
+	java.util.Set<Verblijfsobject> verblijfsobjecten;
+    public java.util.Set<Verblijfsobject> getVerblijfsobjecten() {
     	return verblijfsobjecten;
     }
-    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
+    public void setVerblijfsobjecten(java.util.Set<Verblijfsobject> verblijfsobjecten) {
     	this.verblijfsobjecten = verblijfsobjecten;
     }    
 // tostring    

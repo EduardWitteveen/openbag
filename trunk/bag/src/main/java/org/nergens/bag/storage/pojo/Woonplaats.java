@@ -4,7 +4,6 @@ import com.vividsolutions.jts.geom.*;
 
 //import java.util.List;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
@@ -75,11 +74,11 @@ public class Woonplaats extends BagAuthentiekObject implements Serializable{
     		mappedBy="woonplaats"
     )
     @OrderBy("naam")
-    protected ArrayList<Openbareruimte> openbareruimten;
-    public ArrayList<Openbareruimte> getOpenbareruimten() {
+    protected java.util.Set<Openbareruimte> openbareruimten;
+    public java.util.Set<Openbareruimte> getOpenbareruimten() {
         return openbareruimten;
     }
-    public void setOpenbareruimten(ArrayList<Openbareruimte> openbareruimten) {
+    public void setOpenbareruimten(java.util.Set<Openbareruimte> openbareruimten) {
         this.openbareruimten = openbareruimten;
     }    
 // tostring    

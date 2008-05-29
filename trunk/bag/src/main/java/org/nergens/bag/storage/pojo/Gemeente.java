@@ -1,6 +1,7 @@
 package org.nergens.bag.storage.pojo;
 
 import com.vividsolutions.jts.geom.*;
+import java.util.Set;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,11 +44,11 @@ public class Gemeente extends BagObject implements Serializable{
     		mappedBy="gemeente"
     )
     @OrderBy("naam")
-    protected ArrayList<Woonplaats> woonplaatsen = new ArrayList<Woonplaats>();
-    public ArrayList<Woonplaats> getWoonplaatsen() {
+    protected Set<Woonplaats> woonplaatsen;
+    public Set<Woonplaats> getWoonplaatsen() {
         return woonplaatsen;
     }
-    public void setWoonplaatsen(ArrayList<Woonplaats> woonplaatsen) {
+    public void setWoonplaatsen(Set<Woonplaats> woonplaatsen) {
         this.woonplaatsen = woonplaatsen;
     }        
     @OneToMany(
@@ -56,11 +57,11 @@ public class Gemeente extends BagObject implements Serializable{
     		mappedBy="gemeente"
     )
     @OrderBy("code")
-    protected ArrayList<Verblijfsobject> verblijfsobjecten;
-    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
+    protected Set<Verblijfsobject> verblijfsobjecten;
+    public Set<Verblijfsobject> getVerblijfsobjecten() {
         return verblijfsobjecten;
     }
-    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
+    public void setVerblijfsobjecten(Set<Verblijfsobject> verblijfsobjecten) {
         this.verblijfsobjecten = verblijfsobjecten;
     }    
     @OneToMany(
@@ -69,11 +70,11 @@ public class Gemeente extends BagObject implements Serializable{
     		mappedBy="gemeente"
     )
     @OrderBy("code")
-    protected ArrayList<Pand> panden;
-    public ArrayList<Pand> getPanden() {
+    protected Set<Pand> panden;
+    public Set<Pand> getPanden() {
         return panden;
     }
-    public void setPanden(ArrayList<Pand> panden) {
+    public void setPanden(Set<Pand> panden) {
         this.panden = panden;
     }        
 // tostring    
