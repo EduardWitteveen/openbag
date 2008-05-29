@@ -5,6 +5,7 @@ import com.vividsolutions.jts.geom.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
+
 import org.hibernate.annotations.Type;
 /**
  *
@@ -14,24 +15,12 @@ import org.hibernate.annotations.Type;
 @DiscriminatorValue("GEMEENTE")
 @Table(name="DATA_GEMEENTE")
 public class Gemeente extends BagObject implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2281648105067142468L;
-	// referencing to other tables
-// attributes
-//    long code;
-    String naam;
-    Polygon grens;
-//    @Id
-//    @Column(name="CODE")
-//    public long getCode() {
-//        return code; 
-//    }
-//    public void setCode(long code) { 
-//        this.code = code; 
-//    }    
+// referencing to other tables
+	
+// attributes        
     @Column(name="NAAM")
+    protected String naam;
     public String getNaam() {
         return naam; 
     }
@@ -40,38 +29,47 @@ public class Gemeente extends BagObject implements Serializable{
     }
     @Column(name="GRENS")
     @Type(type="org.hibernatespatial.GeometryUserType")
+    protected Polygon grens;
     public Polygon getGrens() {
         return grens; 
     }
     public void setGrens(Polygon grens) { 
         this.grens = grens; 
     }
-//    @Override
-//    public Geometry getGeometry() {
-//        return grens;
-//    }
-// used in other tables
-    ArrayList<Woonplaats> woonplaatsen = new ArrayList<Woonplaats>();
-    @OneToMany(mappedBy="gemeente")
+// used in other tables    
+    @OneToMany(
+    		targetEntity=org.nergens.bag.storage.pojo.Woonplaats.class,
+    		cascade=CascadeType.ALL, 
+    		mappedBy="gemeente"
+    )
     @OrderBy("naam")
+    protected ArrayList<Woonplaats> woonplaatsen = new ArrayList<Woonplaats>();
     public ArrayList<Woonplaats> getWoonplaatsen() {
         return woonplaatsen;
     }
     public void setWoonplaatsen(ArrayList<Woonplaats> woonplaatsen) {
         this.woonplaatsen = woonplaatsen;
-    }    
-    ArrayList<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
-    @OneToMany(mappedBy="gemeente")
+    }        
+    @OneToMany(
+    		targetEntity=org.nergens.bag.storage.pojo.Verblijfsobject.class,
+    		cascade=CascadeType.ALL, 
+    		mappedBy="gemeente"
+    )
     @OrderBy("code")
+    protected ArrayList<Verblijfsobject> verblijfsobjecten;
     public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
         return verblijfsobjecten;
     }
     public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
         this.verblijfsobjecten = verblijfsobjecten;
     }    
-    ArrayList<Pand> panden = new ArrayList<Pand>();
-    @OneToMany(mappedBy="gemeente")
+    @OneToMany(
+    		targetEntity=org.nergens.bag.storage.pojo.Pand.class,
+    		cascade=CascadeType.REMOVE, 
+    		mappedBy="gemeente"
+    )
     @OrderBy("code")
+    protected ArrayList<Pand> panden;
     public ArrayList<Pand> getPanden() {
         return panden;
     }

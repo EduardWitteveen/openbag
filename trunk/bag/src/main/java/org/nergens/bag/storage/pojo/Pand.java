@@ -5,6 +5,7 @@ import com.vividsolutions.jts.geom.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
+
 import org.hibernate.annotations.Type;
 /**
  * http://bag.vrom.nl/bag_com/8d71bd35f2b6b398d0b86868061681da.php
@@ -25,33 +26,26 @@ import org.hibernate.annotations.Type;
 @DiscriminatorValue("PAND")
 @Table(name="DATA_PAND")
 public class Pand extends BagAuthentiekObject implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6004787767635427969L;
-	// referencing to other tables
-    Gemeente gemeente;
+// referencing to other tables    
     @ManyToOne
+    @JoinColumn(name="GEMEENTE_CODE")
+    protected Gemeente gemeente;
     public Gemeente getGemeente() {
         return gemeente;
     }
     public void setGemeente(Gemeente gemeente) { 
         this.gemeente = gemeente; 
-    }    
-    ArrayList<Verblijfsobject> verblijfsobjecten = new ArrayList<Verblijfsobject>();
-//    @ManyToMany(mappedBy="panden")
-    @ManyToMany()
-    @OrderBy("code")
-    @JoinTable(name = "DATA_VO_PAND")    
-    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
-        return verblijfsobjecten;
     }
-    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
-        this.verblijfsobjecten = verblijfsobjecten;
-    }        
 // attributes
-//    long code;
-    String bouwjaar;
+    @Column(name="BOUWJAAR")
+    String bouwjaar;    
+    public String getBouwjaar() {
+        return bouwjaar; 
+    }
+    public void setBouwjaar(String bouwjaar) { 
+        this.bouwjaar = bouwjaar; 
+    }
     /**
      * Bouwvergunning verleend
      * Niet gerealiseerd pand
@@ -61,25 +55,9 @@ public class Pand extends BagAuthentiekObject implements Serializable{
      * Sloopvergunning verleend
      * Pand gesloopt
      * AN..80
-     */
-    String status;
-    MultiPolygon grens;
-//    @Id
-//    @Column(name="CODE")
-//    public long getCode() {
-//        return code; 
-//    }
-//    public void setCode(long code) { 
-//        this.code = code; 
-//    }    
-    @Column(name="BOUWJAAR")
-    public String getBouwjaar() {
-        return bouwjaar; 
-    }
-    public void setBouwjaar(String bouwjaar) { 
-        this.bouwjaar = bouwjaar; 
-    }       
+     */   
     @Column(name="STATUS")
+    String status;    
     public String getStatus() {
         return status; 
     }
@@ -88,16 +66,26 @@ public class Pand extends BagAuthentiekObject implements Serializable{
     }    
     @Column(name="GRENS")
     @Type(type="org.hibernatespatial.GeometryUserType")
+    MultiPolygon grens;
     public MultiPolygon getGrens() {
         return grens; 
     }
     public void setGrens(MultiPolygon grens) { 
         this.grens = grens; 
-    }   
-//    @Override
-//    public Geometry getGeometry() {
-//        return grens;
-//    }
+    }
+ // used in other tables
+    @ManyToMany(
+    		cascade = CascadeType.REMOVE,
+            mappedBy = "panden",
+            targetEntity = org.nergens.bag.storage.pojo.Verblijfsobject.class
+    )    
+	ArrayList<Verblijfsobject> verblijfsobjecten;
+    public ArrayList<Verblijfsobject> getVerblijfsobjecten() {
+    	return verblijfsobjecten;
+    }
+    public void setVerblijfsobjecten(ArrayList<Verblijfsobject> verblijfsobjecten) {
+    	this.verblijfsobjecten = verblijfsobjecten;
+    }    
 // tostring    
     @Override
     public String toString() {
