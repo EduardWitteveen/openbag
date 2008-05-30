@@ -113,7 +113,7 @@ public class AddGeotaxInformation {
     private static Logger log = Logger.getLogger(AddGeotaxInformation.class.getName());
     private static final java.lang.String BAG_ORACLE_SERVER = "";
     private static final java.lang.Integer BAG_ORACLE_PORT = 1521;
-    private static final java.lang.String BAG_ORACLE_SID = ""
+    private static final java.lang.String BAG_ORACLE_SID = "";
     private static final java.lang.String BAG_ORACLE_USERNAME = "";
     private static final java.lang.String BAG_ORACLE_PASSWORD = "";
     private static final java.lang.String BAG_ORACLE_SQL = "SELECT\n" + 
