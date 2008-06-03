@@ -30,11 +30,11 @@ import org.nergens.bag.storage.util.HibernateFactory;
  */
 public class AddGrsInformation {
     private static Logger log = Logger.getLogger(AddGeotaxInformation.class.getName());
-    private static final java.lang.String BAG_ORACLE_SERVER = "oraserver";
+    private static final java.lang.String BAG_ORACLE_SERVER = "";
     private static final java.lang.Integer BAG_ORACLE_PORT = 1521;
-    private static final java.lang.String BAG_ORACLE_SID = "grs";
-    private static final java.lang.String BAG_ORACLE_USERNAME = "grsview";
-    private static final java.lang.String BAG_ORACLE_PASSWORD = "grsview";
+    private static final java.lang.String BAG_ORACLE_SID = "";
+    private static final java.lang.String BAG_ORACLE_USERNAME = "";
+    private static final java.lang.String BAG_ORACLE_PASSWORD = "";
     private static final java.lang.String BAG_ORACLE_SQL = "SELECT \n" +
     	"           DOCUMENTNR, \n" +
     	"           DOCUMENTDATUM, \n" +
