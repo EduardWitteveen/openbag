@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nergens.bag</groupId>
 	<artifactId>bag</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name />
 	<version>0.0.1-SNAPSHOT</version>
 	<description />
