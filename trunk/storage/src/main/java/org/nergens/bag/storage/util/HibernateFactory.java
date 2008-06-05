@@ -24,7 +24,7 @@ public class HibernateFactory {
             else {
                 System.out.println("could not find the file:" + file.getAbsolutePath());
                 System.out.println("working directory:" + System.getProperty("user.dir"));
-                file = new File("./../Storage/src/" + RESOURCE_NAME);
+                file = new File(RESOURCE_NAME);
                 System.out.println("looking for config:" + file.getAbsolutePath());
                 if(file.exists() && file.canRead()) {
                     // first look in our root (so it can be overriden)
