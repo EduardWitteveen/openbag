@@ -902,7 +902,7 @@ public class AddGeotaxInformation {
 2119	Overig                                            
 2120	Horeca                                            
 2121	Cafetaria/snackbar                                
-2122	Cafébar/restaurant                                
+2122	CafÃ©bar/restaurant                                
 2123	Bar/dancing                                       
 2124	Hotel/motel                                       
 2125	Pension/logiesgebouw                              
@@ -953,7 +953,7 @@ public class AddGeotaxInformation {
 2299	Overige agrarische objecten                       
 2300	kantoren en lab + bedr.woning                     
 2310	Onderwijs                                         
-2311	Crêche/peuterzaal                                 
+2311	CrÃªche/peuterzaal                                 
 2312	Basisschool                                       
 2313	Onderwijs; MAVO-HAVO-VWO                          
 2314	Beroepsonderwijs LBO/MBO                          
@@ -1092,7 +1092,7 @@ public class AddGeotaxInformation {
 3119	Overig                                            
 3120	Horeca                                            
 3121	Cafetaria/snackbar                                
-3122	Cafébar/restaurant                                
+3122	CafÃ©bar/restaurant                                
 3123	Bar/dancing                                       
 3124	Hotel/motel                                       
 3125	Pension/logiesgebouw                              
@@ -1141,7 +1141,7 @@ public class AddGeotaxInformation {
 3299	Overige agrarische objecten                       
 3300	kantoren en laboratoria                           
 3310	kantoren/praktijkruimte                           
-3311	Crêche/peuterzaal                                 
+3311	CrÃªche/peuterzaal                                 
 3312	Basisschool                                       
 3313	Algem.Onderwijs; MAVO-HAVO-VWO                    
 3314	Beroepsonderwijs LBO/MBO                          

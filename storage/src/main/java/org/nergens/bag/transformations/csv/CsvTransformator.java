@@ -45,7 +45,7 @@ public class CsvTransformator implements Transformator {
 	private static Logger log = Logger.getLogger(CsvTransformator.class.getName());
 	
     @SuppressWarnings("unchecked")
-	private static HashMap _cache= new HashMap();
+    private static HashMap _cache= new HashMap();
     String path= null;
     public String help() {
         return "[path]";
@@ -231,8 +231,10 @@ public class CsvTransformator implements Transformator {
         Long l = new Long(str);
         return l;
     }
+    
     @SuppressWarnings("unchecked")
-	public boolean retrieveFromFormat(Session session) {
+    @Override
+    public boolean retrieveFromFormat(Session session) {
         final String FILE_STARTS_WITH = "gemeente";
         File dir = getPath();
         // first find our file
@@ -251,12 +253,8 @@ public class CsvTransformator implements Transformator {
         try
         {
 
-//        	// counter, to prevent java.lang.OutOfMemoryError: Java heap space
-//        	int insertCount = 0;
-//        	int maxInsertCount= 250;        	
-        	
         // gemeente
-        	String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
+            String gemeentefilename = fileprefix+ "gemeente" + filepostfix.substring(FILE_STARTS_WITH.length());
             log.info("Processing: " + gemeentefilename);
             InputStream istream = new FileInputStream(gemeentefilename);
             CSVParser shredder = new CSVParser(istream);
@@ -273,16 +271,7 @@ public class CsvTransformator implements Transformator {
                 gemeente.setGrens(toPolygon(shredder.nextValue()));
                 session.save(gemeente);
                 _cache.put(gemeente.getCode(), gemeente);
-                log.info("\t(" + shredder.lastLineNumber() + ")" + gemeente);
-                
-//            	insertCount++;
-//            	if(insertCount >= maxInsertCount) {
-//            		insertCount = 0;
-//                    //flush a batch of inserts and release memory:
-//                    log.info("hibernate flush");
-//                    session.flush();
-//                    session.clear();            		
-//            	}                
+                log.info("\t(" + shredder.lastLineNumber() + ")" + gemeente);                
             }
             istream.close();
 
@@ -306,15 +295,6 @@ public class CsvTransformator implements Transformator {
                 session.save(woonplaats);
                 _cache.put(woonplaats.getCode(), woonplaats);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + woonplaats);
-                
-//            	insertCount++;
-//            	if(insertCount >= maxInsertCount) {
-//            		insertCount = 0;
-//                    //flush a batch of inserts and release memory:
-//                    log.info("hibernate flush");
-//                    session.flush();
-//                    session.clear();            		
-//            	}                
             }
             istream.close();
             
@@ -339,15 +319,6 @@ public class CsvTransformator implements Transformator {
                 session.save(openbareruimte);
                 _cache.put(openbareruimte.getCode(), openbareruimte);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + openbareruimte);
-                
-//            	insertCount++;
-//            	if(insertCount >= maxInsertCount) {
-//            		insertCount = 0;
-//                    //flush a batch of inserts and release memory:
-//                    log.info("hibernate flush");
-//                    session.flush();
-//                    session.clear();            		
-//            	}                                
             }
             istream.close();
             
@@ -375,15 +346,6 @@ public class CsvTransformator implements Transformator {
                 session.save(nummeraanduiding);
                 _cache.put(nummeraanduiding.getCode(), nummeraanduiding);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + nummeraanduiding);
-
-//            	insertCount++;
-//            	if(insertCount >= maxInsertCount) {
-//            		insertCount = 0;
-//                    //flush a batch of inserts and release memory:
-//                    log.info("hibernate flush");
-//                    session.flush();
-//                    session.clear();            		
-//            	}                
             }
             istream.close();
             
@@ -407,15 +369,6 @@ public class CsvTransformator implements Transformator {
                 verblijfsobject.setPunt(toPoint(shredder.nextValue()));
                 session.save(verblijfsobject);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + verblijfsobject);
-                
-//            	insertCount++;
-//            	if(insertCount >= maxInsertCount) {
-//            		insertCount = 0;
-//                    //flush a batch of inserts and release memory:
-//                    log.info("hibernate flush");
-//                    session.flush();
-//                    session.clear();            		
-//            	}                
             }
             istream.close();
             
@@ -438,15 +391,6 @@ public class CsvTransformator implements Transformator {
                 pand.setGrens(toMultiPolygon(shredder.nextValue()));
                 session.save(pand);
                 log.info("\t(" + shredder.lastLineNumber() + ")" + pand);
-                
-//            	insertCount++;
-//            	if(insertCount >= maxInsertCount) {
-//            		insertCount = 0;
-//                    //flush a batch of inserts and release memory:
-//                    log.info("hibernate flush");
-//                    session.flush();
-//                    session.clear();            		
-//            	}                
             }
             istream.close();
             
@@ -489,7 +433,8 @@ public class CsvTransformator implements Transformator {
         writer.write("\n\r");        
     }
     @SuppressWarnings("unchecked")
-	public boolean exportToFormat(Session session) {
+    @Override
+    public boolean exportToFormat(Session session) {
         Date now = new Date();
         DateFormat formatter = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String timestamp = formatter.format(now);
@@ -607,6 +552,7 @@ public class CsvTransformator implements Transformator {
             return false;
         }
     }
+    @Override
     public void compareWithFormat(Session session) {
         throw new RuntimeException("not implemented");
     }    
