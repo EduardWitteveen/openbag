@@ -8,26 +8,27 @@
         <!-- =================================== -->                
         <!-- ==  start database configuration == -->
         <!-- =================================== -->
-        <!-- ORACLE 9I-->
-		<!-- we need the following additional stuff in classpath:
-			- hibernate-spatial-oracle-1.0-M1.jar
-			- ojdbc6.jar (from the oracle thin client)
-		-->
+        <!-- ORACLE -->
+        <!-- we need the following additional stuff in classpath:
+                - hibernate-spatial-oracle-1.0-M1.jar
+                - ojdbc6.jar (from the oracle thin client)
+        -->
+        <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="connection.url">jdbc:oracle:thin:@servername:1521:databasename</property>
+        <property name="connection.username">username</property>
+        <property name="connection.password">password</property>               
+        <property name="connection.pool_size">1</property>
+        <property name="dialect">org.hibernatespatial.oracle.OracleSpatial10gDialect</property>
+        <!-- POSTGIS-->
         <!--
-		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-		<property name="connection.url">jdbc:oracle:thin:@servername:1521:databasename</property>
-		<property name="connection.username">username</property>
-		<property name="connection.password">password</property>               
-		<property name="connection.pool_size">1</property>
-		<property name="dialect">org.nergens.bag.storage.util.OracleSpatialDialect</property>
-		-->		
-        <!-- POSTGIS-->        
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://localhost:5432/hibernate</property>
         <property name="connection.username">hibernate</property>
         <property name="connection.password">hibernate</property>               
         <property name="connection.pool_size">1</property>
-        <property name="dialect">org.hibernatespatial.postgis.PostgisDialect</property>        
+        <property name="dialect">org.hibernatespatial.postgis.PostgisDialect</property>
+        -->
+        
         <!-- =================================== -->                
         <!-- ==  stop database configuration  == -->
         <!-- =================================== -->                
