@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nergens.openbag</groupId>
 	<artifactId>storage</artifactId>
@@ -10,7 +7,6 @@
 	<name>Storage OpenBag</name>
 	<url>http://code.google.com/p/openbag/</url>
 	<version>0.0.1-SNAPSHOT</version>
-	<description />
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -47,7 +43,7 @@
 			<artifactId>utils</artifactId>
 			<version>1.07.00</version>
 		</dependency>
-<!-- START POSTGIS SUPPORT -->		
+<!-- START POSTGIS SUPPORT -->	
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -64,19 +60,18 @@
 			<version>1.0M1</version>
 		</dependency>
 <!-- STOP POSTGIS SUPPORT -->
-<!-- START ORACLE SPATIAL SUPPORT -->
+<!-- START ORACLE SUPPORT -->
 		<dependency>
 			<groupId>oracle</groupId>
 			<artifactId>oracle-instantclient</artifactId>
 			<version>11.1.0.6.0</version>
 		</dependency>
-<!--		
+<!-- START ORACLE SPATIAL SUPPORT -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-spatial-oracle</artifactId>
 			<version>1.0M1</version>
 		</dependency>
--->		
 <!-- STOP ORACLE SPATIAL SUPPORT -->
 		<!-- added for testing, junit was also inserted in default from netbeans http://mevenide.codehaus.org/  -->
 		<dependency>
@@ -84,7 +79,8 @@
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
-		</dependency>		<!-- added for netbeans maven plugin http://mevenide.codehaus.org/  -->
+		</dependency>
+		<!-- added for netbeans maven plugin http://mevenide.codehaus.org/  -->
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
@@ -110,15 +106,11 @@
 					<components>
 						<component>
 							<name>hbm2ddl</name>
-							<implementation>
-								annotationconfiguration
-							</implementation>
+							<implementation>annotationconfiguration</implementation>
 						</component>
 						<component>
 							<name>hbm2hbmxml</name>
-							<outputDirectory>
-								src/main/resources
-							</outputDirectory>
+							<outputDirectory>src/main/resources</outputDirectory>
 						</component>
 					</components>
 					<componentProperties>
@@ -132,12 +124,8 @@
 						<quiet>false</quiet>
 						<!-- Do not export tables into database -->
 						<export>false</export>
-						<outputfilename>
-							schema-export.sql
-						</outputfilename>
-						<configurationfile>
-							/src/main/resources/bag.cfg.xml
-						</configurationfile>
+						<outputfilename>schema-export.sql</outputfilename>
+						<configurationfile>/src/main/resources/bag.cfg.xml</configurationfile>
 					</componentProperties>
 				</configuration>
 				<dependencies>
@@ -152,10 +140,32 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <encoding>US-ASCII</encoding>
+                </configuration>
+            </plugin>
+			<plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <encoding>UTF-16</encoding>
+                </configuration>
+            </plugin>
+			<plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 </project>
