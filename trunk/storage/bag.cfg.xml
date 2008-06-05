@@ -19,6 +19,7 @@
         <property name="connection.password">password</property>               
         <property name="connection.pool_size">1</property>
         <property name="dialect">org.nergens.bag.storage.util.OracleSpatial9iDialect</property>
+        
         <!-- POSTGIS-->
         <!--
         <property name="connection.driver_class">org.postgresql.Driver</property>
@@ -28,7 +29,6 @@
         <property name="connection.pool_size">1</property>
         <property name="dialect">org.hibernatespatial.postgis.PostgisDialect</property>
         -->
-        
         <!-- =================================== -->                
         <!-- ==  stop database configuration  == -->
         <!-- =================================== -->                
