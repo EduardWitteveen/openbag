@@ -18,7 +18,7 @@
         <property name="connection.username">username</property>
         <property name="connection.password">password</property>               
         <property name="connection.pool_size">1</property>
-        <property name="dialect">org.nergens.bag.storage.util.OracleSpatial9iDialect</property>
+        <property name="dialect">org.hibernatespatial.SpatialDialect.OracleSpatial9iDialect</property>
         
         <!-- POSTGIS-->
         <!--

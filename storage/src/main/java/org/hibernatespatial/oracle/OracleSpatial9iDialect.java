@@ -1,9 +1,7 @@
-package org.nergens.bag.storage.util;
+package org.hibernatespatial.oracle;
 
 import java.sql.Types;
 import org.hibernatespatial.SpatialDialect;
-import org.hibernatespatial.oracle.OracleSpatial10gDialect;
-import org.hibernatespatial.oracle.SDOGeometryType;
 
 public class OracleSpatial9iDialect extends OracleSpatial10gDialect implements SpatialDialect {
     private static String SQL_TYPE_NAME = "MDSYS.SDO_GEOMETRY";
@@ -25,7 +23,7 @@ public class OracleSpatial9iDialect extends OracleSpatial10gDialect implements S
                     private static final int[] geometryTypes = new int[] { Types.STRUCT };
 
             -	private static String SQL_TYPE_NAME = "SDO_GEOMETRY";
-            +	public static String SQL_TYPE_NAME = "SDO_GEOMETRY";
+            +	static String SQL_TYPE_NAME = "SDO_GEOMETRY";
 
                     @Override
                     public void nullSafeSet(PreparedStatement st, Object value, int index)
