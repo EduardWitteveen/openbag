@@ -8,17 +8,31 @@
         <!-- =================================== -->                
         <!-- ==  start database configuration == -->
         <!-- =================================== -->
-        <!-- ORACLE -->
+        <!-- ORACLE 9I -->
         <!-- we need the following additional stuff in classpath:
                 - hibernate-spatial-oracle-1.0-M1.jar
                 - ojdbc6.jar (from the oracle thin client)
         -->
+        <!--
         <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
         <property name="connection.url">jdbc:oracle:thin:@servername:1521:databasename</property>
         <property name="connection.username">username</property>
         <property name="connection.password">password</property>               
         <property name="connection.pool_size">1</property>
-        <property name="dialect">org.hibernatespatial.SpatialDialect.OracleSpatial9iDialect</property>
+        <property name="dialect">org.hibernatespatial.oracle.OracleSpatial9iDialect</property>
+        -->
+        
+        <!-- ORACLE 10 XE -->
+        <!-- we need the following additional stuff in classpath:
+                - hibernate-spatial-oracle-1.0-M1.jar
+                - ojdbc6.jar (from the oracle thin client)
+        -->
+        <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="connection.url">jdbc:oracle:thin:@192.168.0.1:1521:xe</property>
+        <property name="connection.username">hibernate</property>
+        <property name="connection.password">hibernate</property>               
+        <property name="connection.pool_size">1</property>
+        <property name="dialect">org.hibernatespatial.oracle.OracleSpatialXeDialect</property>        
         
         <!-- POSTGIS-->
         <!--
