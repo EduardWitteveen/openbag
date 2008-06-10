@@ -1,0 +1,47 @@
+<?config.xml version="1.0" encoding="UTF-8"?>
+<catalog >
+  <datastores >
+    <!--
+      a datastore configuration element serves as a common data source connection
+      parameters repository for all featuretypes it holds.
+    -->
+    <datastore id = "bag" enabled = "true" namespace = "bag" >
+      <connectionParams >
+        <parameter name = "schema" value = "USERNAME" />
+        <parameter name = "port" value = "1521" />
+        <parameter name = "passwd" value = "password" />
+        <parameter name = "dbtype" value = "oracle" />
+        <parameter name = "host" value = "servername" />
+        <parameter name = "validate connections" value = "true" />
+        <parameter name = "max connections" value = "10" />
+        <parameter name = "instance" value = "databasename" />
+        <parameter name = "user" value = "username" />
+        <parameter name = "min connections" value = "4" />
+        <parameter name = "namespace" value = "bag" />
+      </connectionParams>
+    </datastore>
+  </datastores>
+  <formats >
+    <!--
+      a format configuration element serves as a common data source
+      parameters repository for all coverages it holds.
+    -->
+  </formats>
+  <!--
+    Defines namespaces to be used by the datastores.
+  -->
+  <namespaces >
+    <namespace default = "true" prefix = "bag" uri = "http://witteveen-automatisering.nl/bag/gml" />
+  </namespaces>
+  <styles >
+    <!--
+      Defines the style ids and file name to be used by the wms.
+    -->
+    <style id = "style_woonplaats" filename = "woonplaats.sld" />
+    <style id = "style_pand" filename = "pand.sld" />
+    <style id = "style_nummeraanduiding" filename = "nummeraanduiding.sld" />
+    <style id = "style_gemeente" filename = "gemeente.sld" />
+    <style id = "style_verblijfsobject" filename = "verblijfsobject.sld" />
+    <style id = "style_openbareruimte" filename = "openbareruimte.sld" />
+  </styles>
+</catalog>
