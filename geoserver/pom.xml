@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ===========================================================================
+         Maven 2 project configuration file
+         http://maven.apache.org/
+     =========================================================================== -->
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- ==================================================== -->
+    <!--     Project description                              -->
+    <!-- ==================================================== -->
+    <groupId>org.nergens.openbag</groupId>
+    <artifactId>gisserver</artifactId>
+    <packaging>war</packaging>
+    <name>Gisserver OpenBag</name>
+    <url>http://code.google.com/p/openbag/</url>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>
+        This is the Openbag gisserver
+    </description>
+
+    <organization>
+        <name>Witteveen Autmatisering</name>
+        <url>http://www.witteveen-automatisering.nl/</url>
+    </organization>
+
+    <scm>
+        <connection>scm:svn:http://openbag.googlecode.com/svn/</connection>
+        <url>http://code.google.com/p/openbag/source/browse/</url>
+    </scm>
+  
+    <developers>
+        <developer>
+            <id>eduard</id>
+            <name>Eduard Witteveen</name>
+            <email>eywitteveen@gmail.com</email>
+            <organization>Witteveen Automatisering</organization>
+            <roles>
+                <role>Putjeschepper</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <dependencies>
+       <dependency>
+      <groupId>org.opengis</groupId>
+      <artifactId>geoapi</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt2-referencing</artifactId>
+      <version>2.2-RC0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>geotools</id>
+      <name>Geotools repository</name>
+      <url>http://maven.geotools.fr/repository</url>
+    </repository>
+    <repository>
+      <id>ibiblio</id>
+      <name>Ibiblio - the public's library and digital archive</name>
+      <url>http://www.ibiblio.org/maven2</url>
+    </repository>
+  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>MyMainClass</mainClass>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
