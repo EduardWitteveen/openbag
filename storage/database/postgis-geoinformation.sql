@@ -19,7 +19,7 @@ SET search_path = public, pg_catalog;
 --
 
 INSERT INTO geometry_columns (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type") VALUES ('', 'public', 'data_gemeente', 'grens', 2, -1, 'POLYGON');
-INSERT INTO geometry_columns (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type") VALUES ('', 'public', 'data_nummeraanduiding', 'grens', 2, -1, 'POINT');
+INSERT INTO geometry_columns (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type") VALUES ('', 'public', 'data_nummeraanduiding', 'punt', 2, -1, 'POINT');
 INSERT INTO geometry_columns (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type") VALUES ('', 'public', 'data_openbareruimte', 'grens', 2, -1, 'POLYGON');
 INSERT INTO geometry_columns (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type") VALUES ('', 'public', 'data_pand', 'grens', 2, -1, 'MULTIPOLYGON');
 INSERT INTO geometry_columns (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type") VALUES ('', 'public', 'data_woonplaats', 'grens', 2, -1, 'POLYGON');
