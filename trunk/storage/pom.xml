@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- ===========================================================================
+         Maven 2 project configuration file
+         http://maven.apache.org/
+=========================================================================== -->
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!-- ==================================================== -->
+    <!--     Project description                              -->
+    <!-- ==================================================== -->
     <groupId>org.nergens.openbag</groupId>
     <artifactId>storage</artifactId>
     <packaging>jar</packaging>
     <name>Storage OpenBag</name>
     <url>http://code.google.com/p/openbag/</url>
     <version>0.0.1-SNAPSHOT</version>
+    <description>
+        This is the Openbag storage
+    </description>
+    
+    <organization>
+        <name>Witteveen Autmatisering</name>
+        <url>http://www.witteveen-automatisering.nl/</url>
+    </organization>
+    
+    <scm>
+        <connection>scm:svn:http://openbag.googlecode.com/svn/</connection>
+        <url>http://code.google.com/p/openbag/source/browse/</url>
+    </scm>
+    
+    <developers>
+        <developer>
+            <id>eduard</id>
+            <name>Eduard Witteveen</name>
+            <email>eywitteveen@gmail.com</email>
+            <organization>Witteveen Automatisering</organization>
+            <roles>
+                <role>Putjeschepper</role>
+            </roles>
+        </developer>
+    </developers>    
+    
     <dependencies>
         <dependency>
             <groupId>org.hibernate</groupId>
