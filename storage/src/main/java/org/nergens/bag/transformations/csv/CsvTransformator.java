@@ -239,6 +239,7 @@ public class CsvTransformator implements Transformator {
         File dir = getPath();
         // first find our file
         FilenameFilter filter = new FilenameFilter() {
+            @Override
             public boolean accept(File dir, String name) {
                 return name.startsWith(FILE_STARTS_WITH) && name.endsWith(".csv");
             }
@@ -247,7 +248,8 @@ public class CsvTransformator implements Transformator {
         String fileprefix = dir.getAbsolutePath();
         fileprefix = fileprefix + File.separator;
         if(files.length < 1) {
-        	throw new RuntimeException("data-files were missing in directory:" + fileprefix);
+            log.info("Datafiles were missing in directory:" + fileprefix);
+                return false;
         }
         String filepostfix = files[0];        
         try
