@@ -1,0 +1,24 @@
+<featureType datastore="bag">
+	<name>DATA_PAND</name>
+	<!--
+		native wich EPGS code for the FeatureTypeInfoDTO
+	-->
+	<SRS>28992</SRS>
+	<SRSHandling>0</SRSHandling>
+	<title>PAND</title>
+	<abstract>Generated from bag</abstract>
+	<wmspath>/</wmspath>
+	<numDecimals value="8" />
+	<keywords>PAND, bag</keywords>
+	<latLonBoundingBox dynamic="false" maxx="6.938714789737619"
+		maxy="53.093820383851636" minx="6.559388115090772"
+		miny="52.86794654195805" />
+	<nativeBBox dynamic="false" maxx="258940.14" maxy="568090.039155"
+		minx="233922.832" miny="543420.667" />
+	<!--
+		the default style this FeatureTypeInfoDTO can be represented by.
+		at least must contain the "default" attribute
+	-->
+	<styles default="style_pand" />
+	<cacheinfo enabled="false" maxage="" />
+</featureType>
