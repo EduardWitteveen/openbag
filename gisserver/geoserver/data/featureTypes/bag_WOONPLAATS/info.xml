@@ -1,0 +1,24 @@
+<featureType datastore="bag">
+	<name>DATA_WOONPLAATS</name>
+	<!--
+		native wich EPGS code for the FeatureTypeInfoDTO
+	-->
+	<SRS>28992</SRS>
+	<SRSHandling>0</SRSHandling>
+	<title>Woonplaats</title>
+	<abstract>Generated from bag</abstract>
+	<wmspath>/</wmspath>
+	<numDecimals value="8" />
+	<keywords>WOONPLAATS, bag</keywords>
+	<latLonBoundingBox dynamic="false" maxx="6.939231355570494"
+		maxy="53.09702221894029" minx="6.559437805029983"
+		miny="52.865552105243566" />
+	<nativeBBox dynamic="false" maxx="258967.082" maxy="568446.544"
+		minx="233930.497" miny="543154.716" />
+	<!--
+		the default style this FeatureTypeInfoDTO can be represented by.
+		at least must contain the "default" attribute
+	-->
+	<styles default="style_woonplaats" />
+	<cacheinfo enabled="false" maxage="" />
+</featureType>
