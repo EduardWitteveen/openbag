@@ -38,31 +38,13 @@ public class Pand extends BagAuthentiekObject implements Serializable{
     }
 // attributes
     @Column(name="BOUWJAAR")
-    String bouwjaar;    
-    public String getBouwjaar() {
+    Integer bouwjaar;    
+    public Integer getBouwjaar() {
         return bouwjaar; 
     }
-    public void setBouwjaar(String bouwjaar) { 
+    public void setBouwjaar(Integer bouwjaar) { 
         this.bouwjaar = bouwjaar; 
     }
-    /**
-     * Bouwvergunning verleend
-     * Niet gerealiseerd pand
-     * Bouw gestart
-     * Pand in gebruik (niet ingemeten)
-     * Pand in gebruik
-     * Sloopvergunning verleend
-     * Pand gesloopt
-     * AN..80
-     */   
-    @Column(name="STATUS")
-    String status;    
-    public String getStatus() {
-        return status; 
-    }
-    public void setStatus(String status) { 
-        this.status = status; 
-    }    
     @Column(name="GRENS")
     @Type(type="org.hibernatespatial.GeometryUserType")
     MultiPolygon grens;

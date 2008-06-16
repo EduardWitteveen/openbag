@@ -231,7 +231,11 @@ public class CsvTransformator implements Transformator {
         Long l = new Long(str);
         return l;
     }
-    
+    private Integer toInteger(String str) {
+        if(str.length() == 0) return null;
+        Integer i = new Integer(str);
+        return i;
+    }    
     @SuppressWarnings("unchecked")
     @Override
     public boolean retrieveFromFormat(Session session) {
@@ -366,7 +370,7 @@ public class CsvTransformator implements Transformator {
                 verblijfsobject.setGemeente(toGemeente(session, firstfield));
                 verblijfsobject.setHoofdadres(toAdres(session, shredder.nextValue()));
                 verblijfsobject.setCode(toLong(shredder.nextValue()));
-                verblijfsobject.setOppervlakte(toLong(shredder.nextValue()));
+                verblijfsobject.setOppervlakte(toInteger(shredder.nextValue()));
                 verblijfsobject.setStatus(toString(shredder.nextValue()));
                 verblijfsobject.setPunt(toPoint(shredder.nextValue()));
                 session.save(verblijfsobject);
@@ -388,7 +392,7 @@ public class CsvTransformator implements Transformator {
                 Pand pand = new Pand();                
                 pand.setGemeente(toGemeente(session, firstfield));
                 pand.setCode(toLong(shredder.nextValue()));
-                pand.setBouwjaar(toString(shredder.nextValue()));
+                pand.setBouwjaar(toInteger(shredder.nextValue()));
                 pand.setStatus(toString(shredder.nextValue()));
                 pand.setGrens(toMultiPolygon(shredder.nextValue()));
                 session.save(pand);
@@ -413,6 +417,15 @@ public class CsvTransformator implements Transformator {
             writer.write(",");
         }
     }    
+    private void writeValue(FileWriter writer, Integer value, boolean comma) throws IOException {
+        if(value != null) {        
+            String field = value.toString();
+            writer.write(field);
+        }
+        if(comma) {
+            writer.write(",");
+        }
+    }        
     private void writeValue(FileWriter writer, Long value, boolean comma) throws IOException {
         if(value != null) {        
             String field = value.toString();
@@ -441,19 +454,20 @@ public class CsvTransformator implements Transformator {
         DateFormat formatter = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String timestamp = formatter.format(now);
         File dir = getPath();
+
+        File gemeentefilename = new File(dir + "/gemeente-" +  timestamp + ".csv");
+        File woonplaatsfilename = new File(dir + "/woonplaats-" +  timestamp + ".csv");
+        File openbareruimtefilename = new File(dir + "/openbareruimte-" +  timestamp + ".csv");
+        File nummeraanduidingfilename = new File(dir + "/nummeraanduiding-" +  timestamp + ".csv");
+        File verblijfsobjectfilename = new File(dir + "/verblijfsobject-" +  timestamp + ".csv");            
+        File pandfilename = new File(dir + "/pand-" +  timestamp + ".csv");
         
         try {
-            File gemeentefilename = new File(dir + "/gemeente-" +  timestamp + ".csv");
             FileWriter gemeentewriter = new FileWriter(gemeentefilename, false);
-            File woonplaatsfilename = new File(dir + "/woonplaats-" +  timestamp + ".csv");
-            FileWriter woonplaatswriter = new FileWriter(woonplaatsfilename, false);
-            File openbareruimtefilename = new File(dir + "/openbareruimte-" +  timestamp + ".csv");
+            FileWriter woonplaatswriter = new FileWriter(woonplaatsfilename, false);            
             FileWriter openbareruimtewriter = new FileWriter(openbareruimtefilename, false);
-            File nummeraanduidingfilename = new File(dir + "/nummeraanduiding-" +  timestamp + ".csv");
-            FileWriter nummeraanduidingwriter = new FileWriter(nummeraanduidingfilename, false);
-            File verblijfsobjectfilename = new File(dir + "/verblijfsobject-" +  timestamp + ".csv");
+            FileWriter nummeraanduidingwriter = new FileWriter(nummeraanduidingfilename, false);            
             FileWriter verblijfsobjectwriter = new FileWriter(verblijfsobjectfilename, false);
-            File pandfilename = new File(dir + "/pand-" +  timestamp + ".csv");
             FileWriter pandwriter = new FileWriter(pandfilename, false);
             
             
@@ -549,8 +563,20 @@ public class CsvTransformator implements Transformator {
             log.info("export done!");
             return true;
         }
-        catch(IOException ioe) {
-            ioe.printStackTrace();
+//        catch(IOException ioe) {
+//            ioe.printStackTrace();
+//            return false;
+//        }
+        catch(Exception e) {
+            e.printStackTrace();            
+            
+            gemeentefilename.delete();
+            woonplaatsfilename.delete();
+            openbareruimtefilename.delete();
+            nummeraanduidingfilename.delete();
+            verblijfsobjectfilename.delete();
+            pandfilename.delete();
+            
             return false;
         }
     }

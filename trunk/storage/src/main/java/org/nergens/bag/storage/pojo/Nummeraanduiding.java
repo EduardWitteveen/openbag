@@ -99,20 +99,6 @@ public class Nummeraanduiding extends BagAuthentiekObject implements Serializabl
     public void setType(String type) { 
         this.type = type; 
     }
-    /**
-     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
-     * Naamgeving uitgegeven 
-     * Naamgeving ingetrokken
-     * AN..80
-     */
-    @Column(name="STATUS")    
-    String status;       
-    public String getStatus() {
-        return status; 
-    }
-    public void setStatus(String status) { 
-        this.status = status; 
-    }        
     @Column(name="PUNT")
     @Type(type="org.hibernatespatial.GeometryUserType")
     protected Point punt;    
@@ -124,7 +110,7 @@ public class Nummeraanduiding extends BagAuthentiekObject implements Serializabl
     }
 // used in other tables
     @OneToMany(
-    		targetEntity=org.nergens.bag.storage.pojo.Verblijfsobject.class,
+    		targetEntity=org.nergens.bag.storage.pojo.Verblijfsplaats.class,
     		cascade=CascadeType.REMOVE, 
     		mappedBy="hoofdadres"
     )

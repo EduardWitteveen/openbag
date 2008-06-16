@@ -360,7 +360,7 @@ public class AddGeotaxInformation {
                 return WONINGTYPE.OVERIGE;
         }
     }
-    private  static Long getOppervlakte(String woznummer, Long jaartal, Long inhoud, Long gebruikscode, Long soortcode, String soortomschrijving)
+    private  static Integer getOppervlakte(String woznummer, Long jaartal, Long inhoud, Long gebruikscode, Long soortcode, String soortomschrijving)
     {
 	if(soortcode == null)  {
             log.info("Oppervlakte: No soortcode for wozobject:" + woznummer + " jaartal:" + jaartal + " soort:" + soortomschrijving);
@@ -428,6 +428,6 @@ public class AddGeotaxInformation {
     	double oppervlakte = factor * inhoud;
         // round should work correctly, therefore add 0.5
         oppervlakte += .5;
-    	return new Long((int)oppervlakte);
+    	return (int)oppervlakte;
     }
 }

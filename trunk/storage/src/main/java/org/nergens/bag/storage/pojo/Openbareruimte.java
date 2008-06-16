@@ -73,21 +73,7 @@ public class Openbareruimte extends BagAuthentiekObject implements Serializable 
     }
     public void setType(String type) { 
         this.type = type; 
-    }
-    /**
-     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
-     * Naamgeving uitgegeven
-     * Naamgeving ingetrokken
-     * AN..80
-     */
-    @Column(name="STATUS")
-	protected String status;
-    public String getStatus() {
-        return status; 
-    }
-    public void setStatus(String status) { 
-        this.status = status; 
-    }    
+    }  
     @Column(name="GRENS")
     @Type(type="org.hibernatespatial.GeometryUserType")
     protected Polygon grens;
