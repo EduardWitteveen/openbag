@@ -3,6 +3,8 @@ package org.nergens.bag.storage.pojo;
 import com.vividsolutions.jts.geom.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
@@ -30,38 +32,19 @@ import org.nergens.bag.storage.pojo.util.Gebruiksdoel;
 @DiscriminatorValue("VERBLIJFSOBJECT")
 @PrimaryKeyJoinColumn(name="CODE")
 @Table(name="DATA_VERBLIJFSOBJECT")
-public class Verblijfsobject extends BagAuthentiekObject implements Serializable{
+public class Verblijfsobject extends Verblijfsplaats implements Serializable{
 	private static final long serialVersionUID = 6171936434187699536L;
-// referencing to other tables
-    @ManyToOne
-    @JoinColumn(name="GEMEENTE_CODE")
-    protected Gemeente gemeente;
-    public Gemeente getGemeente() {
-        return gemeente;
-    }
-    public void setGemeente(Gemeente gemeente) { 
-        this.gemeente = gemeente; 
-    }
-    @ManyToOne
-    @JoinColumn(name="NUMMERAANDUIDING_CODE")
-    protected Nummeraanduiding hoofdadres;
-    public Nummeraanduiding getHoofdadres() {
-        return hoofdadres;
-    }
-    public void setHoofdadres(Nummeraanduiding hoofdadres) { 
-        this.hoofdadres = hoofdadres; 
-    }    
 // attributes      
     /**
      * Alle natuurlijke getallen van 1 tot en met 999.999
      * N..6
     */
     @Column(name="OPPERVLAKTE")
-    protected Long oppervlakte;   
-    public Long getOppervlakte() {
+    protected Integer oppervlakte;   
+    public Integer getOppervlakte() {
         return oppervlakte; 
     }
-    public void setOppervlakte(Long oppervlakte) { 
+    public void setOppervlakte(Integer oppervlakte) { 
         this.oppervlakte = oppervlakte; 
     }
     /**
@@ -76,6 +59,7 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
         this.wozObjectNumber = wozObjectNumber; 
     }        
     /**
+     * STATUS:
      * Verblijfsobject gevormd
      * Niet gerealiseerd verblijfsobject
      * Verblijfsobject in gebruik (niet ingemeten)
@@ -84,15 +68,7 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
      * Verblijfsobject buiten gebruik
      * AN..80
      */    
-    @Column(name="STATUS")    
-    protected String status;    
-    public String getStatus() {
-        return status; 
-    }
-    public void setStatus(String status) { 
-        this.status = status; 
-    }    
-    @Column(name="PUNT")    
+    @Column(name="PUNT")
     @Type(type="org.hibernatespatial.GeometryUserType")
     protected Point punt;
     public Point getPunt() {
@@ -102,26 +78,6 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
         this.punt = punt; 
     }
 // used in other tables
-    @ManyToMany(
-    		targetEntity=org.nergens.bag.storage.pojo.Nummeraanduiding.class,
-    		cascade=CascadeType.REMOVE    		
-    )
-    @JoinTable(
-        name = "DATA_VO_NEVENADRES", 
-        joinColumns= @JoinColumn(
-        		name="VERBLIJFSOBJECT_CODE"
-        ),
-        inverseJoinColumns=@JoinColumn(
-        		name="NUMMERAANDUIDING_CODE"
-        )
-    )
-    protected java.util.Set<Nummeraanduiding> nevenadressen;
-    public java.util.Set<Nummeraanduiding> getNevenadressen() {
-        return nevenadressen;
-    }
-    public void setNevenadressen(java.util.Set<Nummeraanduiding> nevenadressen) { 
-        this.nevenadressen = nevenadressen; 
-    }
     //http://opensource.atlassian.com/projects/hibernate/browse/ANN-6?rc=1
     @ManyToMany(    		
     		targetEntity=org.nergens.bag.storage.pojo.util.Gebruiksdoel.class,
@@ -132,12 +88,16 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
         joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
         inverseJoinColumns=@JoinColumn(name="GEBRUIKSDOEL_NAAM")
     )
-    protected java.util.Set<Gebruiksdoel> gebruiksdoeleinden;
-    public java.util.Set<Gebruiksdoel> getGebruiksdoeleinden() {
+    protected Set<Gebruiksdoel> gebruiksdoeleinden = new HashSet();
+    public Set<Gebruiksdoel> getGebruiksdoeleinden() {
         return gebruiksdoeleinden;
     }
     public void setGebruiksdoeleinden(java.util.Set<Gebruiksdoel> gebruiksdoeleinden) { 
         this.gebruiksdoeleinden = gebruiksdoeleinden; 
+    }
+    // to make live easier
+    public void addGebruiksdoeleind(Gebruiksdoel gebruiksdoel) {
+        gebruiksdoeleinden.add(gebruiksdoel);
     }
     @ManyToMany(    		
     		targetEntity=org.nergens.bag.storage.pojo.Pand.class,
@@ -148,12 +108,16 @@ public class Verblijfsobject extends BagAuthentiekObject implements Serializable
         joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
         inverseJoinColumns=@JoinColumn(name="PAND_CODE")
     )
-    protected java.util.Set<Pand> panden;    
-    public java.util.Set<Pand> getPanden() {
+    protected Set<Pand> panden = new HashSet();
+    public Set<Pand> getPanden() {
         return panden;
-    }
+    }    
     public void setPanden(java.util.Set<Pand> panden) {
         this.panden = panden;
+    }
+    // to make live easier
+    public void addPand(Pand pand) {
+        this.panden.add(pand);
     }    
 // tostring    
     @Override

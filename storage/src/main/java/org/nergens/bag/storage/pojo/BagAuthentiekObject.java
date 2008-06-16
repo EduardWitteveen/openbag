@@ -41,6 +41,44 @@ public class BagAuthentiekObject extends BagObject implements Serializable {
     public void setInOnderzoek(Boolean inonderzoek) { 
         this.inonderzoek = inonderzoek; 
     }
+    /**
+     * 
+     * 
+     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
+     * Naamgeving uitgegeven
+     * Naamgeving ingetrokken
+     * AN..80
+     * 
+     * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
+     * Naamgeving uitgegeven 
+     * Naamgeving ingetrokken
+     * 
+     * Verblijfsobject gevormd
+     * Niet gerealiseerd verblijfsobject
+     * Verblijfsobject in gebruik (niet ingemeten)
+     * Verblijfsobject in gebruik
+     * Verblijfsobject ingetrokken
+     * Verblijfsobject buiten gebruik
+     * AN..80
+     *      
+     * Bouwvergunning verleend
+     * Niet gerealiseerd pand
+     * Bouw gestart
+     * Pand in gebruik (niet ingemeten)
+     * Pand in gebruik
+     * Sloopvergunning verleend
+     * Pand gesloopt
+     * AN..80
+     * 
+     */
+    @Column(name="STATUS")    
+    protected String status;    
+    public String getStatus() {
+        return status; 
+    }
+    public void setStatus(String status) { 
+        this.status = status; 
+    }    
     @Column(name="DOCUMENTDATUM")
     protected Date documentdatum;    
     public Date getDocumentDatum() {
