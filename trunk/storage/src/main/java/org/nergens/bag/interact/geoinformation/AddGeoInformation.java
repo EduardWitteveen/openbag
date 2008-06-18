@@ -40,6 +40,7 @@ public class AddGeoInformation {
             session.save(gemeente);
         }      
         // UPDATE DE NUMMERAANDUIDING COORDS, VOOR DE ONBEKENDEN
+        log.info("Update the nummeraanduiding");
         List<Verblijfsobject> verblijfsobjecten = session.createQuery("from Verblijfsobject verblijfsobject where verblijfsobject.hoofdadres.punt is null").list();
         for (Verblijfsobject verblijfsobject : verblijfsobjecten) {
             Nummeraanduiding na = verblijfsobject.getHoofdadres();
@@ -47,6 +48,7 @@ public class AddGeoInformation {
             session.save(na);
         }
         // UPDATE DE OPENBARERUIMTE POLYGON, VOOR DE ONBEKENDEN
+        log.info("Update the openbareruimte");
         List<Openbareruimte> openbareruimten = session.createQuery("from Openbareruimte openbareruimte where openbareruimte.grens is null").list();
         for (Openbareruimte openbareruimte : openbareruimten) {
             // retrieve the data for this gemeente
@@ -60,13 +62,30 @@ public class AddGeoInformation {
             session.save(openbareruimte);
         }
         // UPDATE DE VERBLIJFSOBJECT IN PAND(-EN)
+        log.info("Update the pand <--> verblijfsobject");
         // Iterate over de verblijfsobjecten en zie welke panden het in ligt
         // (immers elk verblijfsobject zou in een pand moeten liggen)
         // TODO: do we want a filter here?
-        verblijfsobjecten = session.createQuery("from Verblijfsobject verblijfsobject").list();
+        /**
+         * SELECT   
+         *   DATA_NUMMERAANDUIDING.CODE AS NUMMERAANDUIDING_CODE,
+         *   DATA_PAND.CODE AS PAND_CODE,
+         *   DATA_PAND.GRENS, 
+         *   DATA_NUMMERAANDUIDING.PUNT
+         * FROM DATA_NUMMERAANDUIDING
+         * INNER JOIN DATA_PAND
+         * ON SDO_GEOM.RELATE(DATA_NUMMERAANDUIDING.PUNT, 'INSIDE', DATA_PAND.GRENS, 0.001) = 'TRUE'
+         * 
+         * 
+         * ANALYZE TABLE data_object COMPUTE STATISTICS;
+         * ANALYZE TABLE data_authentiek COMPUTE STATISTICS;
+         * ANALYZE TABLE data_verblijfsplaats COMPUTE STATISTICS;
+         * ANALYZE TABLE data_verblijfsobject COMPUTE STATISTICS;
+         * */
+        verblijfsobjecten = session.createQuery("from Verblijfsobject verblijfsobject where verblijfsobject.code = 1680010000000001").list();
         for (Verblijfsobject verblijfobject : verblijfsobjecten) {
             // retrieve the pand(-en) for this verblijfsobject
-            Query query = session.createQuery("from Pand pand where pand.grens contains :punt ");
+            Query query = session.createQuery("from Pand pand where contains(pand.grens, :punt) = true");
             query.setParameter("punt", verblijfobject.getPunt());
             List<Pand> panden = query.list(); 
             verblijfobject.setPanden(new HashSet<Pand>(panden));
