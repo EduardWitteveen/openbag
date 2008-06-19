@@ -56,4 +56,12 @@ public abstract class BagObject {
     public void setCode(long code) { 
         this.code = code; 
     }
+    @Column(name="BAGOBJECT")
+    protected Boolean bagobject;
+    public Boolean getBagObject() {
+        return bagobject; 
+    }
+    public void setBagObject(Boolean bagobject) {    
+        this.bagobject = bagobject; 
+    }    
 }
