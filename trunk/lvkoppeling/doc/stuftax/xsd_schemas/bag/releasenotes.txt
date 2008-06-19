@@ -1,0 +1,65 @@
+-------------------------------------------------------------------------------------------------------------
+1.2.1
+-------------------------------------------------------------------------------------------------------------
+
+StUF wijzigingen:
+
+StUF0205 final versie van december 2006 overgenomen:
+1) Volgorde van StUF stuurgegevens is veranderd:
+vb van
+            <StUF:berichtsoort>Lk02</StUF:berichtsoort>
+            <StUF:sectormodel>BAG</StUF:sectormodel>
+            <StUF:versieStUF>0205</StUF:versieStUF>
+            <StUF:versieSectormodel>0120</StUF:versieSectormodel>
+naar
+            <StUF:versieStUF>0205</StUF:versieStUF>
+            <StUF:sectormodel>BAG</StUF:sectormodel>
+            <StUF:versieSectormodel>0120</StUF:versieSectormodel>
+            <StUF:berichtsoort>Lk02</StUF:berichtsoort>
+
+2) Verplicht attribuut erbij: StUF:entiteittype
+	<bag-stuf:woonplaats soortEntiteit="F" StUF:entiteittype="WPL">
+
+
+-------------------------------------------------------------------------------------------------------------
+1.2 final (december 2006)
+-------------------------------------------------------------------------------------------------------------
+- gerelateerdeVerblijfsObject -> GerelateerdeVerblijfsObject
+- #225 relatie attributen bij groepen weggehaald (GerelateerdeXXXX, hoofdAdres, nevenAdres)
+  en soortEntiteit op "R" gezet bij entiteiten die onder zo'n groep vallen.
+  (soapui scripts zijn ook ge-update!)
+- stuf0205.xsd final opgenomen in schema's.
+- Dienstberichten. Lk02 en La01 vervangen door Di02 resp. Du02
+- correctie toegevoegd aan vraag- en antwoordbericht (dit wordt in toek. versies waarschijnlijk een datumtijd veld)
+
+
+-------------------------------------------------------------------------------------------------------------
+1.2RC5 (15 november 2006)
+-------------------------------------------------------------------------------------------------------------
+VERANDERINGEN IN XSDs:
+- foutieve verwijzing naar stuf0204 vervangen door stuf0205
+
+- alle tijdvakRelatie elementen verwijderd (begindatumRelatie en einddatumRelatie mogen niet gebruikt worden)
+
+- tns in wsdl was verkeerd. Veranderd van "http://www.vrom.nl/bag/0120" naar "http://www.vrom.nl/bag/stuf/0120"
+
+- binnen een vraagbericht waren sommige elementen unbounded.
+   <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+	 vervangen door:
+   <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" nillable="true" minOccurs="0"/>
+
+- relatie in vraagbericht is verplicht.
+	<xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" maxOccurs="unbounded"/>
+	  vervangen door:
+	<xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" minOccurs="0" maxOccurs="unbounded"/>
+	
+- #188: Status van NummerAanduiding en OpenbareRuimte zijn niet volgens Grondslagen 4.0
+		  "Naamgeving aangewezen" veranderd naar "Naamgeving uitgegeven"
+
+- #184,186: bij een wijzigingsbericht is de einddatum bij 'oud' nu verplicht
+  (en deze moet gelijk zijn aan de begin datum van 'new')
+  
+- Kardinaliteit GerelateerdeAdressen veranderd van 1..N naar 1
+
+- <xs:attributeGroup ref="StUF:relatie"/> toegevoegd aan BevatVerblijfsObjectVraag
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.vrom.nl/bag/0120" xmlns:StUF="http://www.egem.nl/StUF/StUF0204" xmlns:bag-stuf="http://www.vrom.nl/bag/stuf/0120" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.vrom.nl/bag/stuf/0120" name="bag-stuf">
+   <import namespace="http://www.egem.nl/StUF/StUF0204" location="../../stuf/stuf0204.xsd"/>
+   <import namespace="http://www.vrom.nl/bag/stuf/0120" location="bag-stuf-msg.xsd"/>
+   <message name="STUFBAG_Kennisgeving">
+      <part name="kennisgevingBericht" element="bag-stuf:kennisgevingsBericht"/>
+   </message>
+   <message name="STUFBAG_Vraag">
+      <part name="vraag" element="bag-stuf:vraagBericht"/>
+   </message>
+   <message name="STUFBAG_SynchroonAntwoord">
+      <part name="synchroonAntwoordBericht" element="bag-stuf:synchroonAntwoordBericht"/>
+   </message>
+   <message name="StUF_Fout">
+      <part name="fout" element="StUF:foutBericht"/>
+   </message>
+   <portType name="STUFBAG_SynchroonPortType">
+      <documentation>
+			Synchroon is er alleen beantwoordVraag met als response hetzij het antwoord, hetzij een foutbericht.
+		</documentation>
+      <operation name="ontvangKennisgeving">
+         <input message="tns:STUFBAG_Kennisgeving"/>
+         <output message="tns:STUFBAG_SynchroonAntwoord"/>
+         <fault message="tns:StUF_Fout" name="StUF_Fout"/>
+      </operation>
+      <operation name="beantwoordVraag">
+         <input message="tns:STUFBAG_Vraag"/>
+         <output message="tns:STUFBAG_SynchroonAntwoord"/>
+         <fault message="tns:StUF_Fout" name="StUF_Fout"/>
+      </operation>
+   </portType>
+   <binding name="StUFSOAPBindingSynchroon" type="tns:STUFBAG_SynchroonPortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="ontvangKennisgeving">
+         <soap:operation soapAction="urn:ontvangKennisgeving"/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="StUF_Fout">
+            <soap:body use="literal"/>
+         </fault>
+      </operation>
+      <operation name="beantwoordVraag">
+         <soap:operation soapAction="urn:beantwoordVraag"/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="StUF_Fout">
+            <soap:body use="literal"/>
+         </fault>
+      </operation>
+   </binding>
+   <service name="STUFBAGSynchroon">
+      <port name="STUFBAGSynchronePort" binding="tns:StUFSOAPBindingSynchroon">
+         <soap:address location="http://localhost:8080/bag-web/services/BagWebService"/>
+      </port>
+   </service>
+</definitions>
