@@ -37,6 +37,7 @@ public class AddGeoInformation {
             query.setParameter("gemeente", gemeente);
             Polygon grens = (Polygon)query.uniqueResult();
             gemeente.setGrens(grens);
+            gemeente.setBagObject(false);
             session.save(gemeente);
         }      
         // UPDATE DE NUMMERAANDUIDING COORDS, VOOR DE ONBEKENDEN
@@ -82,14 +83,47 @@ public class AddGeoInformation {
          * ANALYZE TABLE data_verblijfsplaats COMPUTE STATISTICS;
          * ANALYZE TABLE data_verblijfsobject COMPUTE STATISTICS;
          * */
-        verblijfsobjecten = session.createQuery("from Verblijfsobject verblijfsobject where verblijfsobject.code = 1680010000000001").list();
+        verblijfsobjecten = session.createQuery("from Verblijfsobject verblijfsobject").list();
+        log.info("Retrieved all verblijfsobjecten, now iterating");
         for (Verblijfsobject verblijfobject : verblijfsobjecten) {
-            // retrieve the pand(-en) for this verblijfsobject
-            Query query = session.createQuery("from Pand pand where contains(pand.grens, :punt) = true");
-            query.setParameter("punt", verblijfobject.getPunt());
-            List<Pand> panden = query.list(); 
-            verblijfobject.setPanden(new HashSet<Pand>(panden));
-            session.save(verblijfobject);
+            try {
+                // retrieve the pand(-en) for this verblijfsobject
+                // does not work!! 
+                /*
+                Query query = session.createQuery("from Pand pand where within(pand.grens, :punt) = true");            
+                query.setParameter("punt", verblijfobject.getPunt());
+                List<Pand> panden = query.list();
+                verblijfobject.setPanden(new HashSet<Pand>(panden));
+                */
+
+                // START WORKAROUND!!
+                // http://www.oreillynet.com/pub/a/network/2003/11/10/oracle_spatial.html?page=2
+                String sql = "SELECT data_pand.code\n";
+                sql += "FROM data_verblijfsobject\n";
+                sql += "LEFT JOIN data_pand\n";
+                sql += "ON MDSYS.SDO_FILTER(data_verblijfsobject.punt, data_pand.grens, 'querytype = JOIN') = 'TRUE' \n";
+                sql += "AND MDSYS.SDO_RELATE(data_verblijfsobject.punt, data_pand.grens, 'mask = INSIDE querytype = JOIN') = 'TRUE'\n";
+                sql += "WHERE data_verblijfsobject.code = :verblijfsobjectcode\n";
+                Query query = session.createSQLQuery(sql);
+                query.setParameter("verblijfsobjectcode", verblijfobject.getCode());
+                log.info("Checking verblijsobject:" + verblijfobject.getCode());
+                List<java.math.BigDecimal> pandcodes = query.list();
+                Set panden = new HashSet<Pand>();
+                for(java.math.BigDecimal code: pandcodes) {
+                    Query qpand = session.createQuery("from Pand pand where pand.code = :code");
+                    qpand.setParameter("code", code.longValue());
+                    log.info("Found pand:" + code.longValue() + "verblijsobject:" + verblijfobject.getCode());
+                    panden.add(qpand.uniqueResult());
+                }
+                verblijfobject.setPanden(panden);
+                // END WORKAROUND!!
+
+                session.save(verblijfobject);
+            }
+            catch(Exception e) {
+                // protect our mainloop
+                e.printStackTrace();
+            }
         }
         // store the data,..
         session.getTransaction().commit();
