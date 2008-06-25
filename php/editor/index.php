@@ -20,8 +20,8 @@
 		<th>Bewerken</th>
 		<th>Onderdeel</th>
 		<th>Omschrijving</th>
-		<th>Aantal authentiek</th>
-		<th>Aantal overig</th>
+		<th>Bag relevant</th>
+		<th>Additionele</th>
 		<th>Totaal</th>
 	</tr>
 	<tr>	
@@ -34,19 +34,23 @@
 		<td>Totalen</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "COUNT(*) AS TOTAL\n";
-	$sql .= "FROM  VB_WOONPLAATS\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_WOONPLAATS\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_WOONPLAATS.CODE\n";
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE EINDEGELDIGHEID IS NULL\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
 ?>
-		<td><?php echo($authentiek); ?></td>
-		<td><?php echo($overig); ?></td>
-		<td><?php echo($totaal); ?></td>		
+		<!-- 
+<?php echo($sql) ?> 
+		-->
+		<td><?php echo($records[0]['RELEVANT']); ?></td>
+		<td><?php echo($records[0]['ADDITIONEEL']); ?></td>
+		<td><?php echo($records[0]['TOTAAL']); ?></td>		
 	</tr>
 	<tr>		
 		<td>	
@@ -58,19 +62,23 @@
 		<td>Totalen</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "COUNT(*) AS TOTAL\n";
-	$sql .= "FROM  VB_OPENBARERUIMTE\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_OPENBARERUIMTE\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_OPENBARERUIMTE.CODE\n";
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";	
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
 ?>
-		<td><?php echo($authentiek); ?></td>
-		<td><?php echo($overig); ?></td>
-		<td><?php echo($totaal); ?></td>		
+		<!-- 
+<?php echo($sql) ?> 
+		-->
+		<td><?php echo($records[0]['RELEVANT']); ?></td>
+		<td><?php echo($records[0]['ADDITIONEEL']); ?></td>
+		<td><?php echo($records[0]['TOTAAL']); ?></td>		
 	</tr>
 	<tr>		
 		<td>
@@ -82,19 +90,23 @@
 		<td>Totalen</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "COUNT(*) AS TOTAL\n";
-	$sql .= "FROM  VB_NUMMERAANDUIDING\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
 ?>
-		<td><?php echo($authentiek); ?></td>
-		<td><?php echo($overig); ?></td>
-		<td><?php echo($totaal); ?></td>		
+		<!-- 
+<?php echo($sql) ?> 
+		-->
+		<td><?php echo($records[0]['RELEVANT']); ?></td>
+		<td><?php echo($records[0]['ADDITIONEEL']); ?></td>
+		<td><?php echo($records[0]['TOTAAL']); ?></td>		
 	</tr>
 </table>
 <!--
@@ -132,31 +144,39 @@
 		<td>Terugmeldingen</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND research = 'Y' THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND research = 'Y' THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN research = 'Y' THEN  1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_WOONPLAATS\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_WOONPLAATS\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_WOONPLAATS.CODE\n";	
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "AND DATA_AUTHENTIEK.INONDERZOEK = 1\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
+	$relevant = $records[0]['RELEVANT'];
+	$additoneel = $records[0]['ADDITIONEEL'];
+	$totaal = $records[0]['TOTAAL'];
 	
-	if($authentiek > 0) {
+	if($relevant > 0) {
 		$statuscolor = "red";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
 		$statuscolor = "green";
 	}	
 ?>
+		<!-- 
+<?php echo($sql) ?> 
+		-->
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -172,31 +192,39 @@
 		<td>Terugmeldingen</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND research = 'Y' THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND research = 'Y' THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN research = 'Y' THEN  1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_OPENBARERUIMTE\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_OPENBARERUIMTE\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_OPENBARERUIMTE.CODE\n";	
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "AND DATA_AUTHENTIEK.INONDERZOEK = 1\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
+	$relevant = $records[0]['RELEVANT'];
+	$additoneel = $records[0]['ADDITIONEEL'];
+	$totaal = $records[0]['TOTAAL'];
 	
-	if($authentiek > 0) {
+	if($relevant > 0) {
 		$statuscolor = "red";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
 		$statuscolor = "green";
 	}	
 ?>
+		<!-- 
+<?php echo($sql) ?> 
+		-->
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -212,20 +240,25 @@
 		<td>Missende woonplaats</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND woonplaatsid IS NULL THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND woonplaatsid IS NULL THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN woonplaatsid IS NULL THEN 1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_OPENBARERUIMTE\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_OPENBARERUIMTE\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_OPENBARERUIMTE.CODE\n";	
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "AND  DATA_OPENBARERUIMTE.WOONPLAATS_CODE IS NULL\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
+	$relevant = $records[0]['RELEVANT'];
+	$additoneel = $records[0]['ADDITIONEEL'];
+	$totaal = $records[0]['TOTAAL'];
 	
-	if($authentiek > 0) {
+	if($relevant > 0) {
 		$statuscolor = "red";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
@@ -233,10 +266,10 @@
 	}	
 ?>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -251,36 +284,61 @@
 		<td>Openbareruimte</td>
 		<td>Nummeraanduiding niet uniek</td>
 <?php
-	$sql = "SELECT COUNT(*) AS aantal_na\n";
-	$sql .= "FROM \n";
-	$sql .= "(\n";
-	$sql .= "  SELECT DISTINCT postcode, huisnummer, huisletter, huisnummertoevoeging, count(*) as aantal\n";
-	$sql .= "  FROM  vb_nummeraanduiding\n";
-	$sql .= "  WHERE authentic = 'Y'\n";
-	$sql .= "  AND EXPIREDATE = 99999999999999\n";
-	$sql .= "  GROUP BY postcode, huisnummer, huisletter, huisnummertoevoeging\n";
+	$sql = "SELECT COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM (\n";
+	$sql .= "  SELECT DISTINCT\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMER,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISLETTER,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMERTOEVOEGING,\n";
+	$sql .= "    COUNT(*) AS AANTAL\n";
+	$sql .= "  FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "  LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "  ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";
+	$sql .= "  LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "  ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "  AND DATA_OBJECT.BAGOBJECT = 1\n";
+	$sql .= "  WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "  GROUP BY \n";
+	$sql .= "    DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE, \n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMER, \n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISLETTER,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMERTOEVOEGING\n";
 	$sql .= ")\n";
-	$sql .= "WHERE aantal > 1\n";
-
+	$sql .= "WHERE AANTAL > 1\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AANTAL_NA'];
-
-	$sql = "SELECT COUNT(*) AS aantal_na\n";
-	$sql .= "FROM \n";
-	$sql .= "(\n";
-	$sql .= "  SELECT DISTINCT postcode, huisnummer, huisletter, huisnummertoevoeging, count(*) as aantal\n";
-	$sql .= "  FROM  vb_nummeraanduiding\n";
-	$sql .= "  WHERE EXPIREDATE = 99999999999999\n";
-	$sql .= "  GROUP BY postcode, huisnummer, huisletter, huisnummertoevoeging\n";
+	echo("<!-- $sql -->");
+	$relevant = $records[0]['TOTAAL'];
+	$sql = "SELECT COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM (\n";
+	$sql .= "  SELECT DISTINCT\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMER,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISLETTER,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMERTOEVOEGING,\n";
+	$sql .= "    COUNT(*) AS AANTAL\n";
+	$sql .= "  FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "  LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "  ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";
+	$sql .= "  LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "  ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "  AND DATA_OBJECT.BAGOBJECT = 1\n";
+	$sql .= "  WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "  GROUP BY \n";
+	$sql .= "    DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE, \n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMER, \n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISLETTER,\n";
+	$sql .= "    DATA_NUMMERAANDUIDING.HUISNUMMERTOEVOEGING\n";
 	$sql .= ")\n";
-	$sql .= "WHERE aantal > 1\n";
+	$sql .= "WHERE AANTAL > 1\n";
 	$records = getRecords($connection, $sql);
-	$totaal = $records[0]['AANTAL_NA'];
-	$overig = $totaal - $authentiek;
-	if($authentiek > 0) {
+	echo("<!-- $sql -->");
+	$totaal = $records[0]['TOTAAL'];
+	$additoneel = $totaal - $relevant;
+	if($relevant > 0) {
 		$statuscolor = "red";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
@@ -288,10 +346,10 @@
 	}	
 ?>
 <td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -304,43 +362,64 @@
 			</a>
 		</td>
 		<td>Openbareruimte</td>
-		<td>Postcode niet uniek</td>
+		<td>Postcode niet uniek(niet fout!)</td>
 <?php
-	$sql = "SELECT COUNT(*) AS aantal_or, SUM(aantal_na) AS aantal_na\n";
+	$sql = "SELECT COUNT(*) AS TOTAAL\n";
 	$sql .= "FROM\n";
 	$sql .= "(\n";
-	$sql .= "  SELECT DISTINCT(postcode), COUNT(*) AS aantal_or, SUM(aantal_na) AS aantal_na\n";
-	$sql .= "  FROM\n";
+	$sql .= "  SELECT DISTINCT \n";
+	$sql .= "    POSTCODE,\n";
+	$sql .= "    COUNT(OPENBARERUIMTE_CODE) AS AANTAL\n";
+	$sql .= "  FROM \n";
 	$sql .= "  (\n";
-	$sql .= "    SELECT DISTINCT postcode, openbareruimteid, COUNT(*) AS aantal_na\n";
-	$sql .= "    FROM  vb_nummeraanduiding\n";
-	$sql .= "    WHERE authentic = 'Y'\n";
-	$sql .= "    AND EXPIREDATE = 99999999999999\n";
-	$sql .= "    GROUP BY postcode, openbareruimteid\n";
+	$sql .= "    SELECT DISTINCT\n";
+	$sql .= "      DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE,\n";
+	$sql .= "      DATA_NUMMERAANDUIDING.POSTCODE\n";
+	$sql .= "    FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "    LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "    ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";
+	$sql .= "    LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "    ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "    AND DATA_OBJECT.BAGOBJECT = 1\n";
+	$sql .= "    WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "    GROUP BY \n";
+	$sql .= "      DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE,\n";
+	$sql .= "      DATA_NUMMERAANDUIDING.POSTCODE\n";
 	$sql .= "  )\n";
-	$sql .= "  GROUP BY postcode\n";
+	$sql .= "  GROUP BY POSTCODE\n";
 	$sql .= ")\n";
-	$sql .= "WHERE aantal_or > 1\n";
+	$sql .= "WHERE AANTAL > 1\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AANTAL_OR'];
-
-	$sql = "SELECT COUNT(*) AS aantal_or, SUM(aantal_na) AS aantal_na\n";
+	echo("<!-- $sql -->");	
+	$relevant = $records[0]['TOTAAL'];
+	$sql = "SELECT COUNT(*) AS TOTAAL\n";
 	$sql .= "FROM\n";
 	$sql .= "(\n";
-	$sql .= "  SELECT DISTINCT(postcode), COUNT(*) AS aantal_or, SUM(aantal_na) AS aantal_na\n";
-	$sql .= "  FROM\n";
+	$sql .= "  SELECT DISTINCT \n";
+	$sql .= "    POSTCODE,\n";
+	$sql .= "    COUNT(OPENBARERUIMTE_CODE) AS AANTAL\n";
+	$sql .= "  FROM \n";
 	$sql .= "  (\n";
-	$sql .= "    SELECT DISTINCT postcode, openbareruimteid, COUNT(*) AS aantal_na\n";
-	$sql .= "    FROM  vb_nummeraanduiding\n";
-	$sql .= "    WHERE EXPIREDATE = 99999999999999\n";
-	$sql .= "    GROUP BY postcode, openbareruimteid\n";
+	$sql .= "    SELECT DISTINCT\n";
+	$sql .= "      DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE,\n";
+	$sql .= "      DATA_NUMMERAANDUIDING.POSTCODE\n";
+	$sql .= "    FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "    LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "    ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";
+	$sql .= "    LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "    ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "    WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "    GROUP BY \n";
+	$sql .= "      DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE,\n";
+	$sql .= "      DATA_NUMMERAANDUIDING.POSTCODE\n";
 	$sql .= "  )\n";
-	$sql .= "  GROUP BY postcode\n";
+	$sql .= "  GROUP BY POSTCODE\n";
 	$sql .= ")\n";
-	$sql .= "WHERE aantal_or > 1\n";
+	$sql .= "WHERE AANTAL > 1\n";
 	$records = getRecords($connection, $sql);
-	$totaal = $records[0]['AANTAL_OR'];
-	$overig = $totaal - $authentiek;
+	echo("<!-- $sql -->");	
+	$totaal = $records[0]['TOTAAL'];
+	$additoneel = $totaal - $relevant;
 	if($totaal > 0) {
 		$statuscolor = "orange";
 	}
@@ -349,10 +428,10 @@
 	}	
 ?>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -368,20 +447,25 @@
 		<td>Terugmeldingen</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND research = 'Y' THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND research = 'Y' THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN research = 'Y' THEN  1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_NUMMERAANDUIDING\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";	
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "AND DATA_AUTHENTIEK.INONDERZOEK = 1\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
+	$relevant = $records[0]['RELEVANT'];
+	$additoneel = $records[0]['ADDITIONEEL'];
+	$totaal = $records[0]['TOTAAL'];
 	
-	if($authentiek > 0) {
+	if($relevant > 0) {
 		$statuscolor = "red";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
@@ -389,10 +473,10 @@
 	}	
 ?>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -405,23 +489,28 @@
 			</a>
 		</td>
 		<td>Nummeraanduiding</td>
-		<td>Missende woonplaats</td>
+		<td>Missende openbareruimte</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND woonplaatsid IS NULL THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND woonplaatsid IS NULL THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN woonplaatsid IS NULL THEN 1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_NUMMERAANDUIDING\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";	
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "AND DATA_NUMMERAANDUIDING.OPENBARERUIMTE_CODE IS NULL\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
+	$relevant = $records[0]['RELEVANT'];
+	$additoneel = $records[0]['ADDITIONEEL'];
+	$totaal = $records[0]['TOTAAL'];
 	
-	if($authentiek > 0) {
+	if($relevant > 0) {
 		$statuscolor = "red";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
@@ -429,10 +518,10 @@
 	}	
 ?>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -444,64 +533,29 @@
 				<img alt="details" src="image/detail.gif">
 			</a>
 		</td>
-		<td>Nummeraanduiding</td>
-		<td>Missende openbareruimte</td>
-<?php
-	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND openbareruimteid IS NULL THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND openbareruimteid IS NULL THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN openbareruimteid IS NULL THEN 1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_NUMMERAANDUIDING\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
-	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
-	
-	if($authentiek > 0) {
-		$statuscolor = "red";
-	}
-	else if($overig > 0) {
-		$statuscolor = "orange";
-	}
-	else {
-		$statuscolor = "green";
-	}	
-?>
-		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
-		</td>
-		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
-		</td>
-		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($totaal); ?>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="nummeraanduiding/search.php?behaviour=geengeom&<?php echo(getCurrentPageParameter())  ?>">
-				<img alt="details" src="image/detail.gif">
-			</a>
-		</td>
 		<td>Nummeraanduiding</td>		
 		<td>Missende coordinaten</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND geom IS NULL THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND geom IS NULL THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN geom IS NULL THEN 1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_NUMMERAANDUIDING\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";	
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "AND DATA_NUMMERAANDUIDING.PUNT IS NULL\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
+	$relevant = $records[0]['RELEVANT'];
+	$additoneel = $records[0]['ADDITIONEEL'];
+	$totaal = $records[0]['TOTAAL'];
 	
-	if($authentiek > 0) {
+	if($relevant > 0) {
 		$statuscolor = "red";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
@@ -509,10 +563,10 @@
 	}	
 ?>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
@@ -525,23 +579,28 @@
 			</a>
 		</td>
 		<td>Nummeraanduiding</td>
-		<td>Missende postcode</td>
+		<td>Missende postcode(niet fout!)</td>
 <?php
 	$sql = "SELECT\n";
-	$sql .= "SUM(CASE WHEN authentic = 'Y' AND postcode IS NULL THEN  1 ELSE 0 END) AS AUTHENTIC,\n";
-	$sql .= "SUM(CASE WHEN authentic = 'N' AND postcode IS NULL THEN  1 ELSE 0 END) AS OTHER,\n";
-	$sql .= "SUM(CASE WHEN postcode IS NULL THEN 1 ELSE 0 END) AS TOTAL\n";
-	$sql .= "FROM  VB_NUMMERAANDUIDING\n";
-	$sql .= "WHERE EXPIREDATE = 99999999999999\n";
+	$sql .= "COALESCE(SUM(DATA_OBJECT.BAGOBJECT), 0) AS RELEVANT,\n";
+	$sql .= "COALESCE(SUM(1 - DATA_OBJECT.BAGOBJECT), 0) AS ADDITIONEEL,\n";
+	$sql .= "COUNT(*) AS TOTAAL\n";
+	$sql .= "FROM DATA_NUMMERAANDUIDING\n";
+	$sql .= "LEFT OUTER JOIN DATA_AUTHENTIEK\n";
+	$sql .= "ON DATA_AUTHENTIEK.CODE = DATA_NUMMERAANDUIDING.CODE\n";	
+	$sql .= "LEFT OUTER JOIN DATA_OBJECT\n";
+	$sql .= "ON DATA_OBJECT.CODE = DATA_AUTHENTIEK.CODE\n";
+	$sql .= "WHERE DATA_AUTHENTIEK.EINDEGELDIGHEID IS NULL\n";
+	$sql .= "AND DATA_NUMMERAANDUIDING.POSTCODE IS NULL\n";
 	$records = getRecords($connection, $sql);
-	$authentiek = $records[0]['AUTHENTIC'];
-	$overig = $records[0]['OTHER'];
-	$totaal = $records[0]['TOTAL'];
+	$relevant = $records[0]['RELEVANT'];
+	$additoneel = $records[0]['ADDITIONEEL'];
+	$totaal = $records[0]['TOTAAL'];
 	
-	if($authentiek > 0) {
-		$statuscolor = "red";
+	if($relevant > 0) {
+		$statuscolor = "orange";
 	}
-	else if($overig > 0) {
+	else if($additoneel > 0) {
 		$statuscolor = "orange";
 	}
 	else {
@@ -549,47 +608,17 @@
 	}	
 ?>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($authentiek); ?>
+			<?php echo($relevant); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
-			<?php echo($overig); ?>
+			<?php echo($additoneel); ?>
 		</td>
 		<td style="background-color: <?php echo($statuscolor); ?>;">
 			<?php echo($totaal); ?>
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<a href="synchronisatie/brs.php?<?php echo(getCurrentPageParameter())  ?>">
-				<img alt="details" src="image/detail.gif">
-			</a>
-		</td>
-		<td>Synchronisatie</td>
-		<td>Missend (wel in BRS)</td>
-<?php
-	$sql = "SELECT *\n"; 
-	$sql .= "FROM brsadresunknown\n"; 
-	$sql .= "WHERE ROWNUM = 1\n"; 	
-	$records = getRecords($connection, $sql);
-	$aantal = array();
-	$aantal = sizeof($records);
-	if($aantal > 0) {
-?>
-		<td colspan="3" style="background-color: red">
-			Database verschillen gevonden!
-		</td>
-<?php	
-	}
-	else {
-?>	
-		<td colspan="3" style="background-color: green">
-			Database vergelijking succesvol!
-		</td>
-<?php		
-	}	
-?>
-	</tr>
 </table>
+<!--
 <h2>Geschiedenis gegevens</h2>
 <p>
 	<a href="geschiedenis/search.php?<?php echo(getCurrentPageParameter())  ?>">
@@ -597,6 +626,7 @@
 	</a>
 	Hier kunt u de geschiedenis van de gegevens bekijken.
 </p>
+-->
 </body>
 </html>
 <?php
