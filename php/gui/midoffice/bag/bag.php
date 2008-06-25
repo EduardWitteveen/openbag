@@ -1,7 +1,7 @@
 <?php
 header("Content-Type:text/html;charset=utf-8");
 
-include_once "../../common/util/url.php";
+include_once "../../include/util/url.php";
 include_once "bag.implementation.php";
 
 // disabling WSDL cache (4 debugging)

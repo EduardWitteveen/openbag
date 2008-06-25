@@ -1,7 +1,7 @@
 <?php
-include_once "../../common/bag/adres.php";
-include_once "../../common/util/soapsettings.php";
-include_once "../../common/util/logging.php";
+include_once "../../include/bag/adres.php";
+//include_once "../../include/util/soapsettings.php";
+include_once "../../include/util/logging.php";
 
 class bag {
 	private function addContainsStatement($fieldname, $fieldvalue, $whereclause, $operator) {
@@ -54,9 +54,13 @@ class bag {
 		return 'bag-voorlopig-0.1';
 	}
 	private function OpenConnection() {
-		$settings = getSettings("bag-oracle");
-		$tnsname = $settings['oracle-tnsname'];
-		$connection = new PDO("oci:dbname=$tnsname", $settings['oracle-username'], $settings['oracle-password']);
+		//$settings = getSettings("bag-oracle");
+		$configfile = getcwd() . '/../../../config.php';
+		$config = parse_ini_file($configfile, true);
+		$tnsname = $config['database']['tnsname'];
+		$username = $config['database']['username'];
+		$password = $config['database']['password'];
+		$connection = new PDO($tnsname , $username , $password);
 		return $connection;
 	}
 	private function FetchSoapAdressen($sql) {
@@ -141,8 +145,9 @@ class bag {
 			//return new SoapFault("Bag", "Bag:ZoekAdresMetFilter filter with value '$filter' generated followin sql: '$sql'");
 			//return $this->FetchSoapAdressen($sql);
 			
-			$settings = getSettings('bag-gis');
-			$gishtml = $settings['gis-adres-detail'];
+			// $settings = getSettings('bag-gis');
+			// $gishtml = $settings['gis-adres-detail'];
+			$gishtml = $this->getGisAdresDetail();		
 			$gishtml = stringreplace($gishtml, '%height%', $height);
 			$gishtml = stringreplace($gishtml, '%width%', $width);
 			$gishtml = stringreplace($gishtml, '%minx%', $record['MINX']);
@@ -200,6 +205,12 @@ class bag {
 			return new SoapFault('BAG', "BAG:ZoekAdresMetFilter: Unknown error: " . $e->getMessage() ." SQL: $sql");
 		}
 	}	
+	private function getGisAdresDetail() {
+		$configfile = getcwd() . '/../../../config.php';
+		$config = parse_ini_file($configfile, true);		
+		$viewerurl =  '<iframe id="gisviewer" SCROLLING="NO" FRAMEBORDER="0" width="%width%" height="%height%" src="' .  getURL($config['midoffice']['bag-gis']) . '?minx=%minx%&miny=%miny%&maxx=%maxx%&maxy=%maxy%&height=%height%&width=%width%&"></iframe>';
+		return $viewerurl;
+	}
 	public function GisHtmlViewAdresMetFilter($filter, $height, $width) {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "SoapCall: $filter $height $width");
 		try {			
@@ -220,8 +231,7 @@ class bag {
 			//return new SoapFault("Bag", "Bag:ZoekAdresMetFilter filter with value '$filter' generated followin sql: '$sql'");
 			//return $this->FetchSoapAdressen($sql);
 			
-			$settings = getSettings('bag-gis');
-			$gishtml = $settings['gis-adres-detail'];
+			$gishtml = $this->getGisAdresDetail();
 			$gishtml = stringreplace($gishtml, '%height%', $height);			
 			$gishtml = stringreplace($gishtml, '%width%', $width);
 			$gishtml = stringreplace($gishtml, '%minx%', $record['MINX']);

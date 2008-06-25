@@ -1,10 +1,17 @@
 <?php
 header("Content-Type:text/html;charset=utf-8");
 
-include_once "../../common/util/soapsettings.php";
-include_once "../../common/bag/adres.php";
+include_once "../include/util/soapsettings.php";
+include_once "../include/bag/adres.php";
 
 $client = getSoapClient("bag-soapclient");
+
+if(!isset($_SERVER['REMOTE_USER'])) {
+	// disable next line to test withouth authentication!
+	//die('[[SSPI not active]]');
+	$_SERVER['REMOTE_USER'] = '[[SSPI not active]]';
+}
+
 // find our record:
 $authentiek = null;
 $woonplaatsauthentiek = null; 
