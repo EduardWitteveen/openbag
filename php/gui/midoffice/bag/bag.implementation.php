@@ -77,7 +77,7 @@ class bag {
 			$adressen[] = new SoapVar($adres, SOAP_ENC_OBJECT, 'Adres', 'urn:bag');
 		}
 		$connection = null;
-		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "end with #" . count($adressen) . " adresses");
+		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "end with #" . count($adressen) . " adresses (sql: $sql)" );
 		return $adressen;
 	}
 	private function getSqlWhere($filter) {
@@ -85,11 +85,11 @@ class bag {
 		// the filter can contain multiple search items, so we need to create a search based upon the multiple fields
 		foreach(explode(" ", $filter) as $searchword) {
 			$where = '';
-			$where = $this->addContainsStatement('straatnaam', $searchword, $where, 'OR');
+			$where = $this->addContainsStatement('openbareruimtenaam', $searchword, $where, 'OR');
 			$where = $this->addEqualsStatement('huisnummer', $searchword, $where, 'OR');
 			$where = $this->addEqualsStatement('huisletter', $searchword, $where, 'OR');
-			$where = $this->addContainsStatement('huistoevoeging', $searchword, $where, 'OR');
-			$where = $this->addContainsStatement('woonplaats', $searchword, $where, 'OR');
+			$where = $this->addContainsStatement('huisnummertoevoeging', $searchword, $where, 'OR');
+			$where = $this->addContainsStatement('woonplaatsnaam', $searchword, $where, 'OR');
 			$where = $this->addEqualsStatement('postcode', $searchword, $where, 'OR');
 			if(empty($totalwhere)) {
 				$totalwhere = "(\n $where )\n";
@@ -104,13 +104,13 @@ class bag {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "Begin ZoekAdres($filter)");
 		try {
 			$sql = "SELECT *\n";
-			$sql .= "FROM midadres\n";		 					
+			$sql .= "FROM bag_nummeraanduiding\n";		 					
 			$where = $this->getSqlWhere($filter);
 			if(empty($where)) {
 				return new SoapFault('BAG', "BAG:ZoekAdres: geen filter gedefinieerd!");
 			}		
 			$sql .= "WHERE $where";
-			$sql .= 'ORDER BY straatnaam, woonplaats, 0 + huisnummer, huisletter, huistoevoeging';
+			$sql .= 'ORDER BY openbareruimtenaam, woonplaatsnaam, 0 + huisnummer, huisletter, huisnummertoevoeging';
 			//return new SoapFault("Bag", "Bag:ZoekAdres filter with value '$filter' generated followin sql: '$sql'");
 			$adressen =  $this->FetchSoapAdressen($sql);
 			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "End ZoekAdres($filter)");

@@ -138,15 +138,23 @@ class Adres {
     }
     public static function CreateFromRecord($record) {
 	    return new Adres(
-			$record['AUTHENTIEK'],
-			$record['WOONPLAATS_AUTHENTIEK'],
-			$record['OPENBARERUIMTE_AUTHENTIEK'],
-			$record['NUMMERAANDUIDING_AUTHENTIEK'],
+			// FOR ALL INFORMATION
+			$record['BAGOBJECT'],
+			// FOR THE woonplaats
+			$record['BAGOBJECT'],
+			// FOR THE openbareruimte
+			$record['BAGOBJECT'],
+			// FOR THE nummeraanduiding
+			$record['BAGOBJECT'],
 			
-			$record['ONDERZOEK'],
-			$record['WOONPLAATS_ONDERZOEK'],
-			$record['OPENBARERUIMTE_ONDERZOEK'],
-			$record['NUMMERAANDUIDING_ONDERZOEK'],
+			// FOR ALL INFORMATION
+			$record['INONDERZOEK'],
+			// FOR THE woonplaats
+			$record['INONDERZOEK'],
+			// FOR THE openbareruimte
+			$record['INONDERZOEK'],
+			// FOR THE nummeraanduiding
+			$record['INONDERZOEK'],
 			
 			//utf8_encode(isset($record['WOONPLAATS_TERUGMELDING'])?stream_get_contents($record['WOONPLAATS_TERUGMELDING']):null),
 			//utf8_encode(isset($record['OPENBARERUIMTE_TERUGMELDING'])?stream_get_contents($record['OPENBARERUIMTE_TERUGMELDING']):null),
@@ -154,15 +162,20 @@ class Adres {
 			//null,
 			//null,
 			//null,
-			$record['WOONPLAATS_TERUGMELDING'],
-			$record['OPENBARERUIMTE_TERUGMELDING'],
-			$record['NUMMERAANDUIDING_TERUGMELDING'],
+			
+			// NOT TERUGMELDINGEN YET
+			'',
+			'',
+			'',
+			//$record['WOONPLAATS_TERUGMELDING'],
+			//$record['OPENBARERUIMTE_TERUGMELDING'],
+			//$record['NUMMERAANDUIDING_TERUGMELDING'],
 						
-			$record['STRAATNAAM'],
+			$record['OPENBARERUIMTENAAM'],
 			$record['HUISNUMMER'],
 			$record['HUISLETTER'],
-			$record['HUISTOEVOEGING'],
-			$record['WOONPLAATS'],
+			$record['HUISNUMMERTOEVOEGING'],
+			$record['WOONPLAATSNAAM'],
 			$record['POSTCODE']					
 		);
     }
