@@ -4,23 +4,13 @@ include_once "url.php";
 
 function getSettings($filter) {
 	try {
-		$options = array();
-		// TO USE THE PROXY
-/*
-		$options = array(
-				'proxy_host'     => "localhost",
-			 	'proxy_port'     => 8888,
-                     	'proxy_login'    => "ew886",
-                        'proxy_password' => "12345678"
-			);
-*/
-/*
-		$options = array(
-				'proxy_host'     => "localhost",
-			 	'proxy_port'     => 8888
-			);
-*/
-		$client = new SoapClient(getURL("../../midoffice/config.php?wsdl"), $options);
+		$configfile = getcwd() . '/../../config.php';
+		$config = parse_ini_file($configfile, true);
+		$options = $config['internet'];
+		if(!is_array($options)) {
+			$options = array();
+		}
+		$client = new SoapClient(getURL($config['frontoffice']['midoffice']), $options);
 		// convert the settings to something workable
 		$retrievedsettings = $client->ConfigSettings($filter);
 		$settings = array();
@@ -36,7 +26,7 @@ function getSettings($filter) {
 }
 function getSoapClient($configfilter) {
 	try {
-		$settings = getSettings($configfilter);				
+		$settings = getSettings($configfilter);
 		$wsdl = $settings["soapclient-wsdl"];
 		$options = $settings["soapclient-options"]; 
 		parse_str($options, $options);

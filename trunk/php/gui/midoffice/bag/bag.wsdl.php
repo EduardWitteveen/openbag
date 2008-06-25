@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?php 
-	include_once "../../common/util/url.php"; 
+	include_once "../../include/util/url.php"; 
 ?>
 <definitions name="bag"
 	targetNamespace="urn:bag"

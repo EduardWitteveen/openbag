@@ -5,8 +5,8 @@ if(!isset($_SERVER['REMOTE_USER'])) {
 	//die('[[SSPI not active]]');
 }
 
-include_once "../../common/util/soapsettings.php";
-include_once "../../common/bag/adres.php";
+include_once "../include/util/soapsettings.php";
+include_once "../include/bag/adres.php";
 
 function echoAdressen($adressen) {
 	?>
@@ -146,7 +146,7 @@ function echoAdressen($adressen) {
 		<p class="footer">
 			Eduard Witteveen
 			-
-			2007
+			2008
 		</p>
 </body>
 </html>
