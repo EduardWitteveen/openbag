@@ -28,7 +28,7 @@
 				// case insensitive
 				$fieldvalue = strtoupper($fieldvalue);
 				$condition = "UPPER($fieldname) LIKE('$fieldvalue')\n";
-			}
+			}			
 			if(empty($whereclause)) {
 				return $condition;
 			}
@@ -41,10 +41,12 @@
 		}
 	}
 	function openConnection() {
-		try {			
-			$tnsname = 'oci:dbname=(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = oracleserver)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = bag)))';
-			$username = '';
-			$password = '';
+		try {	
+			$configfile = getcwd() . '/../config.inc';
+			$config = parse_ini_file($configfile, true);
+			$tnsname = $config['database']['tnsname'];
+			$username = $config['database']['username'];
+			$password = $config['database']['password'];
 			$connection = new PDO($tnsname, $username, $password);
 			if(!$connection) {
 				die("file:" . __FILE__ . " #" . __LINE__ . "  location:" . __CLASS__ . "::" . __FUNCTION__ . " could not create connection: error:" . print_r($connection->errorInfo(), TRUE));
@@ -52,7 +54,7 @@
 			return $connection;
 		}
 		catch(Exception $e) {
-			die("file:" . __FILE__ . " #" . __LINE__ . "  location:" . __CLASS__ . "::" . __FUNCTION__ . " exception: error:" . print_r($connection->errorInfo(), TRUE));
+			die("file:" . __FILE__ . " #" . __LINE__ . "  location:" . __CLASS__ . "::" . __FUNCTION__ . " exception: error:" . $e);
 		}
 	}
 	function getRecords($connection, $sql) {

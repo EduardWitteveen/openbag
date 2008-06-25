@@ -1,10 +1,9 @@
 <?php
 	if(!isset($_SERVER['REMOTE_USER'])) {
 		// disable next line to test withouth authentication!
-		die('[[SSPI not active]]');
+		//die('[[SSPI not active]]');
 		$_SERVER['REMOTE_USER'] = '[[SSPI not active]]';
 	}
-
 	function getCurrentPage() {
 		// current page itselve
 		$currentpage =  $_SERVER['PHP_SELF'];
