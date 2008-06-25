@@ -42,7 +42,7 @@
 	}
 	function openConnection() {
 		try {	
-			$configfile = getcwd() . '/../config.inc';
+			$configfile = getcwd() . '/../config.php';
 			$config = parse_ini_file($configfile, true);
 			$tnsname = $config['database']['tnsname'];
 			$username = $config['database']['username'];
