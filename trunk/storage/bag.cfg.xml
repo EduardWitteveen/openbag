@@ -27,13 +27,14 @@
                 - hibernate-spatial-oracle-1.0-M1.jar
                 - ojdbc6.jar (from the oracle thin client)
         -->
+        <!--
         <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
         <property name="connection.url">jdbc:oracle:thin:@192.168.0.1:1521:xe</property>
         <property name="connection.username">hibernate</property>
         <property name="connection.password">hibernate</property>               
         <property name="connection.pool_size">1</property>
         <property name="dialect">org.hibernatespatial.oracle.OracleSpatialXeDialect</property>        
-        
+        -->
         <!-- POSTGIS-->
         <!--
         <property name="connection.driver_class">org.postgresql.Driver</property>
@@ -62,8 +63,9 @@
         <mapping class="org.nergens.bag.storage.pojo.Openbareruimte"/>
         <mapping class="org.nergens.bag.storage.pojo.Nummeraanduiding"/>
         <mapping class="org.nergens.bag.storage.pojo.Verblijfsobject"/>
-        <mapping class="org.nergens.bag.storage.pojo.Pand"/>        
-        <mapping class="org.nergens.bag.storage.pojo.util.Gebruiksdoel"/>
-        
+        <mapping class="org.nergens.bag.storage.pojo.Pand"/>   
+        <mapping class="org.nergens.bag.storage.pojo.Standplaats"/>
+        <mapping class="org.nergens.bag.storage.pojo.Ligplaats"/>        
+        <mapping class="org.nergens.bag.storage.pojo.util.Gebruiksdoel"/>        
     </session-factory>
 </hibernate-configuration>
