@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2008 rel. 2 sp1 (http://www.altova.com) by Administrator (EMBRACE) -->
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.vrom.nl/bag/stuf/0120" xmlns:StUF="http://www.egem.nl/StUF/StUF0205" xmlns:bag-stuf="http://www.vrom.nl/bag/stuf/0120" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="bag-stuf" targetNamespace="http://www.vrom.nl/bag/stuf/0120">
-	<import namespace="http://www.egem.nl/StUF/StUF0205" location="../../stuf/stuf0205.xsd"/>
-	<import namespace="http://www.vrom.nl/bag/stuf/0120" location="bag-stuf-msg.xsd"/>
+	<import namespace="http://www.egem.nl/StUF/StUF0205" location="stuf/stuf0205.xsd"/>
+	<import namespace="http://www.vrom.nl/bag/stuf/0120" location="bag/0120/bag-stuf-msg.xsd"/>
 	<types>
 		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.vrom.nl/bag/stuf/0120">
 </xsd:schema>
