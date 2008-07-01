@@ -29,7 +29,7 @@ public class Woonplaats extends BagAuthentiekObject implements Serializable{
 	private static final long serialVersionUID = -6718944186372946432L;
 // referencing to other tables    
     @ManyToOne
-    @JoinColumn(name="GEMEENTE_CODE")
+    @PrimaryKeyJoinColumn
     protected Gemeente gemeente;
     public Gemeente getGemeente() {
         return gemeente;
