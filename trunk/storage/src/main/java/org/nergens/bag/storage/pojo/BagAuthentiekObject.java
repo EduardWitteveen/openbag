@@ -34,14 +34,17 @@ public class BagAuthentiekObject extends BagObject implements Serializable {
         this.eindegeldigheid = eindegeldigheid; 
     }    
     @Column(name="INONDERZOEK")
-    protected Boolean inonderzoek = false;
-    public Boolean getInOnderzoek() {
+    protected boolean inonderzoek = false;
+    public boolean getInOnderzoek() {
         return inonderzoek; 
     }
-    public void setInOnderzoek(Boolean inonderzoek) { 
+    public void setInOnderzoek(boolean inonderzoek) { 
         this.inonderzoek = inonderzoek; 
     }
     /**
+     * 
+     * Woonplaats aangewezen
+     * Woonplaats ingetrokken
      * 
      * 
      * http://bag.vrom.nl/bag_com/c198ee23107145c3b531e2dd71f7372b.php
