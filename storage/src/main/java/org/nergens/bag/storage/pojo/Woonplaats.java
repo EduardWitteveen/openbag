@@ -46,18 +46,7 @@ public class Woonplaats extends BagAuthentiekObject implements Serializable{
     public void setNaam(String naam) { 
         this.naam = naam; 
     }
-    /**
-     * Woonplaats aangewezen
-     * Woonplaats ingetrokken
-     */
-    @Column(name="STATUS")
-    protected String status;    
-    public String getStatus() {
-        return status; 
-    }
-    public void setStatus(String status) { 
-        this.status = status; 
-    }
+
     @Column(name="GRENS")
     @Type(type="org.hibernatespatial.GeometryUserType")
     protected Polygon grens;

@@ -10,6 +10,7 @@ POSTGRES
 ========
 - Install postgresql like documented in the file: postgis.pdf
 
+
 ECLIPSE
 =======
 - Use Eclise Version: >= 3.2.2
@@ -20,7 +21,8 @@ ECLIPSE
 		name:	m2eclipse	
 		url:	http://m2eclipse.sonatype.org/update/
 	Finish
-	- Select everything execpt the optional parts	- accept
+	- Select everything execpt the optional parts
+	- accept
 	Finish
 	- Install all
 
@@ -29,7 +31,8 @@ PROJECT
 - File > New > Project ...
 - Java Project > Existing source 
 	- Create project from existing source
-	- JRE: java-6	- Properties > Java Compiler > Compiler compliance leven: 6.0
+	- JRE: java-6
+	- Properties > Java Compiler > Compiler compliance leven: 6.0
 	- Import existing project from workspace
 
 FILL THE DATABASE

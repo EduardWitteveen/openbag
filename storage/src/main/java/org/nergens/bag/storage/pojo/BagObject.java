@@ -57,11 +57,11 @@ public abstract class BagObject {
         this.code = code; 
     }
     @Column(name="BAGOBJECT")
-    protected Boolean bagobject;
-    public Boolean getBagObject() {
+    protected boolean bagobject;
+    public boolean getBagObject() {
         return bagobject; 
     }
-    public void setBagObject(Boolean bagobject) {    
+    public void setBagObject(boolean bagobject) {    
         this.bagobject = bagobject; 
     }    
 }
