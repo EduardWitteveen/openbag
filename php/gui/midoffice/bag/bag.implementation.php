@@ -104,7 +104,7 @@ class bag {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "Begin ZoekAdres($filter)");
 		try {
 			$sql = "SELECT *\n";
-			$sql .= "FROM bag_nummeraanduiding\n";		 					
+			$sql .= "FROM mid_adres\n";		 					
 			$where = $this->getSqlWhere($filter);
 			if(empty($where)) {
 				return new SoapFault('BAG', "BAG:ZoekAdres: geen filter gedefinieerd!");
