@@ -1,6 +1,5 @@
 <?php
 include_once "../../include/bag/adres.php";
-//include_once "../../include/util/soapsettings.php";
 include_once "../../include/util/logging.php";
 
 class bag {
@@ -103,8 +102,12 @@ class bag {
 	public function ZoekAdres($filter) {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "Begin ZoekAdres($filter)");
 		try {
-			$sql = "SELECT *\n";
-			$sql .= "FROM mid_adres\n";		 					
+			$sql = "SELECT\n";
+			$sq.= "CASE WHEN BAGADRES + BAGNUMMERAANDUIDING + BAGOPENBARERUIMTE + BAGWOONPLAATS = 4  THEN 1 ELSE 0 END AS BAGOBJECT, \n";
+			$sq.= "BAGWOONPLAATS,BAGOPENBARERUIMTE, BAGNUMMERAANDUIDING,\n";
+			$sq.= "CASE WHEN ONDERZOEKADRES + ONDERZOEKNUMMERAANDUIDING + ONDERZOEKOPENBARERUIMTE + ONDERZOEKWOONPLAATS = 3  THEN 1 ELSE 0 END AS ONDERZOEKOBJECT,\n"; 
+			$sq.= "ONDERZOEKWOONPLAATS, ONDERZOEKOPENBARERUIMTE,  ONDERZOEKNUMMERAANDUIDING,  OPENBARERUIMTENAAM, HUISNUMMER, HUISLETTER, HUISNUMMERTOEVOEGING,  WOONPLAATSNAAM, POSTCODE\n";
+			$sql .= "FROM MID_ADRES\n";		 							
 			$where = $this->getSqlWhere($filter);
 			if(empty($where)) {
 				return new SoapFault('BAG', "BAG:ZoekAdres: geen filter gedefinieerd!");
@@ -128,9 +131,9 @@ class bag {
 	}
 	public function GisHtmlViewAdres($filter, $height, $width) {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "SoapCall: $filter $height $width");
-		try {			
-			$sql = "SELECT min(x) AS minx, max(x) AS maxx, min(y) AS miny, max(y) AS maxy\n";
-			$sql .= "FROM midadres\n";
+		try {
+			$sql = "SELECT min(adres_x) AS minx, max(adres_x) AS maxx, min(adres_y) AS miny, max(adres_y) AS maxy\n";
+			$sql .= "FROM MID_ADRES\n";		 							
 			$where = $this->getSqlWhere($filter);
 			if(!empty($where)) {
 				$sql .= "WHERE $where";
@@ -183,9 +186,31 @@ class bag {
 	public function ZoekAdresMetFilter($filter) {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "Begin ZoekAdresMetFilter($filter)");
 		try {			
-			$sql = "SELECT *\n";
+/*
+SELECT 
+  CASE WHEN BAGADRES + BAGNUMMERAANDUIDING + BAGOPENBARERUIMTE + BAGWOONPLAATS = 4  THEN 1 ELSE 0 END AS BAGOBJECT, 
+  BAGWOONPLAATS,
+  BAGOPENBARERUIMTE,
+  BAGNUMMERAANDUIDING,
+  CASE WHEN ONDERZOEKADRES + ONDERZOEKNUMMERAANDUIDING + ONDERZOEKOPENBARERUIMTE + ONDERZOEKWOONPLAATS = 3  THEN 1 ELSE 0 END AS ONDERZOEKOBJECT, 
+  ONDERZOEKWOONPLAATS 
+  ONDERZOEKOPENBARERUIMTE,
+  ONDERZOEKNUMMERAANDUIDING,
+  OPENBARERUIMTENAAM,
+  HUISNUMMER,
+  HUISLETTER,
+  HUISNUMMERTOEVOEGING,
+  WOONPLAATSNAAM,
+  POSTCODE
+*/		
+			//$sql = "SELECT *\n";
 			//$sql = "SELECT AUTHENTIEK, WOONPLAATS_AUTHENTIEK, OPENBARERUIMTE_AUTHENTIEK, NUMMERAANDUIDING_AUTHENTIEK, ONDERZOEK, WOONPLAATS_ONDERZOEK, OPENBARERUIMTE_ONDERZOEK, NUMMERAANDUIDING_ONDERZOEK, STRAATNAAM, HUISNUMMER, HUISLETTER, HUISTOEVOEGING, WOONPLAATS, POSTCODE\n";
-			$sql .= "FROM midadres\n";
+			$sql = "SELECT\n";
+			$sq.= "CASE WHEN BAGADRES + BAGNUMMERAANDUIDING + BAGOPENBARERUIMTE + BAGWOONPLAATS = 4  THEN 1 ELSE 0 END AS BAGOBJECT, \n";
+			$sq.= "BAGWOONPLAATS,BAGOPENBARERUIMTE, BAGNUMMERAANDUIDING,\n";
+			$sq.= "CASE WHEN ONDERZOEKADRES + ONDERZOEKNUMMERAANDUIDING + ONDERZOEKOPENBARERUIMTE + ONDERZOEKWOONPLAATS = 3  THEN 1 ELSE 0 END AS ONDERZOEKOBJECT,\n"; 
+			$sq.= "ONDERZOEKWOONPLAATS, ONDERZOEKOPENBARERUIMTE,  ONDERZOEKNUMMERAANDUIDING,  OPENBARERUIMTENAAM, HUISNUMMER, HUISLETTER, HUISNUMMERTOEVOEGING,  WOONPLAATSNAAM, POSTCODE\n";
+			$sql .= "FROM MID_ADRES\n";		 							
 			$where = $this->getSqlWhereMetFilter($filter);
 			if(empty($where)) {
 				return new SoapFault('BAG', "BAG:ZoekAdresMetFilter: geen filter gedefinieerd!");

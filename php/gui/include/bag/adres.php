@@ -137,6 +137,7 @@ class Adres {
 	    $this->postcode = $postcode;
     }
     public static function CreateFromRecord($record) {
+		print_r($record);
 	    return new Adres(
 			// FOR ALL INFORMATION
 			$record['BAGOBJECT'],

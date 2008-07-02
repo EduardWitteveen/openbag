@@ -42,6 +42,9 @@ function getURL($filename) {
     $protocol = strleft(strtolower($_SERVER["SERVER_PROTOCOL"]), "/").$s;
     $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
     $path  = strright($_SERVER['REQUEST_URI'], "/");
+	if(substr($filename,0,7) == 'http://') {
+		return $filename;
+	}
     if($filename[0] == '/') {
 	    // absolute path
 	    $htmlpath =  htmlpath($filename);

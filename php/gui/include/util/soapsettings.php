@@ -10,7 +10,8 @@ function getSettings($filter) {
 		if(!is_array($options)) {
 			$options = array();
 		}
-		$client = new SoapClient(getURL($config['frontoffice']['midoffice']), $options);
+		$url = getURL($config['frontoffice']['midoffice']);
+		$client = new SoapClient($url, $options);
 		// convert the settings to something workable
 		$retrievedsettings = $client->ConfigSettings($filter);
 		$settings = array();
