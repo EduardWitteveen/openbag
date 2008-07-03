@@ -43,8 +43,9 @@ function getBagSoapClient() {
 				$options[$key] = intval($value); 
 			}						
 		}
-		echo("gonna connect with:" . $bagwsdlurl);
+		//print_r($options);
 		$client = new SoapClient($bagwsdlurl, $options);
+		//print_r($client);
 		return $client;
 	}
 	catch(SoapFault $e) {
