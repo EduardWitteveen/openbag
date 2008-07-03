@@ -4,7 +4,7 @@ header("Content-Type:text/html;charset=utf-8");
 include_once "../include/util/soapsettings.php";
 include_once "../include/bag/adres.php";
 
-$client = getSoapClient("bag-soapclient");
+$client = getBagSoapClient();
 // find our record:
 $authentiek = null;
 $woonplaatsauthentiek = null; 
