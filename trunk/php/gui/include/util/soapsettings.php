@@ -12,12 +12,12 @@ function getMidofficeConfig() {
 		if(!is_array($options)) {
 			$options = array();
 		}
-		$url = getURL($config['frontoffice']['config']);
+		$url = getURL($config['frontoffice']['midoffice']);
 		//echo($url);
 		$client = new SoapClient($url, $options);		
 		// convert the settings to something workable
 		$retrievedsettings = $client->ConfigSettings();
-		print_r($retrievedsettings);
+		//print_r($retrievedsettings);
 		$settings = array();
 		foreach($retrievedsettings as $setting) {
 			$settings[$setting->key] = $setting->value;			
@@ -33,8 +33,8 @@ function getMidofficeConfig() {
 function getBagSoapClient() {
 	try {
 		$settings = getMidofficeConfig('bag-soapclient');
-		print_r($settings);
-		$wsdl = $settings["soapclient-wsdl"];
+		// print_r($settings);
+		$bagwsdlurl = $settings["soapclient-wsdl"];
 		$options = $settings["soapclient-options"]; 
 		parse_str($options, $options);
 		foreach($options as $key => $value) {
@@ -43,7 +43,8 @@ function getBagSoapClient() {
 				$options[$key] = intval($value); 
 			}						
 		}
-		$client = new SoapClient($wsdl, $options);
+		echo("gonna connect with:" . $bagwsdlurl);
+		$client = new SoapClient($bagwsdlurl, $options);
 		return $client;
 	}
 	catch(SoapFault $e) {
