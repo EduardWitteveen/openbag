@@ -7,7 +7,7 @@ proxy_port		=	8888
 
 #used by front office
 [frontoffice]
-config		=	"http://192.168.198.118:8080/php/gui/midoffice/config.php?wsdl"	
+midoffice		=	"http://192.168.198.118:8080/php/gui/midoffice/config.php?wsdl"	
 #config		=	"../midoffice/config.php?wsdl"
 
 #used by midoffice
