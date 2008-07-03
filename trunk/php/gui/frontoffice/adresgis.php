@@ -4,7 +4,7 @@ header("Content-Type:text/html;charset=utf-8");
 include_once "../include/util/soapsettings.php";
 include_once "../include/bag/adres.php";
 
-	$client = getSoapClient('bag-soapclient');
+	$client = getBagSoapClient();
 	$filter = $_REQUEST['filter'];
 	$filter =  new SoapVar($filter, XSD_STRING, 'string', 'http://www.w3.org/2001/XMLSchema');
 	$gishtml = $client->GisHtmlViewAdres($filter, 550, 750);

@@ -32,9 +32,9 @@ function getMidofficeConfig() {
 }
 function getBagSoapClient() {
 	try {
-		$settings = getMidofficeConfig('bag-soapclient');
-		// print_r($settings);
-		$bagwsdlurl = $settings["soapclient-wsdl"];
+		$settings = getMidofficeConfig();
+		//print_r($settings);
+		$bagwsdlurl = $settings["bagservice"];
 		$options = $settings["soapclient-options"]; 
 		parse_str($options, $options);
 		foreach($options as $key => $value) {

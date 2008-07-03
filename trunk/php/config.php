@@ -14,8 +14,10 @@ midoffice		=	"http://192.168.198.118:8080/php/gui/midoffice/config.php?wsdl"
 [midoffice]
 #bagservice			=	"../gui/midoffice/bag/bag.php?wsdl"	
 bagservice		=	"http://midserver/php/gui/midoffice/bag/bag.php?wsdl"
-#baggis			=	"../../gis/viewer.php"
-baggis			=	"http://gisserver/php/gui/gis/viewer.php"
+
+[bag]
+#gis			=	"../../gis/viewer.php"
+gis			=	"http://gisserver/php/gui/gis/viewer.php"
 
 #used by midoffice and editor
 [database]
