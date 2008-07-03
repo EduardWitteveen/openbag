@@ -60,15 +60,21 @@ class bag {
 		$username = $config['database']['username'];
 		$password = $config['database']['password'];
 		$connection = new PDO($tnsname , $username , $password);
+		if(!$connection) {
+			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "could not create connection:". $tnsname);
+			throw new Exception('Error in ' .  __CLASS__ . ' ' . __FUNCTION__  .  ": could not create connection");
+		}
 		return $connection;
 	}
 	private function FetchSoapAdressen($sql) {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "start with: $sql");				
 		$connection = $this->OpenConnection();
+		
 		//die("FetchSoapAdressen:$sql");						
 		$statement =  $connection->query($sql);
 		if(!$statement) {
-			throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  . ' : in query: $sql');
+			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "error in query: $sql \nerror:" . print_r($connection->errorInfo(), true));
+			throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  .  "error in query: $sql \nerror:" . print_r($connection->errorInfo(), true));
 		}
 		// since the query will take some time, add 30 seconds to execution time
 		// keep in mind that the webserver also has a timeout of around 300 seconds
@@ -123,13 +129,15 @@ class bag {
 			return $adressen;
 		}
 		catch(PDOException $e) {
-			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Exception ZoekAdres($filter)");
-			return new SoapFault('BAG', "BAG:ZoekAdres: PDOError: " . $e->getMessage() . " SQL: $sql");
+			$message = "BAG:ZoekAdres: PDOError: " . $e->getMessage() . " SQL: $sql";
+			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Exception ZoekAdres($filter)" . $message);
+			return new SoapFault('BAG', $message);
 		}
 		catch (Exception $e)
 		{
-			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Exception ZoekAdres($filter)");
-			return new SoapFault('BAG', "BAG:ZoekAdres: Unknown error: " . $e->getMessage() . " SQL: $sql");
+			$message = "BAG:ZoekAdres: Unknown error: " . $e->getMessage() . " SQL: $sql";
+			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Exception ZoekAdres($filter)" . $message );
+			return new SoapFault('BAG', $message);
 		}
 	}
 	public function GisHtmlViewAdres($filter, $height, $width) {
@@ -145,7 +153,7 @@ class bag {
 			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "sql: $sql");
 			$statement =  $connection->query($sql);
 			if(!$statement) {
-				throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  . ' : in query: $sql');
+				throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  .  " : in query:\n .  $sql");
 			}			
 			// since the query will take some time, add 30 seconds to execution time
 			// keep in mind that the webserver also has a timeout of around 300 seconds
@@ -255,7 +263,7 @@ SELECT
 			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "sql: $sql");
 			$statement =  $connection->query($sql);
 			if(!$statement) {
-				throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  . ' : in query: $sql');
+				throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  . " : in query:\n $sql");
 			}			
 			// since the query will take some time, add 30 seconds to execution time
 			// keep in mind that the webserver also has a timeout of around 300 seconds
@@ -280,12 +288,12 @@ SELECT
 		}
 		catch(PDOException $e) {
 			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Exception");
-			return new SoapFault('BAG', "BAG:ZoekAdresMetFilter: PDOError: " . $e->getMessage() . " SQL: $sql");
+			return new SoapFault('BAG', "BAG:GisHtmlViewAdresMetFilter: PDOError: " . $e->getMessage() . " SQL: $sql");
 		}		
 		catch (Exception $e)
 		{
 			logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Exception");
-			return new SoapFault('BAG', "BAG:ZoekAdres: Unknown error: " . $e->getMessage() ." SQL: $sql");
+			return new SoapFault('BAG', "BAG:GisHtmlViewAdresMetFilter: Unknown error: " . $e->getMessage() ." SQL: $sql");
 		}
 	}
 	public function Terugmelding($filter, $username, $onderdeel, $opmerking) {
