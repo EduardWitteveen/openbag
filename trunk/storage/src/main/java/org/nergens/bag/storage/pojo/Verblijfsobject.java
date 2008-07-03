@@ -88,7 +88,7 @@ public class Verblijfsobject extends Verblijfsplaats implements Serializable{
         joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
         inverseJoinColumns=@JoinColumn(name="GEBRUIKSDOEL_NAAM")
     )
-    protected Set<Gebruiksdoel> gebruiksdoeleinden = new HashSet();
+    protected Set<Gebruiksdoel> gebruiksdoeleinden = new HashSet<Gebruiksdoel>();
     public Set<Gebruiksdoel> getGebruiksdoeleinden() {
         return gebruiksdoeleinden;
     }
@@ -108,7 +108,7 @@ public class Verblijfsobject extends Verblijfsplaats implements Serializable{
         joinColumns= @JoinColumn(name="VERBLIJFSOBJECT_CODE"),
         inverseJoinColumns=@JoinColumn(name="PAND_CODE")
     )
-    protected Set<Pand> panden = new HashSet();
+    protected Set<Pand> panden = new HashSet<Pand>();
     public Set<Pand> getPanden() {
         return panden;
     }    
