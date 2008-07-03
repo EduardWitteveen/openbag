@@ -140,38 +140,29 @@ class Adres {
 		print_r($record);
 	    return new Adres(
 			// FOR ALL INFORMATION
+			// FOR ALL INFORMATION
 			$record['BAGOBJECT'],
 			// FOR THE woonplaats
-			$record['BAGOBJECT'],
+			$record['BAGWOONPLAATS'],
 			// FOR THE openbareruimte
-			$record['BAGOBJECT'],
+			$record['BAGOPENBARERUIMTE'],
 			// FOR THE nummeraanduiding
-			$record['BAGOBJECT'],
+			$record['BAGNUMMERAANDUIDING'],
 			
 			// FOR ALL INFORMATION
 			$record['INONDERZOEK'],
 			// FOR THE woonplaats
-			$record['INONDERZOEK'],
+			$record['ONDERZOEKWOONPLAATS'],
 			// FOR THE openbareruimte
-			$record['INONDERZOEK'],
+			$record['ONDERZOEKOPENBARERUIMTE'],
 			// FOR THE nummeraanduiding
-			$record['INONDERZOEK'],
-			
-			//utf8_encode(isset($record['WOONPLAATS_TERUGMELDING'])?stream_get_contents($record['WOONPLAATS_TERUGMELDING']):null),
-			//utf8_encode(isset($record['OPENBARERUIMTE_TERUGMELDING'])?stream_get_contents($record['OPENBARERUIMTE_TERUGMELDING']):null),
-			//utf8_encode(isset($record['NUMMERAANDUIDING_TERUGMELDING'])?stream_get_contents($record['NUMMERAANDUIDING_TERUGMELDING']):null),
-			//null,
-			//null,
-			//null,
-			
+			$record['ONDERZOEKNUMMERAANDUIDING'],
+					
 			// NOT TERUGMELDINGEN YET
-			'',
-			'',
-			'',
-			//$record['WOONPLAATS_TERUGMELDING'],
-			//$record['OPENBARERUIMTE_TERUGMELDING'],
-			//$record['NUMMERAANDUIDING_TERUGMELDING'],
-						
+			'not yet terugmeldingen woonplaats',
+			'not yet terugmeldingen openbareruimte',
+			'not yet terugmeldingen nummeraanduiding',
+									
 			$record['OPENBARERUIMTENAAM'],
 			$record['HUISNUMMER'],
 			$record['HUISLETTER'],
@@ -180,35 +171,5 @@ class Adres {
 			$record['POSTCODE']					
 		);
     }
-   /*    
-    public static function CreateFromObject($object) {
-	    //die(var_dump($object));
-	    return new Adres(
-			utf8_encode($object->AUTHENTIEK),
-			utf8_encode($object->WOONPLAATS_AUTHENTIEK),
-			utf8_encode($object->OPENBARERUIMTE_AUTHENTIEK),
-			utf8_encode($object->NUMMERAANDUIDING_AUTHENTIEK),
-			
-			utf8_encode($object->ONDERZOEK),
-			utf8_encode($object->WOONPLAATS_ONDERZOEK),
-			utf8_encode($object->OPENBARERUIMTE_ONDERZOEK),
-			utf8_encode($object->NUMMERAANDUIDING_ONDERZOEK),
-			
-			//utf8_encode(isset($object->WOONPLAATS_TERUGMELDING)?stream_get_contents($object->WOONPLAATS_TERUGMELDING):null),
-			//utf8_encode(isset($object->OPENBARERUIMTE_TERUGMELDING)?stream_get_contents($object->OPENBARERUIMTE_TERUGMELDING):null),
-			//utf8_encode(isset($object->NUMMERAANDUIDING_TERUGMELDING)?stream_get_contents($object->NUMMERAANDUIDING_TERUGMELDING):null),
-			null,
-			null,
-			null,
-			
-			utf8_encode($object->STRAATNAAM),
-			utf8_encode($object->HUISNUMMER),
-			utf8_encode($object->HUISLETTER),
-			utf8_encode($object->HUISTOEVOEGING),
-			utf8_encode($object->WOONPLAATS),
-			utf8_encode($object->POSTCODE)					
-		);
-    }
-*/    
 }
 ?>
