@@ -1,23 +1,23 @@
 #used by soap communication
 [internet]
-proxy_host		=	"127.0.0.1"
-proxy_port		=	8888
-proxy_login		=	"username"
-proxy_password	=	"password"
+#proxy_host		=	"127.0.0.1"
+#proxy_port		=	8888
+#proxy_login		=	"username"
+#proxy_password	=	"password"
 
 #used by front office
 [frontoffice]
-midoffice		=	"http://192.168.198.118:8080/php/gui/midoffice/config.php?wsdl"	
-#midoffice		=	"../midoffice/config.php?wsdl"
+midoffice		=	"../midoffice/config.php?wsdl"
+#midoffice		=	"http://192.168.198.118:8080/php/gui/midoffice/config.php?wsdl"
 
 #used by midoffice
 [midoffice]
-#bagservice			=	"../gui/midoffice/bag/bag.php?wsdl"	
-bagservice		=	"http://midserver/php/gui/midoffice/bag/bag.php?wsdl"
+bagservice			=	"../gui/midoffice/bag/bag.php?wsdl"	
+#bagservice			=	"http://192.168.198.118:8080/php/gui/midoffice/bag/bag.php?wsdl"
 
 [bag]
-#gis			=	"../../gis/viewer.php"
-gis			=	"http://gisserver/php/gui/gis/viewer.php"
+gis			=	"../../gis/viewer.php"
+#gis			=	"http://192.168.198.118:8080/php/gui/gis/viewer.php"
 
 #used by midoffice and editor
 [database]
