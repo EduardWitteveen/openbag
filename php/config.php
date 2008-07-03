@@ -12,7 +12,7 @@ midoffice		=	"../midoffice/config.php?wsdl"
 
 #used by midoffice
 [midoffice]
-bagservice			=	"../gui/midoffice/bag/bag.php?wsdl"	
+bagservice			=	"../midoffice/bag/bag.php?wsdl"	
 #bagservice			=	"http://192.168.198.118:8080/php/gui/midoffice/bag/bag.php?wsdl"
 
 [bag]
