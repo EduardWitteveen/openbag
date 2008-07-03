@@ -43,13 +43,13 @@ function echoAdressen($adressen) {
 			>
 				<td>
 					<img 	
-						alt="<?php echo($adres->authentiek == "Y"?'Authentieke':'NIET authentiek') ?> gegevens" 
+						alt="<?php echo($adres->authentiek == 1 ? 'Authentieke':'NIET authentiek') ?> gegevens" 
 						src="image/authentiek_<?php echo($adres->authentiek) ?>.gif"
 					/>
 				</td>
 				<td>
 					<img 
-						alt="<?php echo($adres->onderzoek == "Y"?'Geen opmerkingen':'Opmerkingen geplaatst') ?> gegevens" 
+						alt="<?php echo($adres->onderzoek ==  1 ? 'Geen opmerkingen':'Opmerkingen geplaatst') ?> gegevens" 
 						src="image/onderzoek_<?php echo($adres->onderzoek) ?>.gif"
 					/>
 				</td>

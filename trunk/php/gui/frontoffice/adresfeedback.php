@@ -4,7 +4,7 @@ header("Content-Type:text/html;charset=utf-8");
 include_once "../include/util/soapsettings.php";
 include_once "../include/bag/adres.php";
 
-$client = getSoapClient("bag-soapclient");
+$client = getBagSoapClient();
 
 if(!isset($_SERVER['REMOTE_USER'])) {
 	// disable next line to test withouth authentication!
@@ -90,10 +90,9 @@ else if(isset($_REQUEST['action-send'])) {
 	if(!empty($_REQUEST['part']) && !empty($_REQUEST['feedback'])) {
 		$part = $_REQUEST['part'];
 		$feedback = $_REQUEST['feedback'];
-		$client->Terugmelding($adresfilter, $_SERVER['REMOTE_USER'], $part, $feedback);
-		
-		header("Location: adresdetail.php$urlfilter");
-		exit();		
+		$client->Terugmelding($adresfilter, $_SERVER['REMOTE_USER'], $part, $feedback);		
+		//header("Location: adresdetail.php$urlfilter");
+		exit();
 	}
 	else {
 		$showrequiredfields = true;
@@ -179,11 +178,13 @@ $adres = $adressen[0];
 		<tr>
 				<td>Onderdeel:</td>
 				<td>
+					<input type="radio" name="part" value="verblijfsobject">Verblijfsobject</input>
+					<br />				
 					<input type="radio" name="part" value="nummeraanduiding">Nummeraanduiding</input>
 					<br />
-					<input type="radio" name="part" value="openbareruimte" disabled="disabled">Openbareruimte</input>
+					<input type="radio" name="part" value="openbareruimte">Openbareruimte</input>
 					<br />
-					<input type="radio" name="part" value="woonplaats" disabled="disabled">Woonplaats</input>					
+					<input type="radio" name="part" value="woonplaats">Woonplaats</input>					
 				</td>			
 		</tr>
 		<tr>
