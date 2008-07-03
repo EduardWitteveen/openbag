@@ -162,13 +162,13 @@ $adres = $adressen[0];
 						<th>Authentiek</th>
 						<td>
 							<img 	
-								alt="<?php echo($adres->woonplaatsauthentiek == "Y"?'Authentiek':'NIET authentiek') ?> gegevens" 
+								alt="<?php echo($adres->woonplaatsauthentiek == 1?'Authentiek':'NIET authentiek') ?> gegevens" 
 								src="image/authentiek_<?php echo($adres->woonplaatsauthentiek) ?>.gif"
 							/>
 						</td>
 						<td>
 							<img 	
-								alt="<?php echo($adres->openbareruimteauthentiek == "Y"?'Authentieke':'NIET authentiek') ?> gegevens" 
+								alt="<?php echo($adres->openbareruimteauthentiek == 1?'Authentieke':'NIET authentiek') ?> gegevens" 
 								src="image/authentiek_<?php echo($adres->openbareruimteauthentiek) ?>.gif"
 							/>					
 						</td>

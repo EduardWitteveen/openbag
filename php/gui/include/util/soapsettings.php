@@ -2,7 +2,7 @@
 
 include_once "url.php";
 
-function getSettings($filter) {
+function getMidofficeConfig($filter) {
 	try {
 		$configfile = getcwd() . '/../../config.php';
 		$config = parse_ini_file($configfile, true);
@@ -10,14 +10,17 @@ function getSettings($filter) {
 		if(!is_array($options)) {
 			$options = array();
 		}
-		$url = getURL($config['frontoffice']['midoffice']);
+		$url = getURL($config['frontoffice']['config']);
+		// echo($url);
 		$client = new SoapClient($url, $options);
 		// convert the settings to something workable
 		$retrievedsettings = $client->ConfigSettings($filter);
+		print_r($retrievedsettings);
 		$settings = array();
 		foreach($retrievedsettings as $setting) {
 			$settings[$setting->key] = $setting->value;			
 		}
+		//print_r($settings);
 		return $settings;
 	}
 	catch(SoapFault $e) {
@@ -25,9 +28,10 @@ function getSettings($filter) {
 		?><pre style="color:red; background: white;"><?php print_r($e) ?></pre><?php		
 	}
 }
-function getSoapClient($configfilter) {
+function getBagSoapClient() {
 	try {
-		$settings = getSettings($configfilter);
+		$settings = getMidofficeConfig('bag-soapclient');
+		print_r($settings);
 		$wsdl = $settings["soapclient-wsdl"];
 		$options = $settings["soapclient-options"]; 
 		parse_str($options, $options);

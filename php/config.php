@@ -4,7 +4,7 @@
 proxy_host		=	"localhost"
 proxy_port		=	8888
 #proxy_login		=	"username"
-#proxy_password	=	"password"
+#proxy_password		=	"password"
 
 #used by front office
 [frontoffice]
@@ -13,10 +13,10 @@ config		=	"http://192.168.198.118:8080/php/gui/midoffice/config.php?wsdl"
 
 #used by midoffice
 [midoffice]
-midoffice		=	"http://midofficeserver/php/gui/midoffice/config.php?wsdl"	
-#midoffice			=	"../gui/midoffice/config.php?wsdl"	
-bag-gis			=	"http://gisserver/php/gui/gis/viewer.php"
+#bag-service			=	"../gui/midoffice/bag/bag.php?wsdl"	
+bag-service		=	"http://midserver/php/gui/midoffice/bag/bag.php?wsdl"
 #bag-gis			=	"../../gis/viewer.php"
+bag-gis			=	"http://gisserver/php/gui/gis/viewer.php"
 
 #used by midoffice and editor
 [database]
