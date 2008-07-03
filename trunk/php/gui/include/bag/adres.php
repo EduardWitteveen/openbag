@@ -159,9 +159,9 @@ class Adres {
 			$record['ONDERZOEKNUMMERAANDUIDING'],
 					
 			// NOT TERUGMELDINGEN YET
-			'not yet terugmeldingen woonplaats',
-			'not yet terugmeldingen openbareruimte',
-			'not yet terugmeldingen nummeraanduiding',
+			'<!-- not yet terugmeldingen woonplaats -->',
+			'<!-- not yet terugmeldingen openbareruimte -->',
+			'<!-- not yet terugmeldingen nummeraanduiding -->',
 									
 			$record['OPENBARERUIMTENAAM'],
 			$record['HUISNUMMER'],
