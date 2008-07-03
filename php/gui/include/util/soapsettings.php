@@ -4,7 +4,7 @@ include_once "url.php";
 
 function getMidofficeConfig($filter) {
 	try {
-		$configfile = getcwd() . '/../../config.php';
+		$configfile = getcwd() . './../../config.php';
 		$config = parse_ini_file($configfile, true);
 		$options = $config['internet'];
 		if(!is_array($options)) {
