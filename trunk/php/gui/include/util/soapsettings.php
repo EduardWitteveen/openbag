@@ -2,19 +2,21 @@
 
 include_once "url.php";
 
-function getMidofficeConfig($filter) {
+function getMidofficeConfig() {
 	try {
-		$configfile = getcwd() . './../../config.php';
+		$configfile = getcwd() . '/../../config.php';
+		file_exists($configfile) || die("config file: $configfile did not exist");
 		$config = parse_ini_file($configfile, true);
 		$options = $config['internet'];
+		//print_r($options);
 		if(!is_array($options)) {
 			$options = array();
 		}
 		$url = getURL($config['frontoffice']['config']);
-		// echo($url);
-		$client = new SoapClient($url, $options);
+		//echo($url);
+		$client = new SoapClient($url, $options);		
 		// convert the settings to something workable
-		$retrievedsettings = $client->ConfigSettings($filter);
+		$retrievedsettings = $client->ConfigSettings();
 		print_r($retrievedsettings);
 		$settings = array();
 		foreach($retrievedsettings as $setting) {
