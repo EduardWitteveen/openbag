@@ -67,6 +67,9 @@ class bag {
 		$connection = $this->OpenConnection();
 		//die("FetchSoapAdressen:$sql");						
 		$statement =  $connection->query($sql);
+		if(!$statement) {
+			throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  . ' : in query: $sql');
+		}
 		// since the query will take some time, add 30 seconds to execution time
 		// keep in mind that the webserver also has a timeout of around 300 seconds
 		$adressen = array();
@@ -103,10 +106,10 @@ class bag {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "Begin ZoekAdres($filter)");
 		try {
 			$sql = "SELECT\n";
-			$sq.= "CASE WHEN BAGADRES + BAGNUMMERAANDUIDING + BAGOPENBARERUIMTE + BAGWOONPLAATS = 4  THEN 1 ELSE 0 END AS BAGOBJECT, \n";
-			$sq.= "BAGWOONPLAATS,BAGOPENBARERUIMTE, BAGNUMMERAANDUIDING,\n";
-			$sq.= "CASE WHEN ONDERZOEKADRES + ONDERZOEKNUMMERAANDUIDING + ONDERZOEKOPENBARERUIMTE + ONDERZOEKWOONPLAATS = 3  THEN 1 ELSE 0 END AS ONDERZOEKOBJECT,\n"; 
-			$sq.= "ONDERZOEKWOONPLAATS, ONDERZOEKOPENBARERUIMTE,  ONDERZOEKNUMMERAANDUIDING,  OPENBARERUIMTENAAM, HUISNUMMER, HUISLETTER, HUISNUMMERTOEVOEGING,  WOONPLAATSNAAM, POSTCODE\n";
+			$sql .= "CASE WHEN BAGADRES + BAGNUMMERAANDUIDING + BAGOPENBARERUIMTE + BAGWOONPLAATS = 4  THEN 1 ELSE 0 END AS BAGOBJECT, \n";
+			$sql .= "BAGWOONPLAATS,BAGOPENBARERUIMTE, BAGNUMMERAANDUIDING,\n";
+			$sql .= "CASE WHEN ONDERZOEKADRES + ONDERZOEKNUMMERAANDUIDING + ONDERZOEKOPENBARERUIMTE + ONDERZOEKWOONPLAATS = 3  THEN 1 ELSE 0 END AS ONDERZOEKOBJECT,\n"; 
+			$sql .= "ONDERZOEKWOONPLAATS, ONDERZOEKOPENBARERUIMTE,  ONDERZOEKNUMMERAANDUIDING,  OPENBARERUIMTENAAM, HUISNUMMER, HUISLETTER, HUISNUMMERTOEVOEGING,  WOONPLAATSNAAM, POSTCODE\n";
 			$sql .= "FROM MID_ADRES\n";		 							
 			$where = $this->getSqlWhere($filter);
 			if(empty($where)) {
@@ -141,6 +144,9 @@ class bag {
 			$connection = $this->OpenConnection();
 			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "sql: $sql");
 			$statement =  $connection->query($sql);
+			if(!$statement) {
+				throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  . ' : in query: $sql');
+			}			
 			// since the query will take some time, add 30 seconds to execution time
 			// keep in mind that the webserver also has a timeout of around 300 seconds
 			$record = $statement->fetch();  
@@ -175,10 +181,10 @@ class bag {
 		$where = '';				
 		$where = $this->addEqualsStatement('authentiek', $filter->authentiek, $where, 'AND');
 		$where = $this->addEqualsStatement('onderzoek', $filter->onderzoek, $where, 'AND');			
-		$where = $this->addEqualsStatement('straatnaam', $filter->straatnaam, $where, 'AND');
+		$where = $this->addEqualsStatement('OPENBARERUIMTENAAM', $filter->straatnaam, $where, 'AND');
 		$where = $this->addEqualsStatement('huisnummer', $filter->huisnummer, $where, 'AND');
 		$where = $this->addEqualsStatement('huisletter', $filter->huisletter, $where, 'AND');
-		$where = $this->addEqualsStatement('huistoevoeging', $filter->huistoevoeging, $where, 'AND');
+		$where = $this->addEqualsStatement('HUISNUMMERTOEVOEGING', $filter->HUISNUMMERTOEVOEGING, $where, 'AND');
 		$where = $this->addEqualsStatement('woonplaats', $filter->woonplaats, $where, 'AND');
 		$where = $this->addEqualsStatement('postcode', $filter->postcode, $where, 'AND');		
 		return $where;
@@ -204,19 +210,19 @@ SELECT
   POSTCODE
 */		
 			//$sql = "SELECT *\n";
-			//$sql = "SELECT AUTHENTIEK, WOONPLAATS_AUTHENTIEK, OPENBARERUIMTE_AUTHENTIEK, NUMMERAANDUIDING_AUTHENTIEK, ONDERZOEK, WOONPLAATS_ONDERZOEK, OPENBARERUIMTE_ONDERZOEK, NUMMERAANDUIDING_ONDERZOEK, STRAATNAAM, HUISNUMMER, HUISLETTER, HUISTOEVOEGING, WOONPLAATS, POSTCODE\n";
+			//$sql = "SELECT AUTHENTIEK, WOONPLAATS_AUTHENTIEK, OPENBARERUIMTE_AUTHENTIEK, NUMMERAANDUIDING_AUTHENTIEK, ONDERZOEK, WOONPLAATS_ONDERZOEK, OPENBARERUIMTE_ONDERZOEK, NUMMERAANDUIDING_ONDERZOEK, OPENBARERUIMTENAAM, HUISNUMMER, HUISLETTER, HUISNUMMERTOEVOEGING, WOONPLAATS, POSTCODE\n";
 			$sql = "SELECT\n";
-			$sq.= "CASE WHEN BAGADRES + BAGNUMMERAANDUIDING + BAGOPENBARERUIMTE + BAGWOONPLAATS = 4  THEN 1 ELSE 0 END AS BAGOBJECT, \n";
-			$sq.= "BAGWOONPLAATS,BAGOPENBARERUIMTE, BAGNUMMERAANDUIDING,\n";
-			$sq.= "CASE WHEN ONDERZOEKADRES + ONDERZOEKNUMMERAANDUIDING + ONDERZOEKOPENBARERUIMTE + ONDERZOEKWOONPLAATS = 3  THEN 1 ELSE 0 END AS ONDERZOEKOBJECT,\n"; 
-			$sq.= "ONDERZOEKWOONPLAATS, ONDERZOEKOPENBARERUIMTE,  ONDERZOEKNUMMERAANDUIDING,  OPENBARERUIMTENAAM, HUISNUMMER, HUISLETTER, HUISNUMMERTOEVOEGING,  WOONPLAATSNAAM, POSTCODE\n";
+			$sql .= "CASE WHEN BAGADRES + BAGNUMMERAANDUIDING + BAGOPENBARERUIMTE + BAGWOONPLAATS = 4  THEN 1 ELSE 0 END AS BAGOBJECT, \n";
+			$sql .= "BAGWOONPLAATS,BAGOPENBARERUIMTE, BAGNUMMERAANDUIDING,\n";
+			$sql .= "CASE WHEN ONDERZOEKADRES + ONDERZOEKNUMMERAANDUIDING + ONDERZOEKOPENBARERUIMTE + ONDERZOEKWOONPLAATS = 3  THEN 1 ELSE 0 END AS ONDERZOEKOBJECT,\n"; 
+			$sql .= "ONDERZOEKWOONPLAATS, ONDERZOEKOPENBARERUIMTE,  ONDERZOEKNUMMERAANDUIDING,  OPENBARERUIMTENAAM, HUISNUMMER, HUISLETTER, HUISNUMMERTOEVOEGING,  WOONPLAATSNAAM, POSTCODE\n";
 			$sql .= "FROM MID_ADRES\n";		 							
 			$where = $this->getSqlWhereMetFilter($filter);
 			if(empty($where)) {
 				return new SoapFault('BAG', "BAG:ZoekAdresMetFilter: geen filter gedefinieerd!");
 			} 							
 			$sql .= "WHERE $where";		
-			$sql .= 'ORDER BY straatnaam, woonplaats, 0 + huisnummer, huisletter, huistoevoeging';
+			$sql .= 'ORDER BY OPENBARERUIMTENAAM, WOONPLAATSNAAM, 0 + huisnummer, huisletter, HUISNUMMERTOEVOEGING';
 			//return new SoapFault("Bag", "Bag:ZoekAdresMetFilter filter with value '$filter' generated followin sql: '$sql'");
 			return $this->FetchSoapAdressen($sql);
 		}
@@ -239,8 +245,8 @@ SELECT
 	public function GisHtmlViewAdresMetFilter($filter, $height, $width) {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "SoapCall: $filter $height $width");
 		try {			
-			$sql = "SELECT min(x) AS minx, max(x) AS maxx, min(y) AS miny, max(y) AS maxy\n";
-			$sql .= "FROM midadres\n";										
+			$sql = "SELECT min(adres_x) AS minx, max(adres_x) AS maxx, min(adres_y) AS miny, max(adres_y) AS maxy\n";
+			$sql .= "FROM mid_adres\n";										
 			$where = $this->getSqlWhereMetFilter($filter);
 			if(!empty($where)) {
 				$sql .= "WHERE $where";
@@ -248,10 +254,17 @@ SELECT
 			$connection = $this->OpenConnection();
 			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "sql: $sql");
 			$statement =  $connection->query($sql);
+			if(!$statement) {
+				throw new Exception('Error in' .  __CLASS__ . ' ' . __FUNCTION__  . ' : in query: $sql');
+			}			
 			// since the query will take some time, add 30 seconds to execution time
 			// keep in mind that the webserver also has a timeout of around 300 seconds
 			set_time_limit(180);					
 			$record = $statement->fetch(); 
+			if(!$record) {			
+				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Error fetching result for SQL: $sql");			
+				return new SoapFault('BAG', "BAG:GisHtmlViewAdresMetFilter: Error fetching result for SQL: $sql");
+			}
 			$connection = null;	
 			//return new SoapFault("Bag", "Bag:ZoekAdresMetFilter filter with value '$filter' generated followin sql: '$sql'");
 			//return $this->FetchSoapAdressen($sql);
