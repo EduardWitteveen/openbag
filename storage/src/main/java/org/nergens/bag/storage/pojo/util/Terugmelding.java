@@ -15,14 +15,22 @@ public class Terugmelding  {
     protected long id;
     public Long getId() { return id; }
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @ManyToOne
+    @JoinColumn(name="BAGOBJECT_CODE")
     protected BagObject  bagobject;
     public BagObject getBagObject() {
         return bagobject;
     }
     public void setBagObject(BagObject bagobject) { 
         this.bagobject  = bagobject;
+    }
+    @Column(name="USERNAME")	
+    protected String username;
+    public String getUsername() {
+        return username; 
+    }
+    public void setUsername(String username) { 
+        this.username = username; 
     }
     @Column(name="MELDING")	
     protected String melding;
