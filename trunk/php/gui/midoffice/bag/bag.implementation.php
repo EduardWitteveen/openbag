@@ -247,7 +247,7 @@ SELECT
 	private function getGisAdresDetail() {
 		$configfile = getcwd() . '/../../../config.php';
 		$config = parse_ini_file($configfile, true);		
-		$viewerurl =  '<iframe id="gisviewer" SCROLLING="NO" FRAMEBORDER="0" width="%width%" height="%height%" src="' .  getURL($config['midoffice']['bag-gis']) . '?minx=%minx%&miny=%miny%&maxx=%maxx%&maxy=%maxy%&height=%height%&width=%width%&"></iframe>';
+		$viewerurl =  '<iframe id="gisviewer" SCROLLING="NO" FRAMEBORDER="0" width="%width%" height="%height%" src="' .  getURL($config['bag']['gis']) . '?minx=%minx%&miny=%miny%&maxx=%maxx%&maxy=%maxy%&height=%height%&width=%width%&"></iframe>';
 		return $viewerurl;
 	}
 	public function GisHtmlViewAdresMetFilter($filter, $height, $width) {
@@ -299,7 +299,7 @@ SELECT
 	public function Terugmelding($filter, $username, $onderdeel, $opmerking) {
 		logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "SoapCall: filter $filter username $username onderdeel $onderdeel opmerking $opmerking");
 		try {
-			$where = $this->getSqlWhereMetFilter($filter);
+			// retrieve our code
 			$sqlname = '';
 			switch($onderdeel) {
 			case 'woonplaats':
@@ -311,19 +311,21 @@ SELECT
 			case 'nummeraanduiding':
 				$sqlname = 'nummeraanduiding';
 				break;			
+			case 'verblijfsobject':
+				$sqlname = 'adres';
+				break;
 			default:
 				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "Unknown part: $onderdeel");
 				return new SoapFault('BAG', "BAG:Terugmelding: Unknown part: $onderdeel");
 			}
-			$sql = "SELECT ${sqlname}_id AS gid\n";
-			$sql .= "FROM midadres\n";
+			$sql = "SELECT ${sqlname}code AS code\n";
+			$sql .= "FROM mid_adres\n";
 			$where = $this->getSqlWhereMetFilter($filter);
 			if(empty($where)) {
 				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "geen filter gedefinieerd!");
 				return new SoapFault('BAG', "BAG:Terugmelding: geen filter gedefinieerd!");
 			}
 			$sql .= "WHERE $where";
-			// retrieve our gid						
 			$connection = $this->OpenConnection();
 			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "sql: $sql");
 			$statement =  $connection->query($sql);
@@ -331,115 +333,35 @@ SELECT
 				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "geen record gevonden voor sql: $sql");
 				return new SoapFault('BAG', "BAG:Terugmelding: geen record gevonden voor sql: $sql");
 			}
-			$gid = $record['GID'];
+			
+			$code = $record[0];
+						
 			if($statement->fetch()) {
 				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "meer dan 1 record gevonden voor sql: $sql");
 				return new SoapFault('BAG', "BAG:Terugmelding: meer dan 1 record gevonden voor sql: $sql");
 			}
-			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "gid: $gid");			
+			
+			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "code: $code");			
 			// update the value's so they cannot harm us,..
 			$username =  str_replace('\\', '/', $username);
 			$opmerking =  str_replace('\'', '\'\'', $opmerking);
 			$opmerking =  str_replace('\n', '', $opmerking);
 			// and here we have our sql script!
 			logmessage(LOG_LEVEL::trace, __CLASS__,__FUNCTION__, "sqlname: $sqlname");
-			switch($sqlname) {
-			case 'woonplaats':
-				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "WOONPLAATS NOT YET IMPLEMENTED");
-				return new SoapFault('BAG', "BAG:Terugmelding: WOONPLAATS NOT YET IMPLEMENTED");
-				break;
-			case 'openbareruimte':
-				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "OPENBARERUIMTE NOT YET IMPLEMENTED");
-				return new SoapFault('BAG', "BAG:Terugmelding: OPENBARERUIMTE NOT YET IMPLEMENTED");
-				break;
-			case 'nummeraanduiding':
-				$connection->beginTransaction();
-				$sql = 	"-- first update the record to a value we can recognise and is expired\n";
-				$sql .= "UPDATE VB_NUMMERAANDUIDING\n";
-				$sql .= "SET EXPIREDATE = 0\n";
-				$sql .= "WHERE GID = '$gid'\n";;
-				if(!$connection->exec($sql)) {
-					logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-					return new SoapFault('BAG', "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-				}
-				$sql = "-- We need to add the record in the correct projection\n"; 
-				$sql .= "UPDATE  MDSYS.USER_SDO_GEOM_METADATA SET SRID = 90112  WHERE TABLE_NAME = 'VB_NUMMERAANDUIDING'\n";
-				if(!$connection->exec($sql)) {
-					logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-					return new SoapFault('BAG', "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-				}
-				$sql = "-- now add the new record\n";
-				$sql = "INSERT INTO VB_NUMMERAANDUIDING\n";
-				$sql .= "	(\n";
-				$sql .= "	  GID,\n";
-/* default				$sql .= "	  STARTDATE,\n";	*/
-/* default				$sql .= "	  EXPIREDATE,\n";	*/
-				$sql .= "	  REASONFORCHANGE,\n";
-				$sql .= "	  AUTHOR,\n";
-				$sql .= "	  AUTHENTIC,\n";
-				$sql .= "	  RESEARCH,\n";
-				$sql .= "	  ACCEPTED,\n";
-				$sql .= "	  DOCUMENTID,\n";
-				$sql .= "	  DOCUMENTDATE,\n";
-				$sql .= "	  WOONPLAATSID,\n";
-				$sql .= "	  OPENBARERUIMTEID,\n";
-				$sql .= "	  HUISNUMMER,\n";
-				$sql .= "	  HUISLETTER,\n";
-				$sql .= "	  HUISNUMMERTOEVOEGING,\n";
-				$sql .= "	  POSTCODE,\n";
-				$sql .= "	  GEOM,\n";
-				$sql .= "	  FEEDBACK\n";
-				$sql .= "	)\n";
-				$sql .= "	SELECT\n"; 
-//				$sql .= "	    RAWTOHEX(GID),\n";
-				$sql .= "	    GID,\n";
-/*				$sql .= "	    to_char(sysdate, 'YYYYMMDD'),\n";	*/
-/*				$sql .= "	    99999999,\n";	*/
-				$sql .= "	    'FEEDBACK',\n";
-				$sql .= "	    '$username',\n";
-				$sql .= "	    AUTHENTIC,\n";
-				$sql .= "	    'Y',\n";
-				$sql .= "	    ACCEPTED,\n";
-				$sql .= "	    DOCUMENTID,\n";
-				$sql .= "	    DOCUMENTDATE,\n";
-				$sql .= "	    WOONPLAATSID,\n";
-				$sql .= "	    OPENBARERUIMTEID,\n";
-				$sql .= "	    HUISNUMMER,\n";
-				$sql .= "	    HUISLETTER,\n";
-				$sql .= "	    HUISNUMMERTOEVOEGING,\n";
-				$sql .= "	    POSTCODE,\n";
-				$sql .= "	    GEOM,\n";
-				$sql .= "	    '$opmerking'\n";
-				$sql .= "	  FROM VB_NUMMERAANDUIDING\n";
-				$sql .= "	  WHERE EXPIREDATE = 0\n";
-				if(!$connection->exec($sql)) {
-					logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-					return new SoapFault('BAG', "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-				}
-				$sql = "-- mapguide doesnt like the projection, so we set it back to null\n"; 
-				$sql .= "UPDATE  MDSYS.USER_SDO_GEOM_METADATA SET SRID = NULL  WHERE TABLE_NAME = 'VB_NUMMERAANDUIDING'\n";
-				if(!$connection->exec($sql)) {					
-					logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-					return new SoapFault('BAG', "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-				}
-				$sql = "-- update the old record, so it reads a correct enddate\n";
-				$sql .= "UPDATE VB_NUMMERAANDUIDING\n";
-				$sql .= "	SET EXPIREDATE = \n";
-				$sql .= "	(\n";
-				$sql .= "	  SELECT STARTDATE\n";
-				$sql .= "	  FROM VB_NUMMERAANDUIDING\n";
-				$sql .= "	  WHERE GID = '$gid' \n";
-				$sql .= "	  AND EXPIREDATE = (SELECT MAX(EXPIREDATE) FROM VB_NUMMERAANDUIDING)\n";
-				$sql .= "	)\n";
-				$sql .= "	WHERE GID = '$gid'\n"; 
-				$sql .= "	AND EXPIREDATE = 0\n";
-				if(!$connection->exec($sql)) {
-					logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-					return new SoapFault('BAG', "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
-				}
-				break;
-			default:
-				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "ongeldige sqlname: $sqlname");
+
+		
+			// in a transaction....
+			$connection->beginTransaction();
+			// UPDATE DATA_AUTHENTIEK  SET INONDERZOEK = 1 WHERE CODE = CODE
+			$sql = "UPDATE DATA_AUTHENTIEK  SET INONDERZOEK = 1 WHERE CODE = $code";
+			if(!$connection->exec($sql)) {
+				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
+				return new SoapFault('BAG', "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
+			}
+			$sql = "INSERT INTO UTIL_TERUGMELDING (id, bagobject_code, username, melding) VALUES (COALESCE((select max(id) + 1 from util_terugmelding),1), ${code}, '${username}', '${opmerking}')";
+			if(!$connection->exec($sql)) {
+				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
+				return new SoapFault('BAG', "execute error:" . print_r($connection->errorInfo(), TRUE) . "\n$sql");
 			}
 			if(!$connection->commit()) {
 				logmessage(LOG_LEVEL::error, __CLASS__,__FUNCTION__, "commit error:" . print_r($connection->errorInfo(), TRUE));
