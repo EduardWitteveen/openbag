@@ -137,7 +137,7 @@ class Adres {
 	    $this->postcode = $postcode;
     }
     public static function CreateFromRecord($record) {
-		print_r($record);
+		//print_r($record);
 	    return new Adres(
 			// FOR ALL INFORMATION
 			// FOR ALL INFORMATION
@@ -150,7 +150,7 @@ class Adres {
 			$record['BAGNUMMERAANDUIDING'],
 			
 			// FOR ALL INFORMATION
-			$record['INONDERZOEK'],
+			$record['ONDERZOEKOBJECT'],
 			// FOR THE woonplaats
 			$record['ONDERZOEKWOONPLAATS'],
 			// FOR THE openbareruimte
