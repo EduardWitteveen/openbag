@@ -21,7 +21,7 @@
       <operation name="ontvangKennisgeving">
          <input message="tns:STUFBAG_Kennisgeving"/>
          <output message="tns:STUFBAG_SynchroonAntwoord"/>
-         <fault name="StUF_Fout" message="tns:StUF_Fout"/>
+	 <fault name="StUF_Fout" message="tns:StUF_Fout"/>
       </operation>
       <operation name="beantwoordVraag">
          <input message="tns:STUFBAG_Vraag"/>
