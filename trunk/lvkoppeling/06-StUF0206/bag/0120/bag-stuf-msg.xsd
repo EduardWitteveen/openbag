@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:StUF="http://www.egem.nl/StUF/StUF0205" xmlns:bag-stuf="http://www.vrom.nl/bag/stuf/0120" xmlns:ns1="http://www.vrom.nl/bag/0120" targetNamespace="http://www.vrom.nl/bag/stuf/0120" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0120">
+   <xs:import namespace="http://www.egem.nl/StUF/StUF0205" schemaLocation="../../stuf/stuf0205.xsd"/>
+   <xs:include schemaLocation="bag-stuf-kgb.xsd"/>
+   <xs:include schemaLocation="bag-stuf-vraag.xsd"/>
+   <xs:include schemaLocation="bag-stuf-antwoord.xsd"/>
+   <xs:annotation>
+      <xs:documentation>BAG-StUF berichten standaard op basis van StUF 0205 en BAG 0120. </xs:documentation>
+   </xs:annotation>
+   <xs:element name="kennisgevingsBericht">
+      <xs:annotation>
+         <xs:documentation>body voor kennisgevingsberichten BAG (aanmelden en wijzigen)</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="StUF:stuurgegevens"/>
+            <xs:element name="body">
+               <xs:complexType>
+                  <xs:choice>
+                     <!-- Er is hier een choice gebruikt, omdat hier alle kennisgevingen vanuit het sectormodel BG gedefinieerd moeten worden -->
+                     <xs:element name="pand" maxOccurs="2">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:Pand"/>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="verblijfsObject" maxOccurs="2">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:VerblijfsObject">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduiding"/>
+                                    <xs:element name="GerelateerdPand" type="bag-stuf:LigtInPand"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="ligplaats" maxOccurs="2">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:Ligplaats">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduiding"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="standplaats" maxOccurs="2">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:Standplaats">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduiding"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="nummerAanduiding" maxOccurs="2">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:NummerAanduiding">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeWoonplaats" type="bag-stuf:HoortBijWoonplaats" minOccurs="0" nillable="true"/>
+                                    <xs:element name="GerelateerdeOpenbareRuimte" type="bag-stuf:HoortBijOpenbareRuimte"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="openbareRuimte" maxOccurs="2">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:OpenbareRuimte">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeWoonplaats" type="bag-stuf:HoortBijWoonplaats"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="woonplaats" type="bag-stuf:Woonplaats" maxOccurs="2"/>
+                  </xs:choice>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="vraagBericht">
+      <xs:annotation>
+         <xs:documentation>body voor vraag-berichten BAG</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="StUF:stuurgegevens"/>
+            <xs:element name="body">
+               <xs:complexType>
+                  <xs:choice>
+                     <xs:element name="pand" nillable="true" maxOccurs="4">
+                        <xs:annotation>
+                           <xs:documentation>3..4 is only for being StUF compliant. It is NOT used by the BAG. This is also the case for all entities below.</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:PandVraag">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeVerblijfsObject" type="bag-stuf:BevatVerblijfsObjectVraag" nillable="true" minOccurs="0"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="verblijfsObject" nillable="true" maxOccurs="4">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:VerblijfsObjectVraag">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" nillable="true" minOccurs="0"/>
+                                    <xs:element name="GerelateerdPand" type="bag-stuf:LigtInPandVraag" nillable="true" minOccurs="0"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="ligplaats" nillable="true" maxOccurs="4">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:LigplaatsVraag">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" nillable="true" minOccurs="0"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="standplaats" nillable="true" maxOccurs="4">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:StandplaatsVraag">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" nillable="true" minOccurs="0"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="nummerAanduiding" nillable="true" maxOccurs="4">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:NummerAanduidingVraag">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeWoonplaats" type="bag-stuf:HoortBijWoonplaatsVraag" nillable="true" minOccurs="0"/>
+                                    <xs:element name="GerelateerdeOpenbareRuimte" type="bag-stuf:HoortBijOpenbareRuimteVraag" nillable="true" minOccurs="0"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="openbareRuimte" nillable="true" maxOccurs="4">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:OpenbareRuimteVraag">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeWoonplaats" type="bag-stuf:HoortBijWoonplaatsVraag" nillable="true" minOccurs="0"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="woonplaats" type="bag-stuf:WoonplaatsVraag" nillable="true" maxOccurs="4"/>
+                  </xs:choice>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="foutBericht">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element ref="StUF:stuurgegevens"/>
+   				<xs:element name="body">
+   					<xs:complexType>
+   						<xs:sequence>
+   							<xs:element name="code" type="StUF:FoutCode"/>
+   							<xs:element name="plek" type="StUF:FoutPlek"/>
+   							<xs:element name="omschrijving" type="StUF:FoutOmschrijving"/>
+   							<xs:element name="details" type="StUF:FoutDetails"/>
+   						</xs:sequence>
+   					</xs:complexType>
+   				</xs:element>
+   			</xs:sequence>
+   		</xs:complexType>
+	</xs:element>
+   <xs:element name="synchroonAntwoordBericht">
+      <xs:annotation>
+         <xs:documentation>body voor synchrone antwoordberichten BAG</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="StUF:stuurgegevens"/>
+            <xs:element name="body">
+               <xs:complexType>
+                  <xs:choice>
+                     <!-- Er is hier een choice gebruikt, omdat hier alle antwoordberichten vanuit het sectormodel BG gedefinieerd moeten worden -->
+                     <xs:element name="pand" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:PandAntwoord">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeVerblijfsObject" type="bag-stuf:BevatVerblijfsObjectAntwoord" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="verblijfsObject" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:VerblijfsObjectAntwoord">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingAntwoord" minOccurs="0" nillable="true"/>
+                                    <xs:element name="GerelateerdPand" type="bag-stuf:LigtInPandAntwoord" minOccurs="0" nillable="true"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="ligplaats" minOccurs="0" nillable="true" maxOccurs="unbounded">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:LigplaatsAntwoord">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingAntwoord" minOccurs="0" nillable="true"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="standplaats" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:StandplaatsAntwoord">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingAntwoord" minOccurs="0" nillable="true"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="nummerAanduiding" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:NummerAanduidingAntwoord">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeWoonplaats" type="bag-stuf:HoortBijWoonplaatsAntwoord" minOccurs="0" nillable="true"/>
+                                    <xs:element name="GerelateerdeOpenbareRuimte" type="bag-stuf:HoortBijOpenbareRuimteAntwoord" minOccurs="0" nillable="true"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="openbareRuimte" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                        <xs:complexType>
+                           <xs:complexContent>
+                              <xs:extension base="bag-stuf:OpenbareRuimteAntwoord">
+                                 <xs:sequence>
+                                    <xs:element name="GerelateerdeWoonplaats" type="bag-stuf:HoortBijWoonplaatsAntwoord" minOccurs="0" nillable="true"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="woonplaats" type="bag-stuf:WoonplaatsAntwoord" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                  </xs:choice>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

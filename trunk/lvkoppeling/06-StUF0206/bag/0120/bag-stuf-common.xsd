@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:StUF="http://www.egem.nl/StUF/StUF0205" xmlns:bag="http://www.vrom.nl/bag/0120" xmlns:bag-stuf="http://www.vrom.nl/bag/stuf/0120" targetNamespace="http://www.vrom.nl/bag/stuf/0120" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="http://www.egem.nl/StUF/StUF0205" schemaLocation="../../stuf/stuf0205.xsd"/>
+   <xs:import namespace="http://www.vrom.nl/bag/0120" schemaLocation="bag.xsd"/>
+   <xs:annotation>
+      <xs:documentation>BAG-StUF berichten standaard op basis van StUF 0205.</xs:documentation>
+   </xs:annotation>
+   <xs:simpleType name="Tijdstip">
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[0-9]{14}|[0-9]{16}"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="TijdvakGeldigheid">
+      <xs:annotation>
+         <xs:documentation>Aangepaste TijdvakGeldigheid (StUF:TijdvakGeldigheid bevat namelijk 2 DatumMetIndicators (8 digits) en dit type heeft GEEN tijd component). Update in stuf v0205.03: nog steeds niet bruikbaar omdat einddatum verplicht is</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="begindatumTijdvakGeldigheid" nillable="true" >
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag-stuf:Tijdstip">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="einddatumTijdvakGeldigheid" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag-stuf:Tijdstip">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="BronDocument">
+      <xs:annotation>
+         <xs:documentation>Documentdatum en nummer</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="documentnummer" nillable="true" >
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:DocumentNummering">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="documentdatum" nillable="true" >
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:Datum">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <!--==========================================================================================================-->
+</xs:schema>
