@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:StUF="http://www.egem.nl/StUF/StUF0205" xmlns:bag="http://www.vrom.nl/bag/0120" xmlns:bag-stuf="http://www.vrom.nl/bag/stuf/0120" 
+targetNamespace="http://www.vrom.nl/bag/stuf/0120" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="http://www.egem.nl/StUF/StUF0205" schemaLocation="../../stuf/stuf0205.xsd"/>
+   <xs:import namespace="http://www.vrom.nl/bag/0120" schemaLocation="bag.xsd"/>
+   <xs:include schemaLocation="bag-stuf-common.xsd"/>
+   <xs:annotation>
+      <xs:documentation>BAG-LV vraagberichten</xs:documentation>
+   </xs:annotation>
+   <!--==========================================================================================================-->
+   <xs:complexType name="BagObjectVraag">
+      <xs:annotation>
+         <xs:documentation>Base type met audit, brondoc en geldigheid</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="identificatie" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:Objectnummering">
+                     <xs:attribute name="kerngegeven" type="xs:boolean" fixed="true"/>
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="bron" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:complexContent>
+                  <xs:extension base="bag-stuf:BronDocument"/>
+               </xs:complexContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="geconstateerd" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="inOnderzoek" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="tijdvakGeldigheid" type="bag-stuf:TijdvakGeldigheid" nillable="true" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="BagObjectAltVraag">
+      <xs:annotation>
+         <xs:documentation>Idem BagOvjectVraag alleen met identificatie van 4 ipv 16</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="identificatie" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:WoonplaatsCodering">
+                     <xs:attribute name="kerngegeven" type="xs:boolean" fixed="true"/>
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="bron" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:complexContent>
+                  <xs:extension base="bag-stuf:BronDocument"/>
+               </xs:complexContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="geconstateerd" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="inOnderzoek" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="tijdvakGeldigheid" type="bag-stuf:TijdvakGeldigheid" nillable="true" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="GerelateerdBagObjectVraag">
+      <xs:annotation>
+         <xs:documentation>idem BagObject, maar nu voor relaties (alleen id is dan verplicht)</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="identificatie" nillable="true">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:Objectnummering">
+                     <xs:attribute name="kerngegeven" type="xs:boolean" fixed="true"/>
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="bron" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:complexContent>
+                  <xs:extension base="bag-stuf:BronDocument"/>
+               </xs:complexContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="geconstateerd" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="inOnderzoek" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="tijdvakGeldigheid" type="bag-stuf:TijdvakGeldigheid" nillable="true" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="GerelateerdBagObjectAltVraag">
+      <xs:annotation>
+         <xs:documentation>idem BagObjectAlt, maar nu voor relaties (alleen id is dan verplicht)</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="identificatie" nillable="true">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:WoonplaatsCodering">
+                     <xs:attribute name="kerngegeven" type="xs:boolean" fixed="true"/>
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="bron" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:complexContent>
+                  <xs:extension base="bag-stuf:BronDocument"/>
+               </xs:complexContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="geconstateerd" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="inOnderzoek" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="bag:JaNeeType">
+                     <xs:attributeGroup ref="StUF:element"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="tijdvakGeldigheid" type="bag-stuf:TijdvakGeldigheid" nillable="true" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <!--==========================================================================================================-->
+   <xs:complexType name="PandVraag">
+      <xs:annotation>
+         <xs:documentation>entiteit Pand voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:BagObjectVraag">
+            <xs:sequence>
+               <xs:element name="pandGeometrie" type="bag:GeometrieVlak" nillable="true" minOccurs="0"/>
+               <xs:element name="bouwjaar" nillable="true" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Oorspronkelijk bouwjaar pand</xs:documentation>
+                  </xs:annotation>
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Jaar">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="pandstatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusPand">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:fundamenteel"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VerblijfsObjectVraag">
+      <xs:annotation>
+         <xs:documentation>entiteit VerblijfsObject voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:BagObjectVraag">
+            <xs:sequence>
+               <xs:element name="verblijfsObjectGeometrie" type="bag:GeometriePunt" nillable="true" minOccurs="0"/>
+               <xs:element name="gebruiksdoelVerblijfsobject" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Gebruiksdoeleinden">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="oppervlakteVerblijfsobject" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Natuurlijkgetal">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="verblijfsobjectStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusVerblijfsObject">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:fundamenteel"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="LigplaatsVraag">
+      <xs:annotation>
+         <xs:documentation>entiteit Ligplaats voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:BagObjectVraag">
+            <xs:sequence>
+               <xs:element name="ligplaatsGeometrie" type="bag:GeometrieVlak" nillable="true" minOccurs="0"/>
+               <xs:element name="ligplaatsStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusLigplaats">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:fundamenteel"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StandplaatsVraag">
+      <xs:annotation>
+         <xs:documentation>entiteit Standplaats voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:BagObjectVraag">
+            <xs:sequence>
+               <xs:element name="standplaatsGeometrie" type="bag:GeometrieVlak" nillable="true" minOccurs="0"/>
+               <xs:element name="standplaatsStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusStandplaats">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:fundamenteel"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NummerAanduidingVraag">
+      <xs:annotation>
+         <xs:documentation>entiteit nummeraanduiding voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:BagObjectVraag">
+            <xs:sequence>
+               <xs:element name="nummeraanduidingStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusNaamgeving">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="huisnummer" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Huisnummering">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="huisletter" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Huislettering">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="huisnummertoevoeging" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Huisnummertoevoeging">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="postcode" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Postcode">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="typeAdresseerbaarObject" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:TyperingAdresseerbareObjecttypen">
+                           <xs:attribute ref="StUF:noValue"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:fundamenteel"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OpenbareRuimteVraag">
+      <xs:annotation>
+         <xs:documentation>entiteit openbare ruimte voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:BagObjectVraag">
+            <xs:sequence>
+               <xs:element name="openbareruimteStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusNaamgeving">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="openbareRuimteNaam" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:OpenbareRuimteNaam">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="openbareRuimteType" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:TyperingOpenbareRuimte">
+                           <xs:attribute ref="StUF:noValue"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:fundamenteel"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WoonplaatsVraag">
+      <xs:annotation>
+         <xs:documentation>entiteit woonplaats voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:BagObjectAltVraag">
+            <xs:sequence>
+               <xs:element name="woonplaatsNaam" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:WoonplaatsNaam">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="woonplaatsGeometrie" type="bag:GeometrieVlak" nillable="true" minOccurs="0"/>
+               <xs:element name="woonplaatsStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusWoonplaats">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:fundamenteel"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <!--==========================================================================================================-->
+   <xs:complexType name="GerelateerdPandVraag">
+      <xs:annotation>
+         <xs:documentation> Gerelateerd Pand (idem als Pand, maar alleen id is nu verplicht)</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:GerelateerdBagObjectVraag">
+            <xs:sequence>
+               <xs:element name="pandGeometrie" type="bag:GeometrieVlak" nillable="true" minOccurs="0"/>
+               <xs:element name="bouwjaar" nillable="true" minOccurs="0">
+                  <xs:annotation>
+                     <xs:documentation>Oorspronkelijk bouwjaar pand</xs:documentation>
+                  </xs:annotation>
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Jaar">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="pandstatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusPand">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:relatie"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GerelateerdVerblijfsObjectVraag">
+      <xs:annotation>
+         <xs:documentation> Gerelateerd VBO (idem als VBO, maar alleen id is nu verplicht)</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:GerelateerdBagObjectVraag">
+            <xs:sequence>
+               <xs:element name="verblijfsObjectGeometrie" type="bag:GeometriePunt" nillable="true" minOccurs="0"/>
+               <xs:element name="gebruiksdoelVerblijfsobject" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Gebruiksdoeleinden">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="oppervlakteVerblijfsobject" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Natuurlijkgetal">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="verblijfsobjectStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusVerblijfsObject">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:relatie"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GerelateerdNummerAanduidingVraag">
+      <xs:annotation>
+         <xs:documentation> Gerelateerd NA (idem als NA, maar alleen id is nu verplicht)</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:GerelateerdBagObjectVraag">
+            <xs:sequence>
+               <xs:element name="nummeraanduidingStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusNaamgeving">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="huisnummer" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Huisnummering">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="huisletter" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Huislettering">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="huisnummertoevoeging" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Huisnummertoevoeging">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="postcode" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:Postcode">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="typeAdresseerbaarObject" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:TyperingAdresseerbareObjecttypen">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:relatie"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GerelateerdOpenbareRuimteVraag">
+      <xs:annotation>
+         <xs:documentation> Gerelateerd OR (idem als OR, maar alleen id is nu verplicht)</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:GerelateerdBagObjectVraag">
+            <xs:sequence>
+               <xs:element name="openbareruimteStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusNaamgeving">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="openbareRuimteNaam" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:OpenbareRuimteNaam">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="openbareRuimteType" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:TyperingOpenbareRuimte">
+                           <xs:attribute ref="StUF:noValue"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:relatie"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GerelateerdWoonplaatsVraag">
+      <xs:annotation>
+         <xs:documentation> Gerelateerd Woonplaats (idem als Woonplaats, maar alleen id is nu verplicht)</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="bag-stuf:GerelateerdBagObjectAltVraag">
+            <xs:sequence>
+               <xs:element name="woonplaatsNaam" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:WoonplaatsNaam">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="woonplaatsGeometrie" type="bag:GeometrieVlak" nillable="true" minOccurs="0"/>
+               <xs:element name="woonplaatsStatus" nillable="true" minOccurs="0">
+                  <xs:complexType>
+                     <xs:simpleContent>
+                        <xs:extension base="bag:StatusWoonplaats">
+                           <xs:attributeGroup ref="StUF:element"/>
+                        </xs:extension>
+                     </xs:simpleContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="StUF:relatie"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <!--==========================================================================================================-->
+   <xs:complexType name="LigtInPandVraag">
+      <xs:annotation>
+         <xs:documentation>relatie ligt in pand voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="pand" type="bag-stuf:GerelateerdPandVraag" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="BevatVerblijfsObjectVraag">
+      <xs:annotation>
+         <xs:documentation>relatie bevat verblijftsobject voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="verblijfsObject" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:complexContent>
+                  <xs:extension base="bag-stuf:GerelateerdVerblijfsObjectVraag">
+                     <xs:sequence>
+                        <xs:element name="GerelateerdeAdressen" type="bag-stuf:HeeftNummerAanduidingVraag" nillable="true" minOccurs="0"/>
+                     </xs:sequence>
+                  </xs:extension>
+               </xs:complexContent>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="HeeftNummerAanduidingVraag">
+      <xs:annotation>
+         <xs:documentation>relatie heeft nummer aanduiding voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="hoofdAdres" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="nummerAanduiding" nillable="true" minOccurs="0">
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="bag-stuf:GerelateerdNummerAanduidingVraag"/>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="nevenAdres" nillable="true" minOccurs="0" maxOccurs="unbounded">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="nummerAanduiding">
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="bag-stuf:GerelateerdNummerAanduidingVraag"/>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="HoortBijOpenbareRuimteVraag">
+      <xs:annotation>
+         <xs:documentation>relatie hoort bij Openbare ruimte voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="openbareRuimte" nillable="true" minOccurs="0">
+            <xs:complexType>
+               <xs:complexContent>
+                  <xs:extension base="bag-stuf:GerelateerdOpenbareRuimteVraag"/>
+               </xs:complexContent>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="HoortBijWoonplaatsVraag">
+      <xs:annotation>
+         <xs:documentation>relatie hoort bij Woonplaats voor Vraagberichten</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="woonplaats" type="bag-stuf:GerelateerdWoonplaatsVraag" nillable="true" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

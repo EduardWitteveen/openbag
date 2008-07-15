@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:bag="http://www.vrom.nl/bag/0120" targetNamespace="http://www.vrom.nl/bag/0120" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:import namespace="http://www.opengis.net/gml" schemaLocation="../../gml/GML-3.1.1/base/bag-gml.xsd"/>
+   <xs:annotation>
+      <xs:documentation>Algemene BAG typen afgeleid uit de Grondslagen. zie Catalogus Basis Gebouwen Registratie (BGR) v4.0 en Catalogus Basis Registratie Adressen (BRA) versie 4.0.</xs:documentation>
+   </xs:annotation>
+   <!--==========================================================================================================-->
+   <!--== Typen uit "Grondslagen Adressen en Gebouwen - domeinen"-->
+   <!--==========================================================================================================-->
+   <xs:simpleType name="AdresType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="HoofdAdres"/>
+         <xs:enumeration value="NevenAdres"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Datum">
+      <xs:annotation>
+         <xs:documentation>Datum formaat: N8. Masker: JJJJMMDD</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:token">
+         <xs:minLength value="8"/>
+         <xs:maxLength value="8"/>
+         <xs:pattern value="[0-2][0-9][0-9][0-9][0-1][0-9][0-3][0-9]"/>
+         <!-- further validation needs to be done in your business logic -->
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="DocumentNummering">
+      <xs:annotation>
+         <xs:documentation>AN..20 (max. 20 tekens)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="20"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Gebruiksdoeleinden">
+      <xs:annotation>
+         <xs:documentation>Gebruiksdoel van een object (AN..80)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="woonfunctie"/>
+         <xs:enumeration value="bijeenkomstfunctie"/>
+         <xs:enumeration value="celfunctie"/>
+         <xs:enumeration value="gezondheidszorgfunctie"/>
+         <xs:enumeration value="industriefunctie"/>
+         <xs:enumeration value="kantoorfunctie"/>
+         <xs:enumeration value="logiesfunctie"/>
+         <xs:enumeration value="onderwijsfunctie"/>
+         <xs:enumeration value="sportfunctie"/>
+         <xs:enumeration value="winkelfunctie"/>
+         <xs:enumeration value="overige gebruiksfunctie"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Gemeentecodering">
+      <xs:annotation>
+         <xs:documentation>AN4</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="4"/>
+         <xs:minLength value="4"/>
+         <xs:pattern value="\d\d\d\d"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Huislettering">
+      <xs:annotation>
+         <xs:documentation>AN..1 (a-z, A-Z)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:minLength value="0"/>
+         <xs:maxLength value="1"/>
+         <xs:pattern value="([a-z]|[A-Z])"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Huisnummering">
+      <xs:annotation>
+         <xs:documentation>N5 (1 .. 99999)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:positiveInteger">
+         <xs:minInclusive value="1"/>
+         <xs:maxInclusive value="99999"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Huisnummertoevoeging">
+      <xs:annotation>
+         <xs:documentation>AN4 (a-z, A-Z, 0-9)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:minLength value="0"/>
+         <xs:maxLength value="4"/>
+         <xs:pattern value="([a-z]|[A-Z]|[0-9])*"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="JaNeeType">
+      <xs:restriction base="xs:token">
+         <xs:length value="1"/>
+         <xs:enumeration value="N"/>
+         <xs:enumeration value="J"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Jaar">
+      <xs:annotation>
+         <xs:documentation>N4 (JJJJ)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[0-9]{4}"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="NaamgevingObject">
+      <xs:annotation>
+         <xs:documentation>Benaming van een object: AN..80</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="80"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Natuurlijkgetal">
+      <xs:annotation>
+         <xs:documentation>N6</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:integer">
+         <xs:minInclusive value="0"/>
+         <xs:maxInclusive value="999999"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Objectnummering">
+      <xs:annotation>
+         <xs:documentation>Unieke identifier (AN16)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:minLength value="16"/>
+         <xs:maxLength value="16"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="ObjectnummeringVerzameling">
+      <xs:annotation>
+         <xs:documentation>Unieke identifier (AN16;..)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="ObjecttypeCode">
+      <xs:annotation>
+         <xs:documentation>type van het object (BGR blz 55, BRA blz 45)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:length value="2"/>
+         <xs:enumeration value="01" id="verblijfsobject">
+            <xs:annotation>
+               <xs:documentation>verblijfsobject</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="02">
+            <xs:annotation>
+               <xs:documentation>ligplaats</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="03">
+            <xs:annotation>
+               <xs:documentation>standplaats</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="10">
+            <xs:annotation>
+               <xs:documentation>pand</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="20">
+            <xs:annotation>
+               <xs:documentation>nummeraanduiding</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="30">
+            <xs:annotation>
+               <xs:documentation>openbare ruimte</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="40">
+            <xs:annotation>
+               <xs:documentation>woonplaats</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Objectvolgnummer">
+      <xs:annotation>
+         <xs:documentation>AN10</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:minLength value="10"/>
+         <xs:maxLength value="10"/>
+         <xs:pattern value="([0-9])*"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <!-- NEW / not used: Oppervlaktemaat  -->
+   <xs:simpleType name="Postcode">
+      <xs:annotation>
+         <xs:documentation>AN6 (NNNNAA)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:minLength value="6"/>
+         <xs:maxLength value="6"/>
+         <xs:pattern value="([0-9]){4,4}([A-Z]){2,2}"/>
+         <xs:pattern value="([0-9]){4,4}([A-Z]){2,2}"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <!-- NEW / not used: RuimtelijkeCoordinaten -->
+   <xs:simpleType name="StatusLigplaats">
+      <xs:annotation>
+         <xs:documentation>Status van een ligplaats (AN..80, zie BGR 58.03, blz 57)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Plaats aangewezen"/>
+         <xs:enumeration value="Plaats ingetrokken"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="StatusNaamgeving">
+      <xs:annotation>
+         <xs:documentation>Status van een Openbare ruimte of Nummeraanduiding (AN..80, zie BRA 11.69, blz 47)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Naamgeving uitgegeven"/>
+         <xs:enumeration value="Naamgeving ingetrokken"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="StatusPand">
+      <xs:annotation>
+         <xs:documentation>Status van een pand (AN..80, zie BGR 55.31, blz 58)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Bouwvergunning verleend"/>
+         <xs:enumeration value="Niet gerealiseerd pand"/>
+         <xs:enumeration value="Bouw gestart"/>
+         <xs:enumeration value="Pand in gebruik (niet ingemeten)"/>
+         <xs:enumeration value="Pand in gebruik"/>
+         <xs:enumeration value="Sloopvergunning verleend"/>
+         <xs:enumeration value="Pand gesloopt"/>
+         <xs:enumeration value="Pand buiten gebruik"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="StatusStandplaats">
+      <xs:annotation>
+         <xs:documentation>Status van een standplaats (AN..80, zie BGR 57.03, blz 57)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Plaats aangewezen"/>
+         <xs:enumeration value="Plaats ingetrokken"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="StatusVerblijfsObject">
+      <xs:annotation>
+         <xs:documentation>Status van een verblijfobject (AN..80, zie BGR 56.32, blz 58)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Verblijfsobject gevormd"/>
+         <xs:enumeration value="Niet gerealiseerd verblijfsobject"/>
+         <xs:enumeration value="Verblijfsobject in gebruik (niet ingemeten)"/>
+         <xs:enumeration value="Verblijfsobject in gebruik"/>
+         <xs:enumeration value="Verblijfsobject ingetrokken"/>
+         <xs:enumeration value="Verblijfsobject buiten gebruik"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="StatusWoonplaats">
+      <xs:annotation>
+         <xs:documentation>Status van een woonplaats (AN..80, zie BRA 11.79, blz 47)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Woonplaats aangewezen"/>
+         <xs:enumeration value="Woonplaats ingetrokken"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="TyperingAdresseerbareObjecttypen">
+      <xs:annotation>
+         <xs:documentation>verblijfsobject, standplaats, ligplaats (AN20) </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Verblijfsobject"/>
+         <xs:enumeration value="Standplaats"/>
+         <xs:enumeration value="Ligplaats"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="TyperingOpenbareRuimte">
+      <xs:annotation>
+         <xs:documentation>Weg,Water, ... (AN40) </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Weg"/>
+         <xs:enumeration value="Water"/>
+         <xs:enumeration value="Spoorbaan"/>
+         <xs:enumeration value="Terrein"/>
+         <xs:enumeration value="Kunstwerk"/>
+         <xs:enumeration value="Landschappelijk gebied"/>
+         <xs:enumeration value="Administratief gebied"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="WoonplaatsCodering">
+      <xs:annotation>
+         <xs:documentation>AN4: 0001 - 9999</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:minLength value="4"/>
+         <xs:maxLength value="4"/>
+         <xs:pattern value="\d\d\d\d"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <!--==========================================================================================================-->
+   <!--== Eigen typen-->
+   <!--==========================================================================================================-->
+   <xs:simpleType name="WoonplaatsNaam">
+      <xs:restriction base="bag:NaamgevingObject"/>
+   </xs:simpleType>
+   <xs:simpleType name="OpenbareRuimteNaam">
+      <xs:restriction base="bag:NaamgevingObject"/>
+   </xs:simpleType>
+   <xs:complexType name="GeometrieVlak">
+      <xs:complexContent>
+         <xs:extension base="gml:SurfacePropertyType"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GeometriePunt">
+      <xs:complexContent>
+         <xs:extension base="gml:PointPropertyType"/>
+      </xs:complexContent>
+   </xs:complexType>
+</xs:schema>
