@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ===========================================================================
+         Maven 2 project configuration file
+         http://maven.apache.org/
+=========================================================================== -->
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- ==================================================== -->
+    <!--     Project description                              -->
+    <!-- ==================================================== -->
+    <groupId>org.nergens.openbag</groupId>
+    <artifactId>lvkoppeling</artifactId>
+    <packaging>jar</packaging>
+    <name>lvkoppeling OpenBag</name>
+    <url>http://code.google.com/p/openbag/</url>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>
+        This is the Openbag lvkoppeling
+    </description>
+    
+    <organization>
+        <name>Witteveen Autmatisering</name>
+        <url>http://www.witteveen-automatisering.nl/</url>
+    </organization>
+    
+    <scm>
+        <connection>scm:svn:http://openbag.googlecode.com/svn/</connection>
+        <url>http://code.google.com/p/openbag/source/browse/</url>
+    </scm>
+    
+    <developers>
+        <developer>
+            <id>eduard</id>
+            <name>Eduard Witteveen</name>
+            <email>eywitteveen@gmail.com</email>
+            <organization>Witteveen Automatisering</organization>
+            <roles>
+                <role>Putjeschepper</role>
+            </roles>
+        </developer>
+    </developers>    
+    
+    <dependencies>
+
+<dependency>
+	<groupId>org.apache.axis2</groupId>
+	<artifactId>axis2</artifactId>
+	<version>1.4</version>
+</dependency>
+<dependency>
+	<groupId>wsdl4j</groupId>
+	<artifactId>wsdl4j</artifactId>
+	<version>1.6.1</version>
+</dependency>
+
+        <!-- added for netbeans maven plugin http://mevenide.codehaus.org/  -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>hibernate3-maven-plugin</artifactId>
+                <version>2.0-alpha-2</version>
+                <configuration>
+                    <!-- When to invoke this plugin -->
+                    <executions>
+                        <execution>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>hbm2ddl</goal>
+                            </goals>
+                        </execution>
+                    </executions>				
+                    <components>
+                        <component>
+                            <name>hbm2ddl</name>
+                            <implementation>annotationconfiguration</implementation>
+                        </component>
+                        <component>
+                            <name>hbm2hbmxml</name>
+                            <outputDirectory>src/main/resources</outputDirectory>
+                        </component>
+                    </components>
+                    <componentProperties>
+                        <!-- Output in pretty format -->
+                        <format>true</format>
+                        <!-- Do not create drop statements -->
+                        <drop>false</drop>
+                        <!-- Generate script -->
+                        <text>true</text>
+                        <!-- Do not output sql to screen -->
+                        <quiet>false</quiet>
+                        <!-- Do not export tables into database -->
+                        <export>false</export>
+                        <outputfilename>schema-export.sql</outputfilename>
+                        <configurationfile>/src/main/resources/bag.cfg.xml</configurationfile>
+                    </componentProperties>
+                </configuration>
+                <dependencies>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <encoding>US-ASCII</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <encoding>UTF-16</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.nergens.bag.lvkoppeling.Main</mainClass>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>            
+        </plugins>
+    </build>
+</project>
