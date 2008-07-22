@@ -49,7 +49,7 @@
             * override this method for handling normal response from ontvangKennisgeving operation
             */
            public void receiveResultontvangKennisgeving(
-                    nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonStub.SynchroonAntwoordBericht result
+                    nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht result
                         ) {
            }
 
@@ -65,7 +65,7 @@
             * override this method for handling normal response from beantwoordVraag operation
             */
            public void receiveResultbeantwoordVraag(
-                    nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonStub.SynchroonAntwoordBericht result
+                    nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht result
                         ) {
            }
 

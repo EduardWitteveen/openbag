@@ -10,7 +10,7 @@ package nl.vrom.www.bag.stuf._0120;
 
 public class StUF_Fout extends java.lang.Exception{
     
-    private nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonStub.FoutBerichtE faultMessage;
+    private nl.vrom.www.bag.stuf._0120.FoutBerichtE faultMessage;
     
     public StUF_Fout() {
         super("StUF_Fout");
@@ -24,11 +24,11 @@ public class StUF_Fout extends java.lang.Exception{
       super(s, ex);
     }
     
-    public void setFaultMessage(nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonStub.FoutBerichtE msg){
+    public void setFaultMessage(nl.vrom.www.bag.stuf._0120.FoutBerichtE msg){
        faultMessage = msg;
     }
     
-    public nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonStub.FoutBerichtE getFaultMessage(){
+    public nl.vrom.www.bag.stuf._0120.FoutBerichtE getFaultMessage(){
        return faultMessage;
     }
 }
