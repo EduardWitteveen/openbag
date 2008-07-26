@@ -19,7 +19,7 @@
         /**
           * Auto generated method signature
           * 
-                    * @param kennisgevingsBericht1
+                    * @param kennisgevingsBericht
                 
              * @throws nl.vrom.www.bag.stuf._0120.StUF_Fout : 
          */
@@ -27,32 +27,17 @@
          
                      public nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht ontvangKennisgeving(
 
-                        nl.vrom.www.bag.stuf._0120.KennisgevingsBericht kennisgevingsBericht1)
+                        nl.vrom.www.bag.stuf._0120.KennisgevingsBericht kennisgevingsBericht)
                         throws java.rmi.RemoteException
              
           ,nl.vrom.www.bag.stuf._0120.StUF_Fout;
 
         
-         /**
-            * Auto generated method signature for Asynchronous Invocations
-            * 
-                * @param kennisgevingsBericht1
-            
-          */
-        public void startontvangKennisgeving(
-
-            nl.vrom.www.bag.stuf._0120.KennisgevingsBericht kennisgevingsBericht1,
-
-            final nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonCallbackHandler callback)
-
-            throws java.rmi.RemoteException;
-
-     
 
         /**
           * Auto generated method signature
           * 
-                    * @param vraagBericht3
+                    * @param vraagBericht
                 
              * @throws nl.vrom.www.bag.stuf._0120.StUF_Fout : 
          */
@@ -60,27 +45,12 @@
          
                      public nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht beantwoordVraag(
 
-                        nl.vrom.www.bag.stuf._0120.VraagBericht vraagBericht3)
+                        nl.vrom.www.bag.stuf._0120.VraagBericht vraagBericht)
                         throws java.rmi.RemoteException
              
           ,nl.vrom.www.bag.stuf._0120.StUF_Fout;
 
         
-         /**
-            * Auto generated method signature for Asynchronous Invocations
-            * 
-                * @param vraagBericht3
-            
-          */
-        public void startbeantwoordVraag(
-
-            nl.vrom.www.bag.stuf._0120.VraagBericht vraagBericht3,
-
-            final nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonCallbackHandler callback)
-
-            throws java.rmi.RemoteException;
-
-     
 
         
        //
