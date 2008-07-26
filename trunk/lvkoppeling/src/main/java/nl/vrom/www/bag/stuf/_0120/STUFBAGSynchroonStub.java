@@ -152,7 +152,7 @@
                      * Auto generated method signature
                      * 
                      * @see nl.vrom.www.bag.stuf._0120.STUFBAGSynchroon#ontvangKennisgeving
-                     * @param kennisgevingsBericht5
+                     * @param kennisgevingsBericht1
                     
                      * @throws nl.vrom.www.bag.stuf._0120.StUF_Fout : 
                      */
@@ -161,7 +161,7 @@
 
                             public  nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht ontvangKennisgeving(
 
-                            nl.vrom.www.bag.stuf._0120.KennisgevingsBericht kennisgevingsBericht5)
+                            nl.vrom.www.bag.stuf._0120.KennisgevingsBericht kennisgevingsBericht1)
                         
 
                     throws java.rmi.RemoteException
@@ -189,7 +189,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    kennisgevingsBericht5,
+                                                    kennisgevingsBericht1,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.vrom.nl/bag/stuf/0120",
                                                     "ontvangKennisgeving")));
                                                 
@@ -273,162 +273,11 @@
             }
         }
             
-                /**
-                * Auto generated method signature for Asynchronous Invocations
-                * 
-                * @see nl.vrom.www.bag.stuf._0120.STUFBAGSynchroon#startontvangKennisgeving
-                    * @param kennisgevingsBericht5
-                
-                */
-                public  void startontvangKennisgeving(
-
-                 nl.vrom.www.bag.stuf._0120.KennisgevingsBericht kennisgevingsBericht5,
-
-                  final nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonCallbackHandler callback)
-
-                throws java.rmi.RemoteException{
-
-              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
-             _operationClient.getOptions().setAction("urn:ontvangKennisgeving");
-             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
-
-              
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
-              
-
-
-              // create SOAP envelope with that payload
-              org.apache.axiom.soap.SOAPEnvelope env=null;
-              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
-
-                    
-                                    //Style is Doc.
-                                    
-                                                    
-                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    kennisgevingsBericht5,
-                                                    optimizeContent(new javax.xml.namespace.QName("http://www.vrom.nl/bag/stuf/0120",
-                                                    "ontvangKennisgeving")));
-                                                
-        // adding SOAP soap_headers
-         _serviceClient.addHeadersToEnvelope(env);
-        // create message context with that soap envelope
-        _messageContext.setEnvelope(env);
-
-        // add the message context to the operation client
-        _operationClient.addMessageContext(_messageContext);
-
-
-                    
-                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
-                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
-                            try {
-                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
-                                
-                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht.class,
-                                                                         getEnvelopeNamespaces(resultEnv));
-                                        callback.receiveResultontvangKennisgeving(
-                                        (nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht)object);
-                                        
-                            } catch (org.apache.axis2.AxisFault e) {
-                                callback.receiveErrorontvangKennisgeving(e);
-                            }
-                            }
-
-                            public void onError(java.lang.Exception error) {
-								if (error instanceof org.apache.axis2.AxisFault) {
-									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
-									org.apache.axiom.om.OMElement faultElt = f.getDetail();
-									if (faultElt!=null){
-										if (faultExceptionNameMap.containsKey(faultElt.getQName())){
-											//make the fault by reflection
-											try{
-													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
-													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
-													java.lang.Exception ex=
-														(java.lang.Exception) exceptionClass.newInstance();
-													//message class
-													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
-														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
-													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
-													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
-															new java.lang.Class[]{messageClass});
-													m.invoke(ex,new java.lang.Object[]{messageObject});
-													
-													if (ex instanceof nl.vrom.www.bag.stuf._0120.StUF_Fout){
-														callback.receiveErrorontvangKennisgeving((nl.vrom.www.bag.stuf._0120.StUF_Fout)ex);
-											            return;
-										            }
-										            
-					
-										            callback.receiveErrorontvangKennisgeving(new java.rmi.RemoteException(ex.getMessage(), ex));
-                                            } catch(java.lang.ClassCastException e){
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorontvangKennisgeving(f);
-                                            } catch (java.lang.ClassNotFoundException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorontvangKennisgeving(f);
-                                            } catch (java.lang.NoSuchMethodException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorontvangKennisgeving(f);
-                                            } catch (java.lang.reflect.InvocationTargetException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorontvangKennisgeving(f);
-                                            } catch (java.lang.IllegalAccessException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorontvangKennisgeving(f);
-                                            } catch (java.lang.InstantiationException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorontvangKennisgeving(f);
-                                            } catch (org.apache.axis2.AxisFault e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorontvangKennisgeving(f);
-                                            }
-									    } else {
-										    callback.receiveErrorontvangKennisgeving(f);
-									    }
-									} else {
-									    callback.receiveErrorontvangKennisgeving(f);
-									}
-								} else {
-								    callback.receiveErrorontvangKennisgeving(error);
-								}
-                            }
-
-                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
-                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
-                                onError(fault);
-                            }
-
-                            public void onComplete() {
-                                try {
-                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
-                                } catch (org.apache.axis2.AxisFault axisFault) {
-                                    callback.receiveErrorontvangKennisgeving(axisFault);
-                                }
-                            }
-                });
-                        
-
-          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
-        if ( _operations[0].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
-           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
-          _operations[0].setMessageReceiver(
-                    _callbackReceiver);
-        }
-
-           //execute the operation client
-           _operationClient.execute(false);
-
-                    }
-                
                     /**
                      * Auto generated method signature
                      * 
                      * @see nl.vrom.www.bag.stuf._0120.STUFBAGSynchroon#beantwoordVraag
-                     * @param vraagBericht7
+                     * @param vraagBericht3
                     
                      * @throws nl.vrom.www.bag.stuf._0120.StUF_Fout : 
                      */
@@ -437,7 +286,7 @@
 
                             public  nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht beantwoordVraag(
 
-                            nl.vrom.www.bag.stuf._0120.VraagBericht vraagBericht7)
+                            nl.vrom.www.bag.stuf._0120.VraagBericht vraagBericht3)
                         
 
                     throws java.rmi.RemoteException
@@ -465,7 +314,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    vraagBericht7,
+                                                    vraagBericht3,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.vrom.nl/bag/stuf/0120",
                                                     "beantwoordVraag")));
                                                 
@@ -549,157 +398,6 @@
             }
         }
             
-                /**
-                * Auto generated method signature for Asynchronous Invocations
-                * 
-                * @see nl.vrom.www.bag.stuf._0120.STUFBAGSynchroon#startbeantwoordVraag
-                    * @param vraagBericht7
-                
-                */
-                public  void startbeantwoordVraag(
-
-                 nl.vrom.www.bag.stuf._0120.VraagBericht vraagBericht7,
-
-                  final nl.vrom.www.bag.stuf._0120.STUFBAGSynchroonCallbackHandler callback)
-
-                throws java.rmi.RemoteException{
-
-              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
-             _operationClient.getOptions().setAction("urn:beantwoordVraag");
-             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
-
-              
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
-              
-
-
-              // create SOAP envelope with that payload
-              org.apache.axiom.soap.SOAPEnvelope env=null;
-              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
-
-                    
-                                    //Style is Doc.
-                                    
-                                                    
-                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    vraagBericht7,
-                                                    optimizeContent(new javax.xml.namespace.QName("http://www.vrom.nl/bag/stuf/0120",
-                                                    "beantwoordVraag")));
-                                                
-        // adding SOAP soap_headers
-         _serviceClient.addHeadersToEnvelope(env);
-        // create message context with that soap envelope
-        _messageContext.setEnvelope(env);
-
-        // add the message context to the operation client
-        _operationClient.addMessageContext(_messageContext);
-
-
-                    
-                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
-                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
-                            try {
-                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
-                                
-                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht.class,
-                                                                         getEnvelopeNamespaces(resultEnv));
-                                        callback.receiveResultbeantwoordVraag(
-                                        (nl.vrom.www.bag.stuf._0120.SynchroonAntwoordBericht)object);
-                                        
-                            } catch (org.apache.axis2.AxisFault e) {
-                                callback.receiveErrorbeantwoordVraag(e);
-                            }
-                            }
-
-                            public void onError(java.lang.Exception error) {
-								if (error instanceof org.apache.axis2.AxisFault) {
-									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
-									org.apache.axiom.om.OMElement faultElt = f.getDetail();
-									if (faultElt!=null){
-										if (faultExceptionNameMap.containsKey(faultElt.getQName())){
-											//make the fault by reflection
-											try{
-													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
-													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
-													java.lang.Exception ex=
-														(java.lang.Exception) exceptionClass.newInstance();
-													//message class
-													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
-														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
-													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
-													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
-															new java.lang.Class[]{messageClass});
-													m.invoke(ex,new java.lang.Object[]{messageObject});
-													
-													if (ex instanceof nl.vrom.www.bag.stuf._0120.StUF_Fout){
-														callback.receiveErrorbeantwoordVraag((nl.vrom.www.bag.stuf._0120.StUF_Fout)ex);
-											            return;
-										            }
-										            
-					
-										            callback.receiveErrorbeantwoordVraag(new java.rmi.RemoteException(ex.getMessage(), ex));
-                                            } catch(java.lang.ClassCastException e){
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorbeantwoordVraag(f);
-                                            } catch (java.lang.ClassNotFoundException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorbeantwoordVraag(f);
-                                            } catch (java.lang.NoSuchMethodException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorbeantwoordVraag(f);
-                                            } catch (java.lang.reflect.InvocationTargetException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorbeantwoordVraag(f);
-                                            } catch (java.lang.IllegalAccessException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorbeantwoordVraag(f);
-                                            } catch (java.lang.InstantiationException e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorbeantwoordVraag(f);
-                                            } catch (org.apache.axis2.AxisFault e) {
-                                                // we cannot intantiate the class - throw the original Axis fault
-                                                callback.receiveErrorbeantwoordVraag(f);
-                                            }
-									    } else {
-										    callback.receiveErrorbeantwoordVraag(f);
-									    }
-									} else {
-									    callback.receiveErrorbeantwoordVraag(f);
-									}
-								} else {
-								    callback.receiveErrorbeantwoordVraag(error);
-								}
-                            }
-
-                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
-                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
-                                onError(fault);
-                            }
-
-                            public void onComplete() {
-                                try {
-                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
-                                } catch (org.apache.axis2.AxisFault axisFault) {
-                                    callback.receiveErrorbeantwoordVraag(axisFault);
-                                }
-                            }
-                });
-                        
-
-          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
-        if ( _operations[1].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
-           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
-          _operations[1].setMessageReceiver(
-                    _callbackReceiver);
-        }
-
-           //execute the operation client
-           _operationClient.execute(false);
-
-                    }
-                
 
 
        /**

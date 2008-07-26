@@ -19,7 +19,7 @@
         /**
           * Auto generated method signature
           * 
-                    * @param synchronisatieBericht0
+                    * @param synchronisatieBericht
                 
              * @throws nl.vrom.www.bag.stuf._0120.StUF_Fout : 
          */
@@ -27,27 +27,12 @@
          
                      public nl.vrom.www.bag.stuf._0120.SynchronisatieAntwoordBericht verwerkSynchronisatie(
 
-                        nl.vrom.www.bag.stuf._0120.SynchronisatieBericht synchronisatieBericht0)
+                        nl.vrom.www.bag.stuf._0120.SynchronisatieBericht synchronisatieBericht)
                         throws java.rmi.RemoteException
              
           ,nl.vrom.www.bag.stuf._0120.StUF_Fout;
 
         
-         /**
-            * Auto generated method signature for Asynchronous Invocations
-            * 
-                * @param synchronisatieBericht0
-            
-          */
-        public void startverwerkSynchronisatie(
-
-            nl.vrom.www.bag.stuf._0120.SynchronisatieBericht synchronisatieBericht0,
-
-            final nl.vrom.www.bag.stuf._0120.STUFBAGSynchronisatieCallbackHandler callback)
-
-            throws java.rmi.RemoteException;
-
-     
 
         
        //
