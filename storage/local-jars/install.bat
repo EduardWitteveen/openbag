@@ -1,7 +1,8 @@
-call install-ejb.sh
-call install-hibernate-spatial-postgis.sh
-call install-hibernate-spatial.sh
-call install-jta.sh
-call install-jts.sh
-call install-postgis.sh
+call install-ejb.bat
+call install-hibernate-spatial-postgis.bat
+call install-hibernate-spatial.bat
+call install-jta.bat
+call install-jts.bat
+call install-postgis.bat
+call install-oracle-instantclient.bat
 
