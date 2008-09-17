@@ -524,7 +524,7 @@
                          java.lang.String content = tempAttribNoValue;
                         
                                         attributeMap.put("NoValue",
-                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToNoValue(tempAttribNoValue));
+                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToAnyType(tempAttribNoValue));
                                     
                     } else {
                        
@@ -553,7 +553,7 @@
                                                                 attributeMap.get("NoValue");
                                                if (tempObjectAttribnoValue!=null){
                                                     
-                                                            object.setNoValue((NoValue)tempObjectAttribnoValue);
+                                                            object.setNoValue((nl.egem.www.stuf.stuf0205.NoValue)tempObjectAttribnoValue);
                                                         
                                                 }
                                             

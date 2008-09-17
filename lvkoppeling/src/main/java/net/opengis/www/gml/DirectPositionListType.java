@@ -422,11 +422,12 @@
                                 reader.getAttributeValue(null,"count");
                             
                    if (tempAttribCount!=null){
-                         java.lang.String content = tempAttribCount;
-                        
+//                         java.lang.String content = tempAttribCount;
+                         content = tempAttribCount;                        
                                                  object.setCount(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToPositiveInteger(tempAttribCount));
-                                            
+
+                                                 
                     } else {
                        
                     }
