@@ -1,0 +1,52 @@
+<?xml version="1.0" standalone="yes" ?>
+<xs:schema id="Centroid" targetNamespace="http://www.tempuri.org/Centroid.xsd" xmlns:mstns="http://www.tempuri.org/Centroid.xsd"
+	xmlns="http://www.tempuri.org/Centroid.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+	<xs:element name="Centroid" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="HIT_CTR">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Handle" type="xs:string" />
+							<xs:element name="Pavement" type="xs:string" minOccurs="0" />
+							<xs:element name="RType" type="xs:string" minOccurs="0" />
+							<xs:element name="Parentcadid" type="xs:string" minOccurs="0" />
+							<xs:element name="Area" type="xs:string" minOccurs="0" />
+							<xs:element name="OrgRType" type="xs:string" minOccurs="0" />
+							<xs:element name="OrgPavement" type="xs:string" minOccurs="0" />
+							<xs:element name="Att1" type="xs:string" minOccurs="0" />
+							<xs:element name="Att2" type="xs:string" minOccurs="0" />
+							<xs:element name="Att3" type="xs:string" minOccurs="0" />
+							<xs:element name="Att4" type="xs:string" minOccurs="0" />
+							<xs:element name="Att5" type="xs:string" minOccurs="0" />
+							<xs:element name="mapid" type="xs:integer" minOccurs="0" />
+							<xs:element name="X" type="xs:double" minOccurs="0" />
+							<xs:element name="Y" type="xs:double" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="OrgRTypes_">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Rtype" type="xs:string" minOccurs="0" />
+							<xs:element name="cwvo_omschrijving" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="OrgPavements_">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="cvha_omschrijving" type="xs:string" minOccurs="0" />
+							<xs:element name="cvht_omschrijving" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="Constraint1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:HIT_CTR" />
+			<xs:field xpath="mstns:Handle" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,872 @@
+<VisualStudioProject>
+    <CSHARP
+        ProjectType = "Web"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{09B207CC-AF98-44DF-8458-8A92A0647E8F}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = ""
+                AssemblyKeyContainerName = ""
+                AssemblyName = "qi02"
+                AssemblyOriginatorKeyFile = ""
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "Library"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "qi02"
+                RunPostBuildEvent = "OnBuildSuccess"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "DEBUG;TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+                <Config
+                    Name = "Release"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "false"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "true"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "System.Web"
+                    AssemblyName = "System.Web"
+                    HintPath = "..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.dll"
+                />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                    HintPath = "..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "System.Data.OracleClient"
+                    AssemblyName = "System.Data.OracleClient"
+                    HintPath = "..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.OracleClient.dll"
+                    Private = "False"
+                />
+                <Reference
+                    Name = "DynamicAuthoringToolkit"
+                    Guid = "{4545C040-2CDC-11D4-B05F-00105AA44781}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "HawarIT.WebLibrary"
+                    AssemblyName = "HawarIT.WebLibrary"
+                    HintPath = "..\HawarIT.WebLibrary\bin\Debug\HawarIT.WebLibrary.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Default.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Default.aspx.cs"
+                    DependentUpon = "Default.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Default.aspx.resx"
+                    DependentUpon = "Default.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Global.asax"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Global.asax.cs"
+                    DependentUpon = "Global.asax"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Global.asax.resx"
+                    DependentUpon = "Global.asax.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "MapguideViewer.ascx"
+                    SubType = "UserControl"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "MapguideViewer.ascx.cs"
+                    DependentUpon = "MapguideViewer.ascx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MapguideViewer.ascx.resx"
+                    DependentUpon = "MapguideViewer.ascx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web.config"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "data\MapWindowXMLProcessor.aspx.cs"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "data\MapWindowXMLProcessor.aspx.resx"
+                    DependentUpon = "MapWindowXMLProcessor.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "data\viewer.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "details\bestemmingsvlak.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "details\bestemmingsvlak.aspx.cs"
+                    DependentUpon = "bestemmingsvlak.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "details\bestemmingsvlak.aspx.resx"
+                    DependentUpon = "bestemmingsvlak.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "details\BomenDetails.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "details\BomenDetails.aspx.cs"
+                    DependentUpon = "BomenDetails.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "details\BomenDetails.aspx.resx"
+                    DependentUpon = "BomenDetails.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "details\Centroid.cs"
+                    SubType = "code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "details\CentroidDetails.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "details\CentroidDetails.aspx.cs"
+                    DependentUpon = "CentroidDetails.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "details\CentroidDetails.aspx.resx"
+                    DependentUpon = "CentroidDetails.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "details\GrijsDetails.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "details\GrijsDetails.aspx.cs"
+                    DependentUpon = "GrijsDetails.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "details\GrijsDetails.aspx.resx"
+                    DependentUpon = "GrijsDetails.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "details\GroenDetails.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "details\GroenDetails.aspx.cs"
+                    DependentUpon = "GroenDetails.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "details\GroenDetails.aspx.resx"
+                    DependentUpon = "GroenDetails.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "login\Login.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "login\Login.aspx.cs"
+                    DependentUpon = "Login.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "login\Login.aspx.resx"
+                    DependentUpon = "Login.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "login\Logout.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "login\Logout.aspx.cs"
+                    DependentUpon = "Logout.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "login\Logout.aspx.resx"
+                    DependentUpon = "Logout.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "login\media\bullet.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "login\media\corner.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "login\media\menufade.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "login\media\os.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "login\media\spacer_grey.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "login\media\style.css"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\MapWindowXMLProcessor.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\ie_mac_mrj\index.htm"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\ie_mac_mrj\MapGuide Installer.bin"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "mapguide\installer\ie_win\index.htm"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\ie_win\install.htm"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\ie_win\mgjava.cab"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\manual\index.htm"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\manual\mgjava.jar"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\ns_unix\index.htm"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\ns_unix\MapGuide_Installer_VM.bin"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "mapguide\installer\ns_win\index.htm"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "mapguide\installer\ns_win\install.jar"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\controlbox-resize.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\logo.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\menufade.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\pinpoint.js"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\style.css"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\subpartreport.js"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\swap.js"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\tasks.js"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\fade.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\Seperator.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\Thumbs.db"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "media\toolbar\active\Distance.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\LogOff.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\Pan.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\Select.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\Stop.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\ZoomExt.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\ZoomIn.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\ZoomOut.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\ZoomPrev.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\active\ZoomScale.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\Distance.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\LogOff.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\Pan.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\Select.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\Stop.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\ZoomExt.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\ZoomIn.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\ZoomOut.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\ZoomPrev.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\down\ZoomScale.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\Distance.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\LogOff.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\Pan.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\Select.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\Stop.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\ZoomExt.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\ZoomIn.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\ZoomOut.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\ZoomPrev.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\inactive\ZoomScale.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\Distance.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\LogOff.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\Pan.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\Select.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\Stop.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\ZoomExt.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\ZoomIn.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\ZoomOut.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\ZoomPrev.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "media\toolbar\normal\ZoomScale.gif"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\pinpoint.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\pinpoint.aspx.cs"
+                    DependentUpon = "pinpoint.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "pinpoint\pinpoint.aspx.resx"
+                    DependentUpon = "pinpoint.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "pinpoint\PinPoint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointadd.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointadd.aspx.cs"
+                    DependentUpon = "pinpointadd.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointadd.aspx.resx"
+                    DependentUpon = "pinpointadd.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointmain.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointmain.aspx.cs"
+                    DependentUpon = "pinpointmain.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointmain.aspx.resx"
+                    DependentUpon = "pinpointmain.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointselect.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointselect.aspx.cs"
+                    DependentUpon = "pinpointselect.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointselect.aspx.resx"
+                    DependentUpon = "pinpointselect.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointtext.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointtext.aspx.cs"
+                    DependentUpon = "pinpointtext.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "pinpoint\pinpointtext.aspx.resx"
+                    DependentUpon = "pinpointtext.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "pinpoint\media\edit_record.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\media\edit_root.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\media\gradhatch.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\media\pinpoint.css"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\media\pinpoint.js"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\media\web_exclamation.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\media\web_questionmark.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "pinpoint\media\web_zoomto.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\subpartreport.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\subpartreport.aspx.cs"
+                    DependentUpon = "subpartreport.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "subpartreport\subpartreport.aspx.resx"
+                    DependentUpon = "subpartreport.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "subpartreport\subpartreportmain.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\subpartreportmainProb.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\subpartreportmain.aspx.cs"
+                    DependentUpon = "subpartreportmainProb.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "subpartreport\subpartreportmain.aspx.resx"
+                    DependentUpon = "subpartreportmain.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "subpartreport\media\edit_record.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\edit_root.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\gradhatch.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\subpartreport.css"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\subpartreport.js"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\Thumbs.db"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\web_exclamation.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\web_questionmark.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\web_zoomto.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\empty-file"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\format"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\README.txt"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\prop-base\edit_record.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\prop-base\edit_root.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\prop-base\gradhatch.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\prop-base\Thumbs.db.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\prop-base\web_exclamation.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\prop-base\web_questionmark.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\prop-base\web_zoomto.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\props\edit_record.png.svn-work"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\props\edit_root.png.svn-work"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\props\gradhatch.png.svn-work"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\props\Thumbs.db.svn-work"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\props\web_exclamation.png.svn-work"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\props\web_questionmark.png.svn-work"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\props\web_zoomto.png.svn-work"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\edit_record.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\edit_root.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\gradhatch.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\subpartreport.css.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\subpartreport.js.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\Thumbs.db.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\web_exclamation.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\web_questionmark.png.svn-base"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "subpartreport\media\_svn\text-base\web_zoomto.png.svn-base"
+                    BuildAction = "None"
+                />
+                <Folder RelPath = "subpartreport\media\_svn\tmp\prop-base\" />
+                <Folder RelPath = "subpartreport\media\_svn\tmp\props\" />
+                <Folder RelPath = "subpartreport\media\_svn\tmp\text-base\" />
+                <Folder RelPath = "subpartreport\media\_svn\tmp\wcprops\" />
+                <Folder RelPath = "subpartreport\media\_svn\wcprops\" />
+            </Include>
+        </Files>
+    </CSHARP>
+</VisualStudioProject>
+

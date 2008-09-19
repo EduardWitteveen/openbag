@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qi02", "http://localhost/da54/qi02.csproj", "{09B207CC-AF98-44DF-8458-8A92A0647E8F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{09B207CC-AF98-44DF-8458-8A92A0647E8F}.Debug.ActiveCfg = Debug|.NET
+		{09B207CC-AF98-44DF-8458-8A92A0647E8F}.Debug.Build.0 = Debug|.NET
+		{09B207CC-AF98-44DF-8458-8A92A0647E8F}.Release.ActiveCfg = Release|.NET
+		{09B207CC-AF98-44DF-8458-8A92A0647E8F}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
