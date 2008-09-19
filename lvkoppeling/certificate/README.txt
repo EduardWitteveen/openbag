@@ -36,18 +36,15 @@ eduard@eduard-desktop:~/openbag/lvkoppeling/certificate$ openssl rsa -in hawarit
 Enter pass phrase for hawarit-key.pem:
 writing RSA key
 
-
-C:\bag\lvkoppeling\certificate>openssl pkcs12 -export -inkey hawarit-key.pem -in
- hawarit.crt -out hawarit-key-crt.p12 -name hawarit-key-crt
-Loading 'screen' into random state - done
+ubuntu@ubuntu:/media/disk-1/bag/lvkoppeling/certificate$ openssl pkcs12 -export -inkey hawarit-key.pem -in  hawarit.crt -out hawarit-key-crt.p12 -name hawarit-key-crt
 Enter pass phrase for hawarit-key.pem:
 Enter Export Password:
 Verifying - Enter Export Password:
 
-C:\bag\lvkoppeling\certificate>openssl pkcs12 -in hawarit-key-crt.p12 -out hawar
-it-key-crt-enc.pem
-3564:error:0D07207B:asn1 encoding routines:ASN1_get_object:header too long:.\cry
-pto\asn1\asn1_lib.c:150:
-
+ubuntu@ubuntu:/media/disk-1/bag/lvkoppeling/certificate$ openssl pkcs12 -in hawarit-key-crt.p12 -out hawarit-key-crt-enc.pem
+Enter Import Password:
+MAC verified OK
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
 
 
