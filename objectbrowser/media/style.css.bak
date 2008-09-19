@@ -1,0 +1,179 @@
+body
+{
+	font-size: 11px;
+	margin: 0px;
+	color: #ffffff;
+	font-family: arua font-family: arial, verdana, sans-serif;
+	background-color: #686689;
+}
+td.menubar
+{
+	background-position: left top;
+	background-image: url(menufade.png);
+	background-repeat: repeat-x;
+	background-color: #9896b1;
+	text-align: left;
+}
+td.menubaritems
+{
+	padding-right: 10px;
+	padding-left: 10px;
+	font-size: 11px;
+	visibility: hidden;
+	padding-bottom: 5px;
+	overflow: auto;
+	width: 180px;
+	color: white;
+	padding-top: 5px;
+	height: 8px;
+	background-color: transparent;
+	text-align: left;
+}
+td.toolbar
+{
+	background-position: left top;
+	background-image: url(toolbar/fade.png);
+	background-repeat: repeat-y;
+	background-color: #ffffff;
+	text-align: center;
+}
+td.logo
+{
+	background-color: #ffffff;
+	text-align: right;
+}
+td.dropmenu
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 11px;
+    BACKGROUND-COLOR: #9896b1;
+    TEXT-ALIGN: right;
+    font-color: #FFFFFF
+}
+/*
+
+body.legendastyle {
+	background-color: transparent;
+}
+
+body.menustyle {
+	background-image: url('../IMG/menufade.png');
+	background-repeat: no-repeat;
+	background-color: #9896B1;
+	margin-top: 41px
+}
+
+body.navstyle {
+	background-color: #FFFFFF;
+	background-image: url('../IMG/navfade.png');
+	background-repeat: no-repeat;
+}
+
+
+#legenda {
+	width: 175px; 
+	height: 263px; 
+	overflow-y: auto
+}
+
+.legendaframe {
+	width: 180px; 
+	height: 400px; 
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	visibility: hidden
+}
+
+#menutop {
+	font-family: arial, verdana, sans-serif; 
+	font-size: 12px;
+	color: #FFFFFF;
+	padding-left: 5px;
+	padding-top: 21px;
+}
+
+#menubottom {
+	font-family: arial, verdana, sans-serif; 
+	font-size: 10px;
+	color: #FFFFFF;
+	padding-left: 5px;
+}
+
+#main {
+	font-family: arial, verdana, sans-serif; 
+	font-size: 12px;
+	color: #FFFFFF;
+	padding-left: 5px;
+}
+
+#text {
+	font-family: arial, verdana, sans-serif; 
+	font-size: 11px;
+	color: #FFFFFF;
+}
+
+td {
+	font-family: arial, verdana, sans-serif; 
+	font-size: 11px;
+	color: #FFFFFF;
+	padding-left: 5px;
+}
+
+a {
+	font-family: arial, verdana, sans-serif; 
+	font-size: 11px;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #DAD9E8;
+	text-decoration: underline;
+}
+
+#buttons {
+	background-color: #FFFFFF;
+	padding-left: 2px;
+	padding-right: 2px;
+	cursor: hand
+}
+
+.hr {
+	border: solid #FFFFFF 1px;
+	height: 1px;
+}
+
+.submenuitems
+{
+	font-size: 11px;
+	visibility: hidden;
+	width: 180px;
+	height: 8;
+	overflow: auto;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	text-align: left;
+	background-color: transparent;
+}
+
+.menurow
+{
+	height: 20px;
+	padding: 0px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.menubox
+{
+	width: 30px;
+	height: 20px;
+	padding: 0px;
+	text-align: left;
+	vertical-align: middle;
+}
+*/

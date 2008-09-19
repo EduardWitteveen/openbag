@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MapWindow Version="6.0" CreatedBy="6.3.1.3 - Autodesk MapGuide(R) Author" xmlns="x-schema:MapWindowXMLSchema.xdr">
+
+  <GeneralProperties>
+    <Name>Da59</Name>
+    <Password></Password>
+    <BackgroundColorIndex>105</BackgroundColorIndex>
+    <MapCenter Latitude="475800" Longitude="140000"/>
+    <MapSize Width="5000" Height="3600"/>
+    <TrackingID AccessFromViewerAPI="0"/>
+    <ViewDistanceCalculation>0</ViewDistanceCalculation>
+  </GeneralProperties>
+
+  <CoordinateSystem>
+    <CSMap Code="*XY-MT*">
+      <Description>Arbitrary X-Y Coordinates (Meters)</Description>
+      <GroupCode>Arbitrary X-Y Coordinate Systems</GroupCode>
+
+      <Projection Code="*X-Y*">
+        <LatitudeOfOrigin>0</LatitudeOfOrigin>
+        <LongitudeOfOrigin>0</LongitudeOfOrigin>
+        <FalseEasting>0</FalseEasting>
+        <FalseNorthing>0</FalseNorthing>
+        <MapScale>1</MapScale>
+        <ScaleReductionFactor>1</ScaleReductionFactor>
+        <CombinedScaleFactor>1</CombinedScaleFactor>
+        <UnitsCode>Meter</UnitsCode>
+        <UnitsScaleFactor>1</UnitsScaleFactor>
+      </Projection>
+
+      <Datum Code="*X-Y*">
+        <Description>No Datum Used</Description>
+        <ToWGS84>0</ToWGS84>
+        <DX>0</DX>
+        <DY>0</DY>
+        <DZ>0</DZ>
+        <RotX>0</RotX>
+        <RotY>0</RotY>
+        <RotZ>0</RotZ>
+        <BWScale>0</BWScale>
+      </Datum>
+
+      <Ellipsoid Code="*X-Y*">
+        <Description>No Ellipsoid Used</Description>
+        <EquatorialRadius>1</EquatorialRadius>
+        <PolarRadius>1</PolarRadius>
+      </Ellipsoid>
+    </CSMap>
+  </CoordinateSystem>
+
+  <MapLayers>
+    <PolygonLayer>
+      <GeneralLayerProperties>
+        <Name>Objecten</Name>
+        <Visible>0</Visible>
+        <LegendLabel>Objecten</LegendLabel>
+        <ShowInLegend>1</ShowInLegend>
+        <DrawPriority>87.5</DrawPriority>
+        <Selectable>1</Selectable>
+        <Static>0</Static>
+        <AccessKey></AccessKey>
+        <AccessGeometry>0</AccessGeometry>
+        <AccessGeometryPasskey></AccessGeometryPasskey>
+        <AccessLayerSetupAPI>0</AccessLayerSetupAPI>
+        <AccessLayerSetupAPIPasskey></AccessLayerSetupAPIPasskey>
+      </GeneralLayerProperties>
+
+      <PolygonLayerDataSources>
+        <SDPFeatureDataSource>
+          <DataSource>DA59 SHP</DataSource>
+          <FeatureTable>GB_Objecten</FeatureTable>
+          <KeyColumn>FEATURE_ID</KeyColumn>
+          <KeyColumnType>22</KeyColumnType>
+          <GeometryColumn>FEATURE_GEOM</GeometryColumn>
+          <NameSource>1</NameSource>
+          <NameColumn>NAAM</NameColumn>
+          <URLSource>0</URLSource>
+          <URLColumn></URLColumn>
+          <ApplySQLWhereClauseTo>0</ApplySQLWhereClauseTo>
+          <SQLWhereClause></SQLWhereClause>
+        </SDPFeatureDataSource>
+
+        <SecondaryDataSource>
+          <DataSource>DA59 MDB</DataSource>
+          <Table>Info</Table>
+          <KeyColumn>ID</KeyColumn>
+        </SecondaryDataSource>
+
+        <ServerURL>http://192.168.1.160/Mapguide6.5/MapAgent_ISAPI.isa</ServerURL>
+      </PolygonLayerDataSources>
+
+      <PolygonLayerStyles>
+        <PolygonLayerStyle>
+          <MinDisplayRange>0</MinDisplayRange>
+          <MaxDisplayRange>1000000000000</MaxDisplayRange>
+
+          <PolygonStyle>
+            <FillStyle>ShapeFill48</FillStyle>
+            <FillColorIndex>110</FillColorIndex>
+            <FillBackgroundColorIndex>0</FillBackgroundColorIndex>
+            <EdgeStyle>Solid</EdgeStyle>
+            <EdgeColorIndex>110</EdgeColorIndex>
+            <EdgeThickness>2</EdgeThickness>
+          </PolygonStyle>
+        </PolygonLayerStyle>
+      </PolygonLayerStyles>
+    </PolygonLayer>
+
+    <TextLayer>
+      <GeneralLayerProperties>
+        <Name>Wijk namen</Name>
+        <Visible>1</Visible>
+        <LegendLabel>Wijk namen</LegendLabel>
+        <ShowInLegend>1</ShowInLegend>
+        <DrawPriority>75</DrawPriority>
+        <Selectable>0</Selectable>
+        <Static>0</Static>
+        <AccessKey></AccessKey>
+        <AccessGeometry>0</AccessGeometry>
+        <AccessGeometryPasskey></AccessGeometryPasskey>
+        <AccessLayerSetupAPI>0</AccessLayerSetupAPI>
+        <AccessLayerSetupAPIPasskey></AccessLayerSetupAPIPasskey>
+      </GeneralLayerProperties>
+
+      <TextLayerDataSources>
+        <SDPFeatureDataSource>
+          <DataSource>DA59 SDF</DataSource>
+          <FeatureTable>&quot;00WijkName&quot;</FeatureTable>
+          <KeyColumn>FEATURE_ID</KeyColumn>
+          <KeyColumnType>1</KeyColumnType>
+          <GeometryColumn>FEATURE_GEOM</GeometryColumn>
+          <NameSource>0</NameSource>
+          <NameColumn>FEATURE_NAME</NameColumn>
+          <URLSource>0</URLSource>
+          <URLColumn>FEATURE_URL</URLColumn>
+          <ApplySQLWhereClauseTo>0</ApplySQLWhereClauseTo>
+          <SQLWhereClause></SQLWhereClause>
+        </SDPFeatureDataSource>
+
+        <ServerURL>http://192.168.1.160/Mapguide6.5/MapAgent_ISAPI.isa</ServerURL>
+      </TextLayerDataSources>
+
+      <TextLayerStyles>
+        <TextLayerStyle>
+          <MinDisplayRange>0</MinDisplayRange>
+          <MaxDisplayRange>1000000000000</MaxDisplayRange>
+          <SizeUnits>0</SizeUnits>
+
+          <TextStyle>
+            <FontName>Arial</FontName>
+            <FontWeight>400</FontWeight>
+            <Italic>0</Italic>
+            <TextColorIndex>14</TextColorIndex>
+            <TextBackgroundStyle>0</TextBackgroundStyle>
+            <TextBackgroundColorIndex>1</TextBackgroundColorIndex>
+            <TextHorizontalAlignment>0</TextHorizontalAlignment>
+            <TextVerticalAlignment>0</TextVerticalAlignment>
+            <TextHeight>0.00381</TextHeight>
+            <TextRotation>0</TextRotation>
+          </TextStyle>
+        </TextLayerStyle>
+      </TextLayerStyles>
+    </TextLayer>
+
+    <PolygonLayer>
+      <GeneralLayerProperties>
+        <Name>Wijk grenzen</Name>
+        <Visible>1</Visible>
+        <LegendLabel>Wijk grenzen</LegendLabel>
+        <ShowInLegend>1</ShowInLegend>
+        <DrawPriority>50</DrawPriority>
+        <Selectable>1</Selectable>
+        <Static>0</Static>
+        <AccessKey></AccessKey>
+        <AccessGeometry>0</AccessGeometry>
+        <AccessGeometryPasskey></AccessGeometryPasskey>
+        <AccessLayerSetupAPI>0</AccessLayerSetupAPI>
+        <AccessLayerSetupAPIPasskey></AccessLayerSetupAPIPasskey>
+      </GeneralLayerProperties>
+
+      <PolygonLayerDataSources>
+        <SDPFeatureDataSource>
+          <DataSource>DA59 SDF</DataSource>
+          <FeatureTable>wijken_wijkbeheer</FeatureTable>
+          <KeyColumn>FEATURE_ID</KeyColumn>
+          <KeyColumnType>1</KeyColumnType>
+          <GeometryColumn>FEATURE_GEOM</GeometryColumn>
+          <NameSource>0</NameSource>
+          <NameColumn>FEATURE_NAME</NameColumn>
+          <URLSource>0</URLSource>
+          <URLColumn>FEATURE_URL</URLColumn>
+          <ApplySQLWhereClauseTo>0</ApplySQLWhereClauseTo>
+          <SQLWhereClause></SQLWhereClause>
+        </SDPFeatureDataSource>
+
+        <ServerURL>http://192.168.1.160/Mapguide6.5/MapAgent_ISAPI.isa</ServerURL>
+      </PolygonLayerDataSources>
+
+      <PolygonLayerStyles>
+        <PolygonLayerStyle>
+          <MinDisplayRange>0</MinDisplayRange>
+          <MaxDisplayRange>1000000000000</MaxDisplayRange>
+
+          <PolygonStyle>
+            <FillStyle>None</FillStyle>
+            <FillColorIndex>2</FillColorIndex>
+            <FillBackgroundColorIndex>0</FillBackgroundColorIndex>
+            <EdgeStyle>Dot</EdgeStyle>
+            <EdgeColorIndex>4</EdgeColorIndex>
+            <EdgeThickness>4</EdgeThickness>
+          </PolygonStyle>
+        </PolygonLayerStyle>
+      </PolygonLayerStyles>
+    </PolygonLayer>
+
+    <PolylineLayer>
+      <GeneralLayerProperties>
+        <Name>GBKN</Name>
+        <Visible>0</Visible>
+        <LegendLabel>GBKN</LegendLabel>
+        <ShowInLegend>1</ShowInLegend>
+        <DrawPriority>25</DrawPriority>
+        <Selectable>1</Selectable>
+        <Static>0</Static>
+        <AccessKey></AccessKey>
+        <AccessGeometry>0</AccessGeometry>
+        <AccessGeometryPasskey></AccessGeometryPasskey>
+        <AccessLayerSetupAPI>0</AccessLayerSetupAPI>
+        <AccessLayerSetupAPIPasskey></AccessLayerSetupAPIPasskey>
+      </GeneralLayerProperties>
+
+      <PolylineLayerDataSources>
+        <SDPFeatureDataSource>
+          <DataSource>DA59 SDF</DataSource>
+          <FeatureTable>GBKN</FeatureTable>
+          <KeyColumn>FEATURE_ID</KeyColumn>
+          <KeyColumnType>1</KeyColumnType>
+          <GeometryColumn>FEATURE_GEOM</GeometryColumn>
+          <NameSource>0</NameSource>
+          <NameColumn>FEATURE_NAME</NameColumn>
+          <URLSource>0</URLSource>
+          <URLColumn>FEATURE_URL</URLColumn>
+          <ApplySQLWhereClauseTo>0</ApplySQLWhereClauseTo>
+          <SQLWhereClause></SQLWhereClause>
+        </SDPFeatureDataSource>
+
+        <ServerURL>http://192.168.1.160/Mapguide6.5/MapAgent_ISAPI.isa</ServerURL>
+      </PolylineLayerDataSources>
+
+      <PolylineLayerStyles>
+        <PolylineLayerStyle>
+          <MinDisplayRange>0</MinDisplayRange>
+          <MaxDisplayRange>1000000000000</MaxDisplayRange>
+
+          <PolylineStyle>
+            <LineStyle>Solid</LineStyle>
+            <LineColorIndex>251</LineColorIndex>
+            <LineThickness>1</LineThickness>
+          </PolylineStyle>
+        </PolylineLayerStyle>
+      </PolylineLayerStyles>
+    </PolylineLayer>
+
+    <TextLayer>
+      <GeneralLayerProperties>
+        <Name>GBKNText</Name>
+        <Visible>0</Visible>
+        <LegendLabel>GBKNText</LegendLabel>
+        <ShowInLegend>1</ShowInLegend>
+        <DrawPriority>12.5</DrawPriority>
+        <Selectable>0</Selectable>
+        <Static>0</Static>
+        <AccessKey></AccessKey>
+        <AccessGeometry>0</AccessGeometry>
+        <AccessGeometryPasskey></AccessGeometryPasskey>
+        <AccessLayerSetupAPI>0</AccessLayerSetupAPI>
+        <AccessLayerSetupAPIPasskey></AccessLayerSetupAPIPasskey>
+      </GeneralLayerProperties>
+
+      <TextLayerDataSources>
+        <OLEDBFeatureDataSource>
+          <DataSource>DA59 MDB</DataSource>
+          <FeatureTable>GBKNText</FeatureTable>
+          <KeyColumn>StreetName</KeyColumn>
+          <KeyColumnType>1</KeyColumnType>
+          <LatitudeColumn>LocationY</LatitudeColumn>
+          <LongitudeColumn>LocationX</LongitudeColumn>
+          <NameColumn>StreetName</NameColumn>
+          <URLColumn></URLColumn>
+          <SQLWhereClause></SQLWhereClause>
+          <TextHeightColumn>TextHeight</TextHeightColumn>
+          <TextHorizAlignColumn>TextHorzAlign</TextHorizAlignColumn>
+          <TextVertAlignColumn>TextVertAlign</TextVertAlignColumn>
+          <TextRotationAngleColumn>TextRotation</TextRotationAngleColumn>
+        </OLEDBFeatureDataSource>
+
+        <ServerURL>http://192.168.1.160/Mapguide6.5/MapAgent_ISAPI.isa</ServerURL>
+      </TextLayerDataSources>
+
+      <TextLayerStyles>
+        <TextLayerStyle>
+          <MinDisplayRange>0</MinDisplayRange>
+          <MaxDisplayRange>1000000000000</MaxDisplayRange>
+          <SizeUnits>1</SizeUnits>
+
+          <TextStyle>
+            <FontName>Arial</FontName>
+            <FontWeight>400</FontWeight>
+            <Italic>0</Italic>
+            <TextColorIndex>3</TextColorIndex>
+            <TextBackgroundStyle>2</TextBackgroundStyle>
+            <TextBackgroundColorIndex>1</TextBackgroundColorIndex>
+            <TextHorizontalAlignment>0</TextHorizontalAlignment>
+            <TextVerticalAlignment>0</TextVerticalAlignment>
+            <TextHeight>7.949738</TextHeight>
+            <TextRotation>0</TextRotation>
+          </TextStyle>
+        </TextLayerStyle>
+      </TextLayerStyles>
+    </TextLayer>
+  </MapLayers>
+
+  <PopupMenu Name="Popup Menu">
+    <MenuItem Name="P&amp;an" Action="100"/>
+    <MenuItem Name="R&amp;eload" Action="300"/>
+    <MenuSeparator/>
+
+    <PopupMenu Name="&amp;Print">
+      <MenuItem Name="Pa&amp;ge Setup..." Action="10"/>
+      <MenuItem Name="&amp;Print..." Action="11"/>
+    </PopupMenu>
+
+    <PopupMenu Name="&amp;Copy">
+      <MenuItem Name="&amp;Copy" Action="400"/>
+      <MenuItem Name="&amp;as URL" Action="401"/>
+    </PopupMenu>
+
+    <PopupMenu Name="&amp;Zoom">
+      <MenuItem Name="&amp;Zoom" Action="200"/>
+      <MenuItem Name="&amp;Goto..." Action="201"/>
+      <MenuItem Name="&amp;Width..." Action="202"/>
+      <MenuItem Name="Sca&amp;le..." Action="203"/>
+      <MenuItem Name="Selec&amp;ted" Action="204"/>
+      <MenuItem Name="P&amp;revious" Action="205"/>
+      <MenuItem Name="&amp;Out" Action="206"/>
+      <MenuItem Name="&amp;Unzoom" Action="207"/>
+    </PopupMenu>
+
+    <PopupMenu Name="&amp;Bookmarks">
+      <MenuItem Name="&amp;Add Bookmark..." Action="500"/>
+      <MenuItem Name="&amp;Delete Bookmarks..." Action="501"/>
+      <MenuItem Name="Bookmark List" Action="502"/>
+    </PopupMenu>
+
+    <PopupMenu Name="&amp;Select">
+      <MenuItem Name="&amp;Select" Action="605"/>
+      <MenuItem Name="Map &amp;Features..." Action="600"/>
+      <MenuItem Name="&amp;Radius" Action="601"/>
+      <MenuItem Name="&amp;Polygon" Action="602"/>
+      <MenuItem Name="&amp;Within..." Action="604"/>
+      <MenuSeparator/>
+      <MenuItem Name="&amp;Clear" Action="603"/>
+    </PopupMenu>
+
+    <PopupMenu Name="&amp;View">
+      <MenuItem Name="&amp;Report..." Action="701"/>
+      <MenuItem Name="&amp;Buffer..." Action="702"/>
+      <MenuSeparator/>
+      <MenuItem Name="&amp;Distance" Action="700"/>
+    </PopupMenu>
+    <MenuSeparator/>
+
+    <PopupMenu Name="&amp;Help">
+      <MenuItem Name="&amp;Preferences..." Action="802"/>
+      <MenuSeparator/>
+      <MenuItem Name="&amp;Help Contents" Action="801"/>
+      <MenuItem Name="&amp;About Autodesk MapGuide..." Action="800"/>
+    </PopupMenu>
+  </PopupMenu>
+
+</MapWindow>

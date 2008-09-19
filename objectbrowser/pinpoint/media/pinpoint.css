@@ -1,0 +1,116 @@
+body {
+	background-color: #FFFFFF;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 100px;
+	font-family: arial, verdana, sans-serif; 
+	font-size: 11px;
+	color: #686689;
+}
+
+#text 
+{
+	font-family: arial, verdana, sans-serif; 
+	font-size: 11px;
+	color: #686689;
+}
+
+td 
+{
+	font-family: arial, verdana, sans-serif; 
+	font-size: 11px;
+	color: #686689;
+	padding-left: 5px;
+}
+
+a 
+{
+	font-family: arial, verdana, sans-serif; 
+	font-size: 11px;
+	color: #686689;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #DAD9E8;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.button {
+	background-color: #686689;
+	border-style: solid;
+	border-color: #686689; 
+	border-width: 1px;
+	height: 20px;
+	width: 144px;
+	font-size: 11px;
+	font-weight: bold;
+	font-family: Arial, Verdana, Sans-Serif;
+	color: #FFFFFF;
+}
+
+.inputedit {
+	background-color: #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #686689; 
+	height: 20px;
+	width: 144px;
+	font-size: 11px;
+	font-family: Arial, Verdana, Sans-Serif;
+}
+
+.inputbigedit {
+	background-color: #FFFFFF;
+	border-style: solid;
+	border-color: #686689; 
+	border-width: 1px;
+	height: 96px;
+	width: 296px;
+	font-size: 11px;
+	font-family: Arial, Verdana, Sans-Serif;
+}
+
+.inputnonedit {
+	background-color: #DDDDDD;
+	border-style: solid;
+	border-color: #686689;
+	border-width: 1px; 
+	height: 20px;
+	width: 144px;
+	font-size: 11px;
+	font-family: Arial, Verdana, Sans-Serif;
+}
+
+.hr {
+	border: solid #686689 1px;
+	height: 1px;
+}
+
+.heading {
+	height: 80px;
+	background-image: url('gradhatch.png');
+	background-repeat: repeat-x;
+	font-size: 20px;
+	color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	text-align: center;
+	font-style: italic;
+}
+
+.content {
+	height: 50px;
+	background-color: #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.ppcol {
+	vertical-align: top;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<viewer>
+	<layers>
+		<layer name="Nummeraanduiding" />
+		<layer name="Pand"/>>
+		<layer name="Woonplaats" />
+		<layer name="Luchtfoto2005" />
+		<layer name="Falkplan" />
+	</layers>
+	<legenda>
+		<legenda-header description="Algemeen" type="checkbox" headername="layer">
+			<legenda-item name="Nummeraanduiding" description="Nummeraanduiding" visible="true">
+				<legenda-includes layer="Nummeraanduiding" />
+			</legenda-item>
+			<legenda-item name="Pand" description="Pand" visible="true">
+				<legenda-includes layer="Pand" />
+			</legenda-item>
+			<legenda-item name="Woonplaats" description="Woonplaats" visible="true">
+				<legenda-includes layer="Woonplaats" />
+			</legenda-item>
+			<legenda-item name="Luchtfoto2005" description="Luchtfoto2005" visible="false">
+				<legenda-includes layer="Luchtfoto2005" />
+			</legenda-item>
+			<legenda-item name="Falkplan" description="Falkplan" visible="false">
+				<legenda-includes layer="Falkplan" />
+			</legenda-item>
+		</legenda-header>
+	</legenda>
+</viewer>

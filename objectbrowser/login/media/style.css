@@ -1,0 +1,163 @@
+
+body
+{
+	font-size: 11px;
+	margin: 0px;
+	color: #ffffff;
+	font-family: arua font-family: arial, verdana, sans-serif;
+	background-color: #686689;
+}
+
+/*
+body.content{
+	background-image: url('media/globe.png');
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+td {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 12px
+}
+
+
+.header {
+	background-color: #9896B1;
+	font-size: 11px;
+	color: #FFFFFF;
+	padding-right: 10px
+}
+
+.menu {
+	background-image: url('media/menufade.png');
+	background-repeat: no-repeat;
+	background-color: #9896B1;
+	font-size: 12px;
+	color: #FFFFFF;
+	padding-top: 10px;
+}
+*/
+.main {
+	font-size: 12px;
+	padding-left: 30px
+}
+
+a {
+	color: #0CA3E8;
+	text-decoration: underline
+}
+
+a:hover {
+	color: #000000;
+	text-decoration: underline
+}
+
+a.button {
+	color: #FFFFFF;
+	margin-left: 5px;
+	text-decoration: none
+}
+/*
+a.button:hover
+{
+	color: #FFFFFF;
+	margin-left: 5px;
+	text-decoration: underline
+}
+
+a.submenu {
+	color: #FFFFFF;
+	margin-left: 5px;
+	text-decoration: none
+}
+a.submenu:hover
+{
+	color: #FFFFFF;
+	margin-left: 5px;
+	text-decoration: underline
+}
+
+td.ictmenu {
+	background-color: #0CA3E8;
+	background-image: url('media/ictmenubg.png');
+	background-repeat: repeat-x;
+	background-position: bottom;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 150px
+}
+
+a.rightmenu {
+	color: #FFFFFF;
+	font-size: 11px;
+	font-weight: normal;
+	text-decoration: none
+}
+a.rightmenu:hover
+{
+	color: #000000;
+	text-decoration: underline
+}
+
+.submenuitems
+{
+	font-size: 11px;
+	visibility: hidden;
+	width: 180px;
+	height: 8; 
+	overflow: auto;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	text-align: left;
+	background-color: #918EAA
+}
+
+b.title {
+	font-size: 11px;
+	font-weight: normal
+}
+*/
+.maintext {
+	margin-left: 8px;
+	line-height: 18px
+}
+/*
+.contents {
+	font-family: arial, verdana, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	background-color: #41BBF5;
+	vertical-align: top;
+	width: 95%;
+	padding-left: 15
+}
+.img {
+	margin-right: 20px;
+	margin-top: 6px
+}
+h1 {
+	font-size: 15px;
+	font-weight: normal
+}
+
+h2 {
+	font-size: 14x;
+	font-weight: normal
+}
+
+h3 {
+	font-size: 13px;
+	font-weight: bold
+}
+
+h4 {
+	font-size: 12px;
+	font-weight: bold
+}
+
+h5 {
+	font-size: 11px;
+	font-weight: bold
+}
+*/
