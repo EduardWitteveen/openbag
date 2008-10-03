@@ -58,13 +58,13 @@ public class Main {
         return vraagbericht;
 	}
 	public static void main(String[] args) throws Exception {
-		String SERVER_URL = "https://test.baglv.nl/";
+		String SERVER_URL = "https://test.baglv.nl/bag-admin/";
 		String KEYSTORE_FILE = new java.io.File(".").getCanonicalPath() +  "/certificate/hawarit-javakeystore.jks";
 		String KEYSTORE_PASSWORD = "hawarit";
 		String TRUSTSTORE_FILE = new java.io.File(".").getCanonicalPath() +  "/jssecacerts";
 		//String TRUSTSTORE_PASSWORD = "hawarit";
 		
-		// System.setProperty("javax.net.debug", "all");
+		System.setProperty("javax.net.debug", "all");
 
 		// test for sun.security.provider.Sun
 		try {

@@ -36,6 +36,10 @@ eduard@eduard-desktop:~/openbag/lvkoppeling/certificate$ openssl rsa -in hawarit
 Enter pass phrase for hawarit-key.pem:
 writing RSA key
 
+hawarit@hawarit-desktop:~/openbag/lvkoppeling/certificate$ openssl rsa -in hawarit-key.pem -out hawarit-key.zonderpass.pem 
+Enter pass phrase for hawarit-key.pem:
+writing RSA key
+
 ubuntu@ubuntu:/media/disk-1/bag/lvkoppeling/certificate$ openssl pkcs12 -export -inkey hawarit-key.pem -in  hawarit.crt -out hawarit-key-crt.p12 -name hawarit-key-crt
 Enter pass phrase for hawarit-key.pem:
 Enter Export Password:
