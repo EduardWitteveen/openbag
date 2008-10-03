@@ -31,12 +31,17 @@ Nu maken we een crt bestand aan op basis van het stunnel.pem bestand:
 	An optional company name []:
 	hawarit@hawarit-desktop:~/openbag/lvkoppeling/stunnel$ 
 
+
 Rechten goed van dat ding
 	hawarit@hawarit-desktop:~/openbag/lvkoppeling/stunnel$ chmod 600 stunnel.pem 
+
+
+Connect met firefox naar: https://test.baglv.nl/ en sla het certificaat van de site op als: "cacert.pem" een x509 certificaat met chain.
 
 Copieren van de configuratie bestanden:
 	hawarit@hawarit-desktop:~/openbag/lvkoppeling/stunnel$ sudo cp stunnel.pem  /etc/stunnel/
 	hawarit@hawarit-desktop:~/openbag/lvkoppeling/stunnel$ sudo cp stunnel.conf /etc/stunnel/
+	hawarit@hawarit-desktop:~/openbag/lvkoppeling/stunnel$ sudo cp cacert.pem  /etc/stunnel/
 
 Bewerken van /etc/default/stunnel4 en wijzig:
 -- ENABLED=0
