@@ -1,8 +1,9 @@
-hawarit@hawarit-desktop:~/openbag/lvkoppeling/certificate$ openssl req -new -nodes -keyout private.key -out public.csr
+# ================ privatekey.pem / certificaterequest.csr.pem ===================
+hawarit@hawarit-desktop:~/openbag/lvkoppeling/certificate$ openssl req -new -nodes -keyout privatekey.pem -out certificaterequest.csr.pem
 Generating a 1024 bit RSA private key
 ...................++++++
 ..................++++++
-writing new private key to 'private.key'
+writing new private key to 'privatekey.pem'
 -----
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
@@ -23,9 +24,14 @@ Please enter the following 'extra' attributes
 to be sent with your certificate request
 A challenge password []:HawarIT1
 An optional company name []:
-hawarit@hawarit-desktop:~/openbag/lvkoppeling/certificate$ openssl rsa -in private.key -des3 -out secureprivate.key
+# =================== CERTIFICATE  =================== 
+openssl x509 -noout -text -in mycert.pem 
+
+# =================== NEXT NOT NEEDED!! ===================
+developer@developer-desktop:~/openbag/lvkoppeling/certificate$ openssl rsa -in private.key -pubout -out public.pem
+# =================== NEXT NOT NEEDED!!! ===================
+hawarit@hawarit-desktop:~/openbag/lvkoppeling/certificate$ openssl rsa -in privatekey.pem -des3 -out secureprivatekey.pem
 writing RSA key
 Enter PEM pass phrase:
 Verifying - Enter PEM pass phrase:
 hawarit@hawarit-desktop:~/openbag/lvkoppeling/certificate$ 
-
