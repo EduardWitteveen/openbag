@@ -40,7 +40,8 @@ import javax.net.ssl.*;
 public class InstallCert {
 
     public static void main(String[] args) throws Exception {
-	String host;
+/*
+        String host;
 	int port;
 	char[] passphrase;
 	if ((args.length == 1) || (args.length == 2)) {
@@ -51,9 +52,15 @@ public class InstallCert {
 	    passphrase = p.toCharArray();
 	} else {
 	    System.out.println("Usage: java InstallCert <host>[:port] [passphrase]");
+            System.out.println("Usage: java InstallCert test.baglv.nl [passphrase]");
 	    return;
 	}
+ */
+        String host = "test.baglv.nl";
+	int port = 443;
+	char[] passphrase = "Xnbgrw12".toCharArray();
 
+/*
 	File file = new File("jssecacerts");
 	if (file.isFile() == false) {
 	    char SEP = File.separatorChar;
@@ -64,6 +71,11 @@ public class InstallCert {
 		file = new File(dir, "cacerts");
 	    }
 	}
+ */
+        File file = new File("/home/developer/.keystore");
+        if (!file.isFile()) {
+            throw new Exception("file not found");
+        }
 	System.out.println("Loading KeyStore " + file + "...");
 	InputStream in = new FileInputStream(file);
 	KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -133,7 +145,15 @@ public class InstallCert {
 	String alias = host + "-" + (k + 1);
 	ks.setCertificateEntry(alias, cert);
 
-	OutputStream out = new FileOutputStream("jssecacerts");
+        try {
+            java.io.File f = new java.io.File("/home/developer/.keystore");
+            java.io.File r = new java.io.File("/home/developer/.keystore" + new java.util.Date().toString());
+            f.renameTo(r);
+        }
+        catch(Exception e) {
+            // maybe not there!
+        }
+	OutputStream out = new FileOutputStream("/home/developer/.keystore");
 	ks.store(out, passphrase);
 	out.close();
 
